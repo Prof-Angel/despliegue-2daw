@@ -1,0 +1,2393 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alejandroroig.github.io/despliegue-daw/tema1/actividad_1_2/">
+      
+      
+        <link rel="prev" href="../resumen-git/">
+      
+      
+        <link rel="next" href="../../tema2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Actividad 1.2 - Tu repositorio como herramienta de despliegue - Despliegue de Aplicaciones Web</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#actividad-12-tu-repositorio-como-herramienta-de-despliegue" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-header__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Despliegue de Aplicaciones Web
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Actividad 1.2 - Tu repositorio como herramienta de despliegue
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo Claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-nav__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Despliegue de Aplicaciones Web
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Punto de partida
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 1 - Punto de partida
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitecturas y proceso de despliegue
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../arquitecturas-despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actividad_1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.1 - Qué se puede saber de un despliegue desde fuera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Control de versiones y documentación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../control-versiones-documentacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resumen-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hoja de referencia de comandos básicos de Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.2 - Tu repositorio como herramienta de despliegue
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.2 - Tu repositorio como herramienta de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-vas-a-practicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué vas a practicar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-prepara-el-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Prepara el repositorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-decide-que-no-debe-entrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Decide qué no debe entrar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 2: Decide qué no debe entrar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-inspecciona-escaparate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Inspecciona Escaparate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-protege-el-repositorio-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Protege el repositorio completo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-publica-la-base-del-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Publica la base del repositorio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 3: Publica la base del repositorio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-crea-el-pat-del-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Crea el PAT del módulo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-enlaza-y-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Enlaza y publica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-anade-la-primera-comprobacion-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Añade la primera comprobación automática
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-empieza-a-trabajar-en-una-rama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: Empieza a trabajar en una rama
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-5-recupera-la-actividad-11-y-dale-formato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5: Recupera la Actividad 1.1 y dale formato
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-6-tres-errores-tres-decisiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 6: Tres errores, tres decisiones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 6: Tres errores, tres decisiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#situacion-1-cambio-que-todavia-no-has-preparado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Situación 1: Cambio que todavía no has preparado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#situacion-2-cambio-preparado-que-quieres-conservar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Situación 2: Cambio preparado que quieres conservar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#situacion-3-el-error-ya-esta-publicado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Situación 3: El error ya está publicado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-7-documenta-la-sesion-y-completa-el-readme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 7: Documenta la sesión y completa el README
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-8-revisa-el-trabajo-mediante-una-pull-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 8: Revisa el trabajo mediante una Pull Request
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-9-identifica-este-estado-con-una-etiqueta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 9: Identifica este estado con una etiqueta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-se-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué se entrega
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/fundamentos-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.1 - Ejecutar, inspeccionar y publicar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Imágenes de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/imagenes-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.2 - Empaquetar Escaparate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker Compose
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/docker-compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.3 - El conjunto entero con un comando
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Currículo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-vas-a-practicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué vas a practicar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-prepara-el-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Prepara el repositorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-decide-que-no-debe-entrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Decide qué no debe entrar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 2: Decide qué no debe entrar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-inspecciona-escaparate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Inspecciona Escaparate
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-protege-el-repositorio-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Protege el repositorio completo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-publica-la-base-del-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Publica la base del repositorio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 3: Publica la base del repositorio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-crea-el-pat-del-modulo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Crea el PAT del módulo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-enlaza-y-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Enlaza y publica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-anade-la-primera-comprobacion-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Añade la primera comprobación automática
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-empieza-a-trabajar-en-una-rama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: Empieza a trabajar en una rama
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-5-recupera-la-actividad-11-y-dale-formato" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5: Recupera la Actividad 1.1 y dale formato
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-6-tres-errores-tres-decisiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 6: Tres errores, tres decisiones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 6: Tres errores, tres decisiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#situacion-1-cambio-que-todavia-no-has-preparado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Situación 1: Cambio que todavía no has preparado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#situacion-2-cambio-preparado-que-quieres-conservar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Situación 2: Cambio preparado que quieres conservar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#situacion-3-el-error-ya-esta-publicado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Situación 3: El error ya está publicado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-7-documenta-la-sesion-y-completa-el-readme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 7: Documenta la sesión y completa el README
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-8-revisa-el-trabajo-mediante-una-pull-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 8: Revisa el trabajo mediante una Pull Request
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-9-identifica-este-estado-con-una-etiqueta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 9: Identifica este estado con una etiqueta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-se-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué se entrega
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><h1 id="actividad-12-tu-repositorio-como-herramienta-de-despliegue">🧪 Actividad 1.2: Tu repositorio como herramienta de despliegue<a class="headerlink" href="#actividad-12-tu-repositorio-como-herramienta-de-despliegue" title="Permanent link">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Descarga el material</p>
+<p>Para esta actividad necesitas la aplicación <a href="../descargas/escaparate-integrado.zip" rel="noopener" target="_blank"><code>escaparate-integrado.zip</code></a>.</p>
+</div>
+<h2 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">¶</a></h2>
+<p>En la sesión anterior observaste despliegues ajenos desde fuera. Hoy empieza el tuyo, pero no por el servidor: por el lugar donde van a vivir <strong>el código, la documentación y el procedimiento de trabajo</strong>.</p>
+<p>Tu objetivo es preparar el repositorio que utilizarás durante el resto del módulo. Debe cumplir tres condiciones:</p>
+<ul>
+<li>cualquier miembro del equipo con acceso debe poder clonarlo y entender qué contiene;</li>
+<li>no debe incorporar secretos ni ficheros locales que no deban versionarse;</li>
+<li>debe permitir identificar sin ambigüedad estados concretos del proyecto.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Sobre Escaparate</p>
+<p><code>escaparate-integrado.zip</code> contiene la aplicación que utilizaremos como hilo conductor del módulo. <strong>Todavía no necesitas entender ni modificar su código</strong>: en esta actividad actúa simplemente como un proyecto real que debes incorporar correctamente al repositorio.</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Cómo vas a trabajar</p>
+<p><strong>Preparar → proteger → publicar → trabajar en rama → corregir → revisar → etiquetar</strong></p>
+<p>La actividad no pretende que memorices comandos. Lo importante es que entiendas <strong>qué estado tiene el repositorio</strong>, qué cambios deben quedar fuera y qué operación corresponde cuando algo sale mal.</p>
+</div>
+<hr>
+<h2 id="que-vas-a-practicar">Qué vas a practicar<a class="headerlink" href="#que-vas-a-practicar" title="Permanent link">¶</a></h2>
+<ul>
+<li>Crear y organizar el repositorio que utilizarás durante el módulo.</li>
+<li>Interpretar y completar reglas de <code>.gitignore</code>.</li>
+<li>Distinguir <strong>directorio de trabajo</strong>, <strong>staging</strong> e <strong>historial</strong>.</li>
+<li>Recuperarte de errores eligiendo la operación adecuada.</li>
+<li>Trabajar con ramas y Pull Requests.</li>
+<li>Interpretar una comprobación automática asociada a una PR.</li>
+<li>Documentar el trabajo en Markdown.</li>
+<li>Identificar un estado concreto mediante una etiqueta.</li>
+</ul>
+<hr>
+<h2 id="requisitos-previos">Requisitos previos<a class="headerlink" href="#requisitos-previos" title="Permanent link">¶</a></h2>
+<ul>
+<li>Git instalado y configurado con tu nombre y correo.</li>
+<li>Cuenta de GitHub.</li>
+<li><code>escaparate-integrado.zip</code>.</li>
+<li>La carpeta completa <code>actividad-1.1/</code> de la sesión anterior, o el ZIP que entregaste en Aules.</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Trabaja fuera de carpetas sincronizadas</p>
+<p>No utilices OneDrive, iCloud, Google Drive ni otras carpetas sincronizadas para guardar el repositorio.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Evidencias</p>
+<p>Durante la actividad solo se pedirán <strong>cuatro evidencias</strong>. Hasta que crees la rama <code>sesion-02</code>, guarda las capturas temporalmente fuera del repositorio.</p>
+</div>
+<hr>
+<h2 id="paso-1-prepara-el-repositorio">Paso 1: Prepara el repositorio<a class="headerlink" href="#paso-1-prepara-el-repositorio" title="Permanent link">¶</a></h2>
+<p>Crea el repositorio haciendo que su rama principal se llame <code>main</code>:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>mkdir<span class="w"> </span>daw-despliegue
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>daw-despliegue
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>git<span class="w"> </span>init<span class="w"> </span>-b<span class="w"> </span>main
+</code></pre></div></td></tr></table></div>
+<p>Prepara esta estructura:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>daw-despliegue/
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>├── README.md
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>├── docs/
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>│   └── README.md
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>├── entregas/
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>│   └── tema1/
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a>├── escaparate/
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a>│   └── ... aplicación integrada ...
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>└── practicas/
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a>    └── README.md
+</code></pre></div></td></tr></table></div>
+<p>Puedes crear las carpetas y ficheros iniciales con:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>docs<span class="w"> </span>entregas/tema1<span class="w"> </span>escaparate<span class="w"> </span>practicas
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>touch<span class="w"> </span>README.md<span class="w"> </span>docs/README.md<span class="w"> </span>practicas/README.md
+</code></pre></div></td></tr></table></div>
+<p>Descomprime <code>escaparate-integrado.zip</code> y coloca su contenido dentro de <code>escaparate/</code>.</p>
+<p>El <code>README.md</code> de la raíz puede contener inicialmente:</p>
+<div class="language-markdown highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Markdown</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="gh"># DAW - Despliegue de Aplicaciones Web</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>Repositorio de trabajo del módulo.
+</code></pre></div></td></tr></table></div>
+<p>En <code>docs/README.md</code> indica que la carpeta contendrá documentación general. En <code>practicas/README.md</code>, que contendrá los ficheros técnicos de configuración y despliegue creados durante el módulo.</p>
+<p>Comprueba el estado:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>git<span class="w"> </span>status
+</code></pre></div></td></tr></table></div>
+<div class="admonition question">
+<p class="admonition-title">Observa</p>
+<p><code>entregas/tema1/</code> todavía está vacía. ¿Aparece en <code>git status</code>? ¿Qué te indica eso sobre cómo trata Git los directorios vacíos?</p>
+</div>
+<hr>
+<h2 id="paso-2-decide-que-no-debe-entrar">Paso 2: Decide qué no debe entrar<a class="headerlink" href="#paso-2-decide-que-no-debe-entrar" title="Permanent link">¶</a></h2>
+<p>Antes del primer commit, revisa qué ficheros deben quedar fuera del historial.</p>
+<h3 id="21-inspecciona-escaparate">2.1. Inspecciona Escaparate<a class="headerlink" href="#21-inspecciona-escaparate" title="Permanent link">¶</a></h3>
+<p>Dentro de <code>escaparate/</code> ya existe un <code>.gitignore</code>. Ábrelo e identifica brevemente qué pretende excluir cada regla.</p>
+<p>No lo borres: forma parte del proyecto recibido.</p>
+<h3 id="22-protege-el-repositorio-completo">2.2. Protege el repositorio completo<a class="headerlink" href="#22-protege-el-repositorio-completo" title="Permanent link">¶</a></h3>
+<p>Crea también un <code>.gitignore</code> en la <strong>raíz de <code>daw-despliegue/</code></strong>.</p>
+<p>Como mínimo deben quedar fuera:</p>
+<ul>
+<li>directorios de compilación Maven;</li>
+<li>ficheros <code>.class</code>;</li>
+<li>ficheros <code>.env</code>;</li>
+<li>configuración local de los IDE habituales;</li>
+<li>datos generados localmente, como las imágenes subidas durante las pruebas.</li>
+</ul>
+<p>Utiliza lo visto en teoría para escribir las reglas. Después comprueba qué regla afecta a distintas rutas:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>git<span class="w"> </span>check-ignore<span class="w"> </span>-v<span class="w"> </span>escaparate/target/prueba.class
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>git<span class="w"> </span>check-ignore<span class="w"> </span>-v<span class="w"> </span>escaparate/.env
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>git<span class="w"> </span>check-ignore<span class="w"> </span>-v<span class="w"> </span>escaparate/uploads/prueba.png
+</code></pre></div></td></tr></table></div>
+<div class="admonition warning">
+<p class="admonition-title">No ignores demasiado</p>
+<p>Un fichero de configuración no es automáticamente un secreto y un <code>.jar</code> no es automáticamente prescindible. Excluye aquello que sabes que es local, sensible o reconstruible.</p>
+</div>
+<p><strong>Comprueba:</strong> las rutas de prueba quedan ignoradas y los ficheros necesarios de Escaparate continúan apareciendo como candidatos a ser versionados.</p>
+<p><strong>Evidencia 1:</strong> captura donde se vea al menos una comprobación con <code>git check-ignore -v</code> y el resultado obtenido.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>Si un fichero ya hubiese entrado en un commit y después lo añadieras a <code>.gitignore</code>, ¿desaparecería del historial?</p>
+<p>¿Y si se hubiese publicado una contraseña real? ¿Bastaría con borrarla en un commit posterior?</p>
+</div>
+<hr>
+<h2 id="paso-3-publica-la-base-del-repositorio">Paso 3: Publica la base del repositorio<a class="headerlink" href="#paso-3-publica-la-base-del-repositorio" title="Permanent link">¶</a></h2>
+<p>Añade el contenido que sí debe versionarse y crea el primer commit:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>git<span class="w"> </span>status
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"chore: crea la estructura inicial del repositorio"</span>
+</code></pre></div></td></tr></table></div>
+<p>Después crea en GitHub un repositorio <strong>privado</strong> llamado <code>daw-despliegue</code>, vacío y sin ficheros iniciales.</p>
+<h3 id="31-crea-el-pat-del-modulo">3.1. Crea el PAT del módulo<a class="headerlink" href="#31-crea-el-pat-del-modulo" title="Permanent link">¶</a></h3>
+<p>En este curso utilizaremos GitHub mediante HTTPS. Para simplificar las primeras sesiones crearás un único <strong>Personal Access Token (classic)</strong> que servirá para trabajar con el repositorio privado y, más adelante, con GitHub Container Registry.</p>
+<p>En GitHub ve a:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>Settings
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>→ Developer settings
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a>→ Personal access tokens
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a>→ Tokens (classic)
+</code></pre></div></td></tr></table></div>
+<p>Crea un token con:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span>
+<span class="normal"><a href="#__codelineno-8-6">6</a></span>
+<span class="normal"><a href="#__codelineno-8-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>Nombre: DAW - Curso
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>Caducidad: hasta el final del curso
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>Scopes:
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>repo
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>workflow
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>write:packages
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><code>repo</code> permite trabajar con el repositorio privado mediante Git.</li>
+<li><code>workflow</code> permite añadir y modificar workflows de GitHub Actions en <code>.github/workflows/</code>.</li>
+<li><code>write:packages</code> se utilizará posteriormente para publicar imágenes en <code>ghcr.io</code>.</li>
+</ul>
+<p>Cuando GitHub muestre el token, <strong>guárdalo en un gestor de contraseñas</strong>. No lo escribas dentro del repositorio.</p>
+<div class="admonition danger">
+<p class="admonition-title">El PAT es un secreto</p>
+<p>No debe aparecer en el README, en <code>.env</code>, en <code>actividad-1.2.md</code> ni en ninguna captura. Si se filtra, revócalo y crea otro.</p>
+</div>
+<details class="info">
+<summary>Alternativa: mínimo privilegio</summary>
+<p>En un entorno profesional es preferible separar credenciales por finalidad.</p>
+<p>Puedes utilizar un <strong>fine-grained PAT</strong> limitado a <code>daw-despliegue</code> para Git y crear posteriormente un PAT classic independiente con <code>write:packages</code> para GHCR.</p>
+<p>La opción utilizada en el aula simplifica la gestión de credenciales, pero concede permisos más amplios.</p>
+</details>
+<h3 id="32-enlaza-y-publica">3.2. Enlaza y publica<a class="headerlink" href="#32-enlaza-y-publica" title="Permanent link">¶</a></h3>
+<p>Configura el remoto:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/&lt;usuario&gt;/daw-despliegue.git
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div></td></tr></table></div>
+<p>Si Git solicita credenciales:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>Username: &lt;tu-usuario-de-GitHub&gt;
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>Password: &lt;tu-PAT&gt;
+</code></pre></div></td></tr></table></div>
+<p>En <code>Password</code> se introduce el PAT, <strong>no la contraseña normal de GitHub</strong>.</p>
+<p>Añade al usuario de GitHub del profesor como <strong>colaborador</strong> del repositorio.</p>
+<p>Comprueba que:</p>
+<ul>
+<li>la rama principal es <code>main</code>;</li>
+<li>el repositorio es privado;</li>
+<li>el profesor tiene acceso;</li>
+<li>el README aparece correctamente;</li>
+<li><code>escaparate/</code> contiene el proyecto recibido;</li>
+<li>no has publicado secretos ni artefactos locales.</li>
+</ul>
+<h3 id="33-anade-la-primera-comprobacion-automatica">3.3. Añade la primera comprobación automática<a class="headerlink" href="#33-anade-la-primera-comprobacion-automatica" title="Permanent link">¶</a></h3>
+<p>Antes de empezar a trabajar con ramas vamos a dejar preparada una pequeña validación de las futuras Pull Requests.</p>
+<div class="admonition note">
+<p class="admonition-title">Una excepción de puesta en marcha</p>
+<p>Este workflow se añade todavía directamente a <code>main</code> porque forma parte de la configuración inicial del repositorio. <strong>A partir del paso 4, el trabajo normal se hará en ramas.</strong></p>
+</div>
+<p>Crea:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a>.github/
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a>└── workflows/
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a>    └── validar.yml
+</code></pre></div></td></tr></table></div>
+<p>con este contenido:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span>
+<span class="normal"><a href="#__codelineno-12-22">22</a></span>
+<span class="normal"><a href="#__codelineno-12-23">23</a></span>
+<span class="normal"><a href="#__codelineno-12-24">24</a></span>
+<span class="normal"><a href="#__codelineno-12-25">25</a></span>
+<span class="normal"><a href="#__codelineno-12-26">26</a></span>
+<span class="normal"><a href="#__codelineno-12-27">27</a></span>
+<span class="normal"><a href="#__codelineno-12-28">28</a></span>
+<span class="normal"><a href="#__codelineno-12-29">29</a></span>
+<span class="normal"><a href="#__codelineno-12-30">30</a></span>
+<span class="normal"><a href="#__codelineno-12-31">31</a></span>
+<span class="normal"><a href="#__codelineno-12-32">32</a></span>
+<span class="normal"><a href="#__codelineno-12-33">33</a></span>
+<span class="normal"><a href="#__codelineno-12-34">34</a></span>
+<span class="normal"><a href="#__codelineno-12-35">35</a></span>
+<span class="normal"><a href="#__codelineno-12-36">36</a></span>
+<span class="normal"><a href="#__codelineno-12-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Validar repositorio</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">main</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="nt">jobs</span><span class="p">:</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">  </span><span class="nt">estructura</span><span class="p">:</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comprobar repositorio</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Descargar repositorio</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v7</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16"></a>
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comprobar estructura básica</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="w">          </span><span class="no">test -f escaparate/pom.xml</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">          </span><span class="no">test -f escaparate/mvnw</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="w">          </span><span class="no">test -f practicas/README.md</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22"></a>
+<a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comprobar ficheros que no deben versionarse</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="w">        </span><span class="nt">shell</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bash</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="w">          </span><span class="no">prohibidos="$(</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="w">            </span><span class="no">git ls-files \</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="w">              </span><span class="no">| grep -E '(^|/)\.env($|\.)|(^|/)target/|\.class$' \</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="w">              </span><span class="no">| grep -vE '(^|/)\.env\.example$' \</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="w">              </span><span class="no">|| true</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="w">          </span><span class="no">)"</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32"></a>
+<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="w">          </span><span class="no">if [ -n "$prohibidos" ]; then</span>
+<a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="w">            </span><span class="no">echo "Se han encontrado ficheros que no deberían estar versionados:"</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35"></a><span class="w">            </span><span class="no">echo "$prohibidos"</span>
+<a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="w">            </span><span class="no">exit 1</span>
+<a id="__codelineno-12-37" name="__codelineno-12-37"></a><span class="w">          </span><span class="no">fi</span>
+</code></pre></div></td></tr></table></div>
+<p>No necesitas estudiar todavía la sintaxis del workflow. Quédate con su intención: GitHub comprobará en un entorno limpio que existe la estructura básica y que no has registrado determinados ficheros que deberían permanecer fuera.</p>
+<p>Regístralo y publícalo:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a>git<span class="w"> </span>add<span class="w"> </span>.github/workflows/validar.yml
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"chore: añade la validación básica del repositorio"</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a>git<span class="w"> </span>push
+</code></pre></div></td></tr></table></div>
+<p>La comprobación aparecerá cuando abras una Pull Request hacia <code>main</code>.</p>
+<hr>
+<h2 id="paso-4-empieza-a-trabajar-en-una-rama">Paso 4: Empieza a trabajar en una rama<a class="headerlink" href="#paso-4-empieza-a-trabajar-en-una-rama" title="Permanent link">¶</a></h2>
+<p>La preparación inicial ha terminado. A partir de ahora no trabajarás directamente sobre <code>main</code>.</p>
+<p>Crea y publica la rama de esta sesión:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>sesion-02
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>sesion-02
+</code></pre></div></td></tr></table></div>
+<p>Comprueba:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>git<span class="w"> </span>branch<span class="w"> </span>--show-current
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a>git<span class="w"> </span>status
+</code></pre></div></td></tr></table></div>
+<p>Debe aparecer:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a>sesion-02
+</code></pre></div></td></tr></table></div>
+<div class="admonition info">
+<p class="admonition-title">Por qué publicamos ya la rama</p>
+<p>Más adelante provocarás deliberadamente un error y lo publicarás. Queremos estudiar cómo corregir un historial <strong>ya compartido</strong>, pero sin ensuciar <code>main</code>.</p>
+</div>
+<hr>
+<h2 id="paso-5-recupera-la-actividad-11-y-dale-formato">Paso 5: Recupera la Actividad 1.1 y dale formato<a class="headerlink" href="#paso-5-recupera-la-actividad-11-y-dale-formato" title="Permanent link">¶</a></h2>
+<p>La Actividad 1.1 se escribió como texto sencillo porque todavía no habías trabajado Markdown. Ahora vas a integrarla correctamente en el repositorio.</p>
+<p>Coloca la carpeta completa en:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<span class="normal"><a href="#__codelineno-17-2">2</a></span>
+<span class="normal"><a href="#__codelineno-17-3">3</a></span>
+<span class="normal"><a href="#__codelineno-17-4">4</a></span>
+<span class="normal"><a href="#__codelineno-17-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a>entregas/
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a>└── tema1/
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a>    └── actividad-1.1/
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a>        ├── actividad-1.1.md
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a>        └── img/
+</code></pre></div></td></tr></table></div>
+<p>Sin cambiar tus conclusiones, mejora <code>actividad-1.1.md</code> utilizando:</p>
+<ul>
+<li>títulos y subtítulos;</li>
+<li>listas cuando ayuden a ordenar información;</li>
+<li>código en línea para comandos, nombres de ficheros o cabeceras;</li>
+<li>imágenes mediante rutas relativas.</li>
+</ul>
+<p>Por ejemplo:</p>
+<div class="language-markdown highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Markdown</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
+<span class="normal"><a href="#__codelineno-18-2">2</a></span>
+<span class="normal"><a href="#__codelineno-18-3">3</a></span>
+<span class="normal"><a href="#__codelineno-18-4">4</a></span>
+<span class="normal"><a href="#__codelineno-18-5">5</a></span>
+<span class="normal"><a href="#__codelineno-18-6">6</a></span>
+<span class="normal"><a href="#__codelineno-18-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="gu">## Cabeceras</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="gu">### Web de apuntes</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a>Código observado: <span class="sb">`200`</span>.
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a>![<span class="nt">Cabeceras de la web de apuntes</span>](<span class="na">img/cabeceras-apuntes.png</span>)
+</code></pre></div></td></tr></table></div>
+<div class="admonition warning">
+<p class="admonition-title">No rehagas la actividad</p>
+<p>El objetivo es <strong>presentar mejor la misma evidencia</strong>, no modificar los resultados para que coincidan con los de otra persona.</p>
+</div>
+<p>Registra la incorporación de esta actividad en un commit propio.</p>
+<p><strong>Comprueba:</strong> al abrir <code>actividad-1.1.md</code> desde GitHub, los títulos y las imágenes se renderizan correctamente.</p>
+<hr>
+<h2 id="paso-6-tres-errores-tres-decisiones">Paso 6: Tres errores, tres decisiones<a class="headerlink" href="#paso-6-tres-errores-tres-decisiones" title="Permanent link">¶</a></h2>
+<p>Este es el núcleo de la actividad. Vas a provocar tres situaciones y resolverlas <strong>sin que el enunciado te diga qué comando utilizar</strong>.</p>
+<p>Antes de empezar, crea:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
+<span class="normal"><a href="#__codelineno-19-2">2</a></span>
+<span class="normal"><a href="#__codelineno-19-3">3</a></span>
+<span class="normal"><a href="#__codelineno-19-4">4</a></span>
+<span class="normal"><a href="#__codelineno-19-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a>entregas/
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a>└── tema1/
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a>    └── actividad-1.2/
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a>        ├── actividad-1.2.md
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a>        └── img/
+</code></pre></div></td></tr></table></div>
+<p>En <code>actividad-1.2.md</code> escribe inicialmente:</p>
+<div class="language-markdown highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Markdown</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
+<span class="normal"><a href="#__codelineno-20-2">2</a></span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="gh"># Actividad 1.2</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="gu">## Recuperación de errores</span>
+</code></pre></div></td></tr></table></div>
+<p>Registra este pequeño esqueleto para empezar los ejercicios con el repositorio limpio.</p>
+<p>Después de cada situación documenta:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a>Zona de Git afectada:
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a>Operación utilizada:
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a>Por qué era adecuada:
+</code></pre></div></td></tr></table></div>
+<h3 id="situacion-1-cambio-que-todavia-no-has-preparado">Situación 1: Cambio que todavía no has preparado<a class="headerlink" href="#situacion-1-cambio-que-todavia-no-has-preparado" title="Permanent link">¶</a></h3>
+<p>Escribe varios párrafos provisionales en el <code>README.md</code> de la raíz. No te convencen y quieres recuperar exactamente el contenido del último commit, <strong>sin editar el fichero manualmente</strong>.</p>
+<p><strong>Comprueba:</strong> el cambio desaparece y el repositorio vuelve al estado anterior.</p>
+<h3 id="situacion-2-cambio-preparado-que-quieres-conservar">Situación 2: Cambio preparado que quieres conservar<a class="headerlink" href="#situacion-2-cambio-preparado-que-quieres-conservar" title="Permanent link">¶</a></h3>
+<p>Modifica de nuevo <code>README.md</code>, esta vez con contenido válido que sí quieres conservar, y prepáralo para el siguiente commit.</p>
+<p>Después decides que todavía no quieres incluirlo. Sácalo del área de preparación <strong>sin perder lo escrito</strong>.</p>
+<p><strong>Comprueba:</strong></p>
+<ul>
+<li>el fichero sigue modificado;</li>
+<li>el contenido permanece;</li>
+<li>el cambio ya no está preparado.</li>
+</ul>
+<p>El contenido es válido. Regístralo y publícalo antes de continuar.</p>
+<h3 id="situacion-3-el-error-ya-esta-publicado">Situación 3: El error ya está publicado<a class="headerlink" href="#situacion-3-el-error-ya-esta-publicado" title="Permanent link">¶</a></h3>
+<p>Añade al <code>README.md</code> una línea claramente equivocada, regístrala en un commit y <strong>publícala en <code>sesion-02</code></strong>.</p>
+<p>Ahora el error forma parte de un historial compartido.</p>
+<p>Corrige su efecto de forma que:</p>
+<ul>
+<li>el contenido incorrecto desaparezca;</li>
+<li>el commit original siga existiendo;</li>
+<li>aparezca un nuevo commit que deshaga sus cambios.</li>
+</ul>
+<p>Publica también la corrección.</p>
+<p><strong>Evidencia 2:</strong> captura del historial donde se vean el commit erróneo y el commit posterior que lo corrige.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>¿Por qué interesa conservar el commit original cuando el error ya se ha publicado? ¿Qué problema podría provocar reescribir una rama que otra persona ya hubiese descargado?</p>
+</div>
+<hr>
+<h2 id="paso-7-documenta-la-sesion-y-completa-el-readme">Paso 7: Documenta la sesión y completa el README<a class="headerlink" href="#paso-7-documenta-la-sesion-y-completa-el-readme" title="Permanent link">¶</a></h2>
+<p>Completa ahora <code>entregas/tema1/actividad-1.2/actividad-1.2.md</code>.</p>
+<p>Debe ser un documento breve y contener:</p>
+<div class="language-markdown highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Markdown</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span>
+<span class="normal"><a href="#__codelineno-22-12">12</a></span>
+<span class="normal"><a href="#__codelineno-22-13">13</a></span>
+<span class="normal"><a href="#__codelineno-22-14">14</a></span>
+<span class="normal"><a href="#__codelineno-22-15">15</a></span>
+<span class="normal"><a href="#__codelineno-22-16">16</a></span>
+<span class="normal"><a href="#__codelineno-22-17">17</a></span>
+<span class="normal"><a href="#__codelineno-22-18">18</a></span>
+<span class="normal"><a href="#__codelineno-22-19">19</a></span>
+<span class="normal"><a href="#__codelineno-22-20">20</a></span>
+<span class="normal"><a href="#__codelineno-22-21">21</a></span>
+<span class="normal"><a href="#__codelineno-22-22">22</a></span>
+<span class="normal"><a href="#__codelineno-22-23">23</a></span>
+<span class="normal"><a href="#__codelineno-22-24">24</a></span>
+<span class="normal"><a href="#__codelineno-22-25">25</a></span>
+<span class="normal"><a href="#__codelineno-22-26">26</a></span>
+<span class="normal"><a href="#__codelineno-22-27">27</a></span>
+<span class="normal"><a href="#__codelineno-22-28">28</a></span>
+<span class="normal"><a href="#__codelineno-22-29">29</a></span>
+<span class="normal"><a href="#__codelineno-22-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="gh"># Actividad 1.2</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="gu">## Qué he decidido excluir del repositorio</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a>Explica las decisiones principales de <span class="sb">`.gitignore`</span>.
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a>
+<a id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="gu">## Recuperación de errores</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8"></a>
+<a id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="gu">### Cambio no preparado</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10"></a>Zona de Git afectada:
+<a id="__codelineno-22-11" name="__codelineno-22-11"></a>Operación utilizada:
+<a id="__codelineno-22-12" name="__codelineno-22-12"></a>Por qué era adecuada:
+<a id="__codelineno-22-13" name="__codelineno-22-13"></a>
+<a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="gu">### Cambio preparado</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15"></a>Zona de Git afectada:
+<a id="__codelineno-22-16" name="__codelineno-22-16"></a>Operación utilizada:
+<a id="__codelineno-22-17" name="__codelineno-22-17"></a>Por qué era adecuada:
+<a id="__codelineno-22-18" name="__codelineno-22-18"></a>
+<a id="__codelineno-22-19" name="__codelineno-22-19"></a><span class="gu">### Commit publicado</span>
+<a id="__codelineno-22-20" name="__codelineno-22-20"></a>Zona de Git afectada:
+<a id="__codelineno-22-21" name="__codelineno-22-21"></a>Operación utilizada:
+<a id="__codelineno-22-22" name="__codelineno-22-22"></a>Por qué era adecuada:
+<a id="__codelineno-22-23" name="__codelineno-22-23"></a>
+<a id="__codelineno-22-24" name="__codelineno-22-24"></a><span class="gu">## Reflexiones</span>
+<a id="__codelineno-22-25" name="__codelineno-22-25"></a>
+<a id="__codelineno-22-26" name="__codelineno-22-26"></a>Incluye las respuestas pedidas durante la actividad.
+<a id="__codelineno-22-27" name="__codelineno-22-27"></a>
+<a id="__codelineno-22-28" name="__codelineno-22-28"></a><span class="gu">## Evidencias</span>
+<a id="__codelineno-22-29" name="__codelineno-22-29"></a>
+<a id="__codelineno-22-30" name="__codelineno-22-30"></a>Inserta las capturas solicitadas mediante rutas relativas.
+</code></pre></div></td></tr></table></div>
+<p>Mueve a <code>img/</code> las evidencias que hayas guardado temporalmente y enlázalas desde el documento.</p>
+<div class="admonition tip">
+<p class="admonition-title">No dupliques los ficheros técnicos</p>
+<p><code>actividad-1.2.md</code> documenta lo realizado. Los ficheros reales —<code>.gitignore</code>, <code>README.md</code>, workflows o contenido de <code>escaparate/</code>— permanecen en su ubicación normal.</p>
+</div>
+<p>Después amplía el <code>README.md</code> de la raíz. Puedes utilizar este esqueleto:</p>
+<div class="language-markdown highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Markdown</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span>
+<span class="normal"><a href="#__codelineno-23-19">19</a></span>
+<span class="normal"><a href="#__codelineno-23-20">20</a></span>
+<span class="normal"><a href="#__codelineno-23-21">21</a></span>
+<span class="normal"><a href="#__codelineno-23-22">22</a></span>
+<span class="normal"><a href="#__codelineno-23-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="gh"># DAW - Despliegue de Aplicaciones Web</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a>Breve descripción del repositorio.
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="gu">## Estructura</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a>
+<a id="__codelineno-23-7" name="__codelineno-23-7"></a>Qué contienen las carpetas principales.
+<a id="__codelineno-23-8" name="__codelineno-23-8"></a>
+<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="gu">## Requisitos</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10"></a>
+<a id="__codelineno-23-11" name="__codelineno-23-11"></a>Herramientas básicas necesarias.
+<a id="__codelineno-23-12" name="__codelineno-23-12"></a>
+<a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="gu">## Flujo de trabajo</span>
+<a id="__codelineno-23-14" name="__codelineno-23-14"></a>
+<a id="__codelineno-23-15" name="__codelineno-23-15"></a>Uso de ramas <span class="sb">`sesion-NN`</span> y Pull Requests hacia <span class="sb">`main`</span>.
+<a id="__codelineno-23-16" name="__codelineno-23-16"></a>
+<a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="gu">## Puesta en marcha</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18"></a>
+<a id="__codelineno-23-19" name="__codelineno-23-19"></a>Se completará en sesiones posteriores.
+<a id="__codelineno-23-20" name="__codelineno-23-20"></a>
+<a id="__codelineno-23-21" name="__codelineno-23-21"></a><span class="gu">## Entregas</span>
+<a id="__codelineno-23-22" name="__codelineno-23-22"></a>
+<a id="__codelineno-23-23" name="__codelineno-23-23"></a>Enlaces relativos a las actividades 1.1 y 1.2.
+</code></pre></div></td></tr></table></div>
+<p>El README <strong>no es un diario de clase</strong>: debe permitir a otra persona entender el repositorio y localizar la información importante.</p>
+<p>Registra y publica los cambios pendientes de <code>sesion-02</code>.</p>
+<hr>
+<h2 id="paso-8-revisa-el-trabajo-mediante-una-pull-request">Paso 8: Revisa el trabajo mediante una Pull Request<a class="headerlink" href="#paso-8-revisa-el-trabajo-mediante-una-pull-request" title="Permanent link">¶</a></h2>
+<p>Abre en GitHub una Pull Request:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a>sesion-02 → main
+</code></pre></div></td></tr></table></div>
+<p>La descripción debe responder brevemente a:</p>
+<ol>
+<li>¿Qué has cambiado?</li>
+<li>¿Por qué?</li>
+<li>¿Cómo has comprobado que queda en buen estado?</li>
+</ol>
+<p>En la PR deberá aparecer la comprobación automática del repositorio.</p>
+<p>Si falla:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
+<span class="normal"><a href="#__codelineno-25-2">2</a></span>
+<span class="normal"><a href="#__codelineno-25-3">3</a></span>
+<span class="normal"><a href="#__codelineno-25-4">4</a></span>
+<span class="normal"><a href="#__codelineno-25-5">5</a></span>
+<span class="normal"><a href="#__codelineno-25-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a>abrir detalle
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a>→ identificar el problema
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a>→ corregir en sesion-02
+<a id="__codelineno-25-4" name="__codelineno-25-4"></a>→ commit
+<a id="__codelineno-25-5" name="__codelineno-25-5"></a>→ push
+<a id="__codelineno-25-6" name="__codelineno-25-6"></a>→ revisar de nuevo la misma PR
+</code></pre></div></td></tr></table></div>
+<div class="admonition warning">
+<p class="admonition-title">No fusiones una comprobación fallida</p>
+<p>Espera a que las comprobaciones hayan terminado y estén correctas antes de integrar los cambios.</p>
+</div>
+<p><strong>Evidencia 3:</strong> captura de la Pull Request antes de fusionarla, con la comprobación automática correcta.</p>
+<p>Cuando todo esté bien, fusiona mediante <strong>Create a merge commit</strong>.</p>
+<p>Después actualiza tu <code>main</code> local:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
+<span class="normal"><a href="#__codelineno-26-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a>git<span class="w"> </span>switch<span class="w"> </span>main
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a>git<span class="w"> </span>pull<span class="w"> </span>--ff-only
+</code></pre></div></td></tr></table></div>
+<p>Comprueba el historial:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a>git<span class="w"> </span>log<span class="w"> </span>--graph<span class="w"> </span>--oneline<span class="w"> </span>--all<span class="w"> </span>--decorate
+</code></pre></div></td></tr></table></div>
+<p>Debe poder identificarse el trabajo realizado en <code>sesion-02</code> y su posterior integración en <code>main</code>.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>La comprobación de hoy solo revisa aspectos básicos. ¿Qué otras comprobaciones tendría sentido realizar antes de desplegar una aplicación?</p>
+</div>
+<hr>
+<h2 id="paso-9-identifica-este-estado-con-una-etiqueta">Paso 9: Identifica este estado con una etiqueta<a class="headerlink" href="#paso-9-identifica-este-estado-con-una-etiqueta" title="Permanent link">¶</a></h2>
+<p>Ya tienes un nuevo estado integrado en <code>main</code>. Crea una <strong>etiqueta anotada</strong> llamada:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a>v0.1.0
+</code></pre></div></td></tr></table></div>
+<p>Utiliza los comandos vistos en teoría para crearla y publicarla.</p>
+<p>Comprueba:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span>
+<span class="normal"><a href="#__codelineno-29-2">2</a></span>
+<span class="normal"><a href="#__codelineno-29-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a>git<span class="w"> </span>tag<span class="w"> </span>-n
+<a id="__codelineno-29-2" name="__codelineno-29-2"></a>git<span class="w"> </span>show<span class="w"> </span>v0.1.0<span class="w"> </span>--no-patch
+<a id="__codelineno-29-3" name="__codelineno-29-3"></a>git<span class="w"> </span>log<span class="w"> </span>--graph<span class="w"> </span>--oneline<span class="w"> </span>--all<span class="w"> </span>--decorate
+</code></pre></div></td></tr></table></div>
+<p>En este momento <code>main</code> y <code>v0.1.0</code> apuntan al mismo commit. En próximas sesiones <code>main</code> seguirá avanzando, mientras que la etiqueta permanecerá identificando este estado.</p>
+<div class="admonition note">
+<p class="admonition-title">No es la versión de Escaparate</p>
+<p><code>v0.1.0</code> identifica un estado concreto del repositorio <code>daw-despliegue</code>. No tiene por qué coincidir con la versión interna de la aplicación.</p>
+</div>
+<p><strong>Evidencia 4:</strong> captura o vista de GitHub donde se vea <code>v0.1.0</code> asociada al estado actual.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>¿Por qué un despliegue reproducible debería poder señalar una versión concreta, en lugar de limitarse a decir «despliega lo que haya ahora mismo en <code>main</code>»?</p>
+</div>
+<hr>
+<h2 id="que-se-entrega">Qué se entrega<a class="headerlink" href="#que-se-entrega" title="Permanent link">¶</a></h2>
+<p>Todo queda versionado en el propio repositorio. Antes de terminar, comprueba:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> repositorio privado <code>daw-despliegue</code> con el profesor como colaborador;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Escaparate incorporado y <code>.gitignore</code> correctamente configurado;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Actividad 1.1 formateada en Markdown con sus imágenes relativas;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Actividad 1.2 con las tres situaciones, reflexiones y <strong>cuatro evidencias</strong>;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> workflow <code>validar.yml</code> y comprobación correcta en la Pull Request;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Pull Request <code>sesion-02 → main</code> fusionada mediante merge commit;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> README actualizado;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> etiqueta anotada <code>v0.1.0</code> publicada.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Dónde queda la entrega</p>
+<p>Desde esta actividad, la evidencia del trabajo queda en el propio repositorio. <strong>No necesitas generar un Word ni convertir la actividad a PDF.</strong></p>
+</div>
+<details class="info">
+<summary>Cómo se comprobará</summary>
+<p>El profesor podrá clonar el repositorio utilizando la cuenta añadida como colaboradora y comprobará, entre otras cosas:</p>
+<ul>
+<li>que la rama principal es <code>main</code>;</li>
+<li>que no hay <code>.env</code>, <code>target/</code> ni <code>.class</code> registrados;</li>
+<li>que Escaparate no contiene un repositorio Git anidado;</li>
+<li>que el error publicado y su corrección siguen visibles en el historial;</li>
+<li>que <code>sesion-02</code> se integró mediante una Pull Request;</li>
+<li>que la comprobación automática terminó correctamente;</li>
+<li>que <code>v0.1.0</code> es una etiqueta anotada;</li>
+<li>que las actividades 1.1 y 1.2 están correctamente documentadas.</li>
+</ul>
+</details>
+<hr>
+<h2 id="cierre">✅ Cierre<a class="headerlink" href="#cierre" title="Permanent link">¶</a></h2>
+<p>Has preparado el repositorio que utilizarás durante el módulo y has empezado a tratarlo como algo más que un lugar donde guardar código: contiene <strong>historial, documentación, decisiones de configuración y estados identificables</strong>.</p>
+<p>También has practicado una regla que será importante durante todo el curso: <strong>para corregir un problema primero debes saber dónde está el cambio y si el historial ya se ha compartido</strong>.</p>
+<p>En la próxima sesión ese repositorio empezará a utilizarse para construir y ejecutar Escaparate de forma reproducible.</p></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../resumen-git/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Hoja de referencia de comandos básicos de Git">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Hoja de referencia de comandos básicos de Git
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../tema2/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Tema 2 - Introducción">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Tema 2 - Introducción
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+<p style="margin: 0 auto; text-align: center; font-size: 0.7rem;">
+  © 2026 Alejandro Roig y Ángel Vidal
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">
+    Licencia CC BY-NC-SA 4.0
+  </a>
+</p>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tracking", "navigation.footer", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

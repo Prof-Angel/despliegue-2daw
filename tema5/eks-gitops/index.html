@@ -1,0 +1,1582 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alejandroroig.github.io/despliegue-daw/tema5/eks-gitops/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>🔁 3. Clúster gestionado y GitOps - Despliegue de Aplicaciones Web</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-cluster-gestionado-y-gitops" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-header__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Despliegue de Aplicaciones Web
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🔁 3. Clúster gestionado y GitOps
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo Claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-nav__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Despliegue de Aplicaciones Web
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Punto de partida
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 1 - Punto de partida
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitecturas y proceso de despliegue
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/arquitecturas-despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.1 - Qué se puede saber de un despliegue desde fuera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Control de versiones y documentación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/control-versiones-documentacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/resumen-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hoja de referencia de comandos básicos de Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.2 - Tu repositorio como herramienta de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/fundamentos-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.1 - Ejecutar, inspeccionar y publicar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Imágenes de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/imagenes-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.2 - Empaquetar Escaparate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker Compose
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/docker-compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.3 - El conjunto entero con un comando
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Currículo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#un-plano-de-control-que-no-es-tuyo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🏢 Un plano de control que no es tuyo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-cluster-tambien-es-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧱 El clúster también es código
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lo-que-este-laboratorio-no-da-y-que-se-hace-en-su-lugar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔌 Lo que este laboratorio no da, y qué se hace en su lugar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔌 Lo que este laboratorio no da, y qué se hace en su lugar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#una-sola-puerta-y-por-que" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Una sola puerta, y por qué
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-base-de-datos-sin-almacenamiento-persistente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La base de datos, sin almacenamiento persistente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#las-imagenes-por-tercera-vez" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Las imágenes, por tercera vez
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#empujar-o-tirar-el-argumento-de-las-credenciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔁 Empujar o tirar: el argumento de las credenciales
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#argo-cd-el-bucle-un-nivel-por-encima" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🤖 Argo CD: el bucle, un nivel por encima
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-vive-en-el-repositorio-y-que-no" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧾 Qué vive en el repositorio y qué no
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuatro-formas-del-mismo-catalogo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧭 Cuatro formas del mismo catálogo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-debes-saber-hacer-al-salir-de-esta-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Qué debes saber hacer al salir de esta sesión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ideas-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Ideas clave
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><h1 id="3-cluster-gestionado-y-gitops">🔁 3. Clúster gestionado y GitOps<a class="headerlink" href="#3-cluster-gestionado-y-gitops" title="Permanent link">¶</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Descarga de diapositivas</p>
+<p><a href="diapositivas/eks-gitops.pptx" rel="noopener" target="_blank">Descarga las diapositivas</a></p>
+</div>
+<hr>
+<p>Última sesión de contenido del curso. La semana que viene empieza el proyecto integrador, así que hoy se cierran las dos cosas que quedaron apuntadas el viernes pasado.</p>
+<p>La primera es fácil de enunciar: el clúster que montaste es tuyo, vive dentro de tu instancia y desaparece si la apagas — como comprobaste el viernes al recrearlo desde cero. Hoy verás uno que mantiene otro.</p>
+<p>La segunda viene de más atrás y es la buena. En diciembre montaste un pipeline que <strong>empujaba</strong> hacia el servidor: entraba por SSH con una llave guardada en un secreto, y la actividad te hizo descubrir que el usuario <code>despliegue</code>, aunque no tuviera <code>sudo</code>, pertenecía al grupo <code>docker</code> y por tanto podía hacer prácticamente cualquier cosa en esa máquina. El viernes pasado, para desplegar sobre el clúster, volviste a entrar por SSH y a ejecutar órdenes a mano. Hoy le das la vuelta al sentido de la flecha: <strong>nadie entra, algo tira desde dentro</strong>.</p>
+<hr>
+<h2 id="un-plano-de-control-que-no-es-tuyo">🏢 Un plano de control que no es tuyo<a class="headerlink" href="#un-plano-de-control-que-no-es-tuyo" title="Permanent link">¶</a></h2>
+<p>Un clúster gestionado te vende una cosa concreta: el plano de control. El proveedor ejecuta y actualiza el servidor de API, el almacén de estado, el planificador y los controladores, los replica en varias zonas de disponibilidad y te los presenta como un punto de acceso. Tú sigues poniendo los nodos.</p>
+<table>
+<thead>
+<tr>
+<th>Lo que deja de ser tuyo</th>
+<th>Lo que sigue siendo tuyo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disponibilidad y copias del almacén de estado</td>
+<td>Cuántos nodos, de qué tamaño y cuándo se actualizan</td>
+</tr>
+<tr>
+<td>Actualizar el plano de control</td>
+<td>Decidir cuándo actualizar, y arreglar lo que rompa</td>
+</tr>
+<tr>
+<td>Certificados internos del clúster</td>
+<td>Tus manifiestos, tus sondas y tus recursos</td>
+</tr>
+<tr>
+<td>Que el servidor de API esté en pie</td>
+<td>Que tu aplicación funcione</td>
+</tr>
+</tbody>
+</table>
+<p>Ese reparto tiene un matiz que conviene no simplificar. Vas a usar un <strong>grupo de nodos gestionado</strong>, y ahí el proveedor automatiza buena parte del ciclo de vida: aprovisiona las máquinas, las vacía ordenadamente antes de sustituirlas y las reemplaza cuando fallan. Lo que sigue siendo decisión tuya es el tamaño, la cantidad y <strong>cuándo</strong> se lanza esa actualización. No es «los nodos son tuyos» a secas; es «las decisiones son tuyas, la mecánica la pone él».</p>
+<p>La parte que no aparece en los diagramas es la factura. El plano de control se cobra <strong>por hora y por clúster</strong> —del orden de 0,10 $, unos 73 $ al mes en tarifa estándar— y se cobra igual con cero contenedores dentro. Encima van los nodos, el balanceador que crees hoy y el tráfico. Un clúster de prácticas olvidado un fin de semana cuesta más que la instancia que lleváis usando desde octubre.</p>
+<div class="admonition danger">
+<p class="admonition-title">Destruir el clúster antes de salir del aula</p>
+<p>Esto no es una recomendación: es norma de aula y forma parte de la entrega. <strong>El plano de control factura aunque el laboratorio esté cerrado y aunque no haya nada corriendo.</strong> Un borrado no es instantáneo, y además hay que quitar antes el balanceador que ha creado Kubernetes, o la destrucción se queda esperando por una red que no puede liberar. Por eso la actividad de hoy tiene una hora de alto obligatorio. Si al terminar tu clúster sigue en pie, la práctica no está bien hecha aunque todo lo demás lo esté.</p>
+</div>
+<hr>
+<h2 id="el-cluster-tambien-es-codigo">🧱 El clúster también es código<a class="headerlink" href="#el-cluster-tambien-es-codigo" title="Permanent link">¶</a></h2>
+<p>No vas a crear el clúster desde la consola web. En INU introdujiste la infraestructura como código el 16 de diciembre; hoy reutilizas ese enfoque, sin volver a explicar qué es un plan ni qué es un estado. Lo que sí conviene mirar es qué se declara:</p>
+<ul>
+<li>La <strong>red</strong> donde vive el clúster: subredes en varias zonas de disponibilidad. Sin eso no hay clúster gestionado.</li>
+<li>El <strong>clúster</strong> en sí, con su versión de Kubernetes.</li>
+<li>Un <strong>grupo de nodos gestionado</strong>: tipo de instancia y número de nodos.</li>
+<li>Los <strong>roles</strong> que necesitan el clúster y los nodos.</li>
+</ul>
+<p>Esa última línea esconde la restricción de siempre y una trampa. En este laboratorio <strong>no puedes crear roles</strong>: la cuenta trae dos ya hechos, uno para el plano de control y otro para los nodos. La trampa es que <strong>sus nombres llevan un prefijo que cambia cada sesión</strong>, así que sus identificadores no pueden estar escritos en el repositorio: se consultan al empezar y se pasan como variables. En una cuenta real crearías roles propios con permisos mínimos, y esa diferencia merece un párrafo en tu informe.</p>
+<p>Lo que de verdad condiciona la sesión son los tiempos. Crear un plano de control gestionado son del orden de quince minutos, y el grupo de nodos va después, porque no empieza hasta que el clúster existe. Entre que lanzas la creación y tienes un <code>kubectl get nodes</code> útil pasa cerca de media hora.</p>
+<div class="admonition tip">
+<p class="admonition-title">Diseña la sesión hacia atrás</p>
+<p>La regla práctica del día es lanzar la creación lo primero y trabajar mientras se construye, y calcular la hora de la destrucción desde el final hacia atrás, no desde el principio hacia adelante. Es exactamente lo que hace un equipo que paga por horas. Y por si acaso: hoy hay una hora de control a media mañana. Si a esa hora el clúster no está en pie, se documenta la incidencia y el resto de la sesión se hace sobre el clúster local, porque lo que se aprende hoy no depende de quién sea el dueño del plano de control.</p>
+</div>
+<hr>
+<h2 id="lo-que-este-laboratorio-no-da-y-que-se-hace-en-su-lugar">🔌 Lo que este laboratorio no da, y qué se hace en su lugar<a class="headerlink" href="#lo-que-este-laboratorio-no-da-y-que-se-hace-en-su-lugar" title="Permanent link">¶</a></h2>
+<p>El laboratorio del aula funciona para lo esencial, pero le faltan cosas que en una cuenta normal darías por hechas. Que falten no es mala suerte: cada ausencia obliga a una decisión de arquitectura, y esas decisiones son contenido.</p>
+<table>
+<thead>
+<tr>
+<th>Lo que tenías el viernes</th>
+<th>Hoy</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ingress publicado por nombre y con TLS</td>
+<td><strong>El mismo Ingress, sin nombre y sin TLS</strong></td>
+<td>No vamos a delegar un dominio ni a emitir certificados en la última sesión</td>
+</tr>
+<tr>
+<td>Base de datos con volumen persistente</td>
+<td><strong>Base de datos sin almacenamiento persistente</strong></td>
+<td>El laboratorio no tiene preparados el controlador ni los permisos necesarios para aprovisionar volúmenes de bloque</td>
+</tr>
+<tr>
+<td>Imágenes de productos en un <code>hostPath</code></td>
+<td><strong>Se rompe</strong></td>
+<td>Ese montaje funcionaba porque había un solo nodo. Hoy hay dos</td>
+</tr>
+</tbody>
+</table>
+<h3 id="una-sola-puerta-y-por-que">Una sola puerta, y por qué<a class="headerlink" href="#una-sola-puerta-y-por-que" title="Permanent link">¶</a></h3>
+<p>Un Service de tipo <code>LoadBalancer</code> hace que el proveedor te construya un balanceador de verdad, con su nombre público y su factura. Podrías declarar uno por cada cosa que quieras publicar, y ahí está el problema: <strong>un balanceador por servicio no escala ni en dinero ni en administración</strong>. Dos servicios, dos nombres distintos que memorizar, dos certificados el día que los pongas, dos facturas.</p>
+<p>Lo que se hace —y es lo mismo que la semana pasada, un piso más arriba— es poner <strong>un único</strong> Service de tipo <code>LoadBalancer</code> delante del <strong>controlador de Ingress</strong>, que corre dentro del clúster. A partir de ahí, publicar algo nuevo no cuesta un balanceador: cuesta una regla en un Ingress. Hoy tienes una sola regla porque Escaparate empaqueta el front y la API en el mismo artefacto; el día que se separen, añades una regla y no cambias nada más. Esa es exactamente la propiedad que compras.</p>
+<p>Del Ingress de la semana pasada cambian dos cosas: fuera el <code>host</code> —hoy entras por el nombre que te dé el balanceador— y fuera el bloque de TLS.</p>
+<div class="admonition warning">
+<p class="admonition-title">Ese balanceador lo crea el mecanismo heredado</p>
+<p>Cuando declaras un Service de tipo <code>LoadBalancer</code> y no hay instalado el controlador de balanceadores de AWS, quien atiende la petición es el <strong>controlador integrado en el proveedor de nube</strong>, que crea un balanceador de la generación clásica. Funciona, y por eso lo usamos: instalar el controlador moderno exige permisos por pod que este laboratorio no permite configurar. Pero el propio AWS lo marca como heredado y solo le da correcciones críticas. <strong>En una cuenta real no elegirías este camino</strong>, y conviene que lo escribas así en el informe.</p>
+</div>
+<p>Y hay una pérdida real que hay que nombrar: hoy entras por HTTP y por un nombre feo. Todo lo que construiste en la S8 —nombre propio, certificado, redirección, HSTS— sigue siendo correcto y sigue siendo necesario; simplemente hoy no se monta. Que una decisión sea razonable en el aula no la convierte en buena práctica.</p>
+<h3 id="la-base-de-datos-sin-almacenamiento-persistente">La base de datos, sin almacenamiento persistente<a class="headerlink" href="#la-base-de-datos-sin-almacenamiento-persistente" title="Permanent link">¶</a></h3>
+<p>Postgres corre hoy dentro del clúster sobre un volumen <strong>efímero, ligado al ciclo de vida del pod</strong>. La imagen siembra el catálogo al arrancar, así que verás productos, y durante las tres horas de clase no notarás nada raro.</p>
+<p>Conviene ser preciso con qué significa «efímero», porque no es «se borra en cuanto pestañees»:</p>
+<ul>
+<li>Si <strong>el contenedor se reinicia</strong> dentro del mismo pod, el volumen sigue ahí y los datos permanecen.</li>
+<li>Si <strong>el pod se elimina, se recrea o cambia de nodo</strong>, el volumen desaparece con él y los datos se van.</li>
+</ul>
+<p>O sea: sobrevive a un fallo del proceso y no sobrevive a nada de lo que hace un orquestador continuamente. Es una base de datos de demostración, no de producción, y la diferencia entre las dos frases anteriores es justo lo que hay que saber explicar.</p>
+<p>La alternativa correcta, cuando no puedes darle almacenamiento persistente al clúster, es sacarla fuera: una base gestionada, o un servidor propio. Y ahí aparece una idea que merece conocerse aunque hoy no la ejecutes.</p>
+<div class="admonition info">
+<p class="admonition-title">Un Service puede apuntar fuera del clúster</p>
+<p>Un Service es <strong>un nombre más un conjunto de destinos</strong>, y esos destinos no tienen por qué ser pods. Si declaras un Service <strong>sin selector</strong>, el clúster no rellena la lista sola: la escribes tú, creando un objeto <strong>EndpointSlice</strong> con la dirección de la máquina de fuera. (Antes esto se hacía con un objeto <code>Endpoints</code>; esa API está deprecada desde Kubernetes 1.33 y la documentación pide crear EndpointSlices directamente.)
+Lo interesante es el efecto: <strong>tu Deployment no cambia ni una línea</strong>, porque sigue conectándose a un nombre. Lo que hay detrás de ese nombre ha dejado de estar en el clúster y la aplicación no se ha enterado. Ese desacoplamiento es la mitad del valor de un Service.</p>
+</div>
+<h3 id="las-imagenes-por-tercera-vez">Las imágenes, por tercera vez<a class="headerlink" href="#las-imagenes-por-tercera-vez" title="Permanent link">¶</a></h3>
+<p>En septiembre te avisamos de que Escaparate guarda las imágenes que suben los usuarios en el disco local, y de que estaba mal a propósito. El fallo ha aparecido ya dos veces: al balancear entre tres copias en la S7, que resolviste con almacenamiento compartido, y agazapado en la S14, donde el montaje funcionó <strong>solo porque el clúster tenía un único nodo</strong>.</p>
+<p>Hoy vuelve entero: con dos nodos, cada pod monta el disco de la máquina donde le ha tocado caer. Subes una foto, la ves al recargar, recargas otra vez y ha desaparecido. Y no lo vas a arreglar, porque las dos soluciones posibles quedan fuera de esta sesión:</p>
+<ul>
+<li><strong>Almacenamiento de objetos</strong>, que es la respuesta preferente para un catálogo como este y la que ya usaste en INU con S3. Los ficheros dejan de estar en ninguna máquina.</li>
+<li><strong>Un sistema de ficheros en red</strong> montado por todos los nodos a la vez, que es otra arquitectura válida y más parecida a lo que hiciste en la S7, pero que este laboratorio no tiene preparado.</li>
+</ul>
+<p>Es el mismo fallo visto a tres escalas en cinco meses, y la conclusión es siempre la misma frase, cada vez con más fuerza: <strong>nada que un usuario necesite volver a encontrar puede vivir dentro de una copia.</strong></p>
+<hr>
+<h2 id="empujar-o-tirar-el-argumento-de-las-credenciales">🔁 Empujar o tirar: el argumento de las credenciales<a class="headerlink" href="#empujar-o-tirar-el-argumento-de-las-credenciales" title="Permanent link">¶</a></h2>
+<p>Ahora el asunto de fondo. Compara los dos modelos.</p>
+<p>En el modelo de <strong>empuje</strong>, que es el que montaste en diciembre, algo de fuera —el pipeline— tiene credenciales para entrar en producción y modificarla. Funciona. Pero implica que esas credenciales existen, viajan y se guardan en un secreto de la plataforma. En tu caso, además, la llave llevaba a un usuario del grupo <code>docker</code>, o sea, control efectivo de la máquina. Y para que aquello funcionara tuviste que abrir el acceso SSH a <strong>un rango de direcciones que no controlas</strong>: los ejecutores prestados por GitHub.</p>
+<p>En el modelo de <strong>extracción</strong>, un agente instalado <strong>dentro</strong> del clúster lee el repositorio y aplica lo que encuentra. El repositorio es público y solo se lee. No hace falta abrir ningún puerto de administración hacia el clúster. Y el pipeline deja de necesitar acceso a producción: para desplegar, alguien fusiona una rama.</p>
+<div class="admonition warning">
+<p class="admonition-title">Cuidado con la frase fácil</p>
+<p>Es tentador resumir esto como «ya no hay credenciales de producción fuera de producción», y sería falso. Esta misma mañana has pegado en tu instancia unas credenciales del laboratorio capaces de <strong>crear y destruir el clúster entero</strong>, que es bastante más poder del que tenía la llave SSH de diciembre. Lo que ha cambiado es más preciso y más útil:</p>
+<ul>
+<li><strong>Aprovisionar la plataforma</strong> sigue exigiendo credenciales potentes, en manos de quien administra la infraestructura y usadas en momentos contados.</li>
+<li><strong>Desplegar una versión nueva de la aplicación</strong> ya no exige ninguna: ni acceso administrativo al clúster, ni una llave en el sistema de integración continua.</li>
+</ul>
+<p>Separar esos dos caminos —quién puede crear la plataforma y quién puede desplegar sobre ella— es una de las decisiones de diseño más valiosas que te llevas del curso.</p>
+</div>
+<pre class="mermaid"><code>flowchart LR
+    subgraph EMP["Diciembre — empuje"]
+        P1[Pipeline] --&gt;|SSH con llave| S1[(Servidor)]
+    end
+    subgraph EXT["Hoy — extracción"]
+        R2[(Repositorio)] -.-&gt;|lee| A2[Agente]
+        A2 --&gt; C2[Clúster]
+    end</code></pre>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Empuje (S13)</th>
+<th>Extracción (hoy)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quién inicia</td>
+<td>El pipeline, desde fuera</td>
+<td>El agente, desde dentro</td>
+</tr>
+<tr>
+<td>Credenciales en el sistema de CI</td>
+<td>Una llave con acceso al servidor</td>
+<td>Ninguna</td>
+</tr>
+<tr>
+<td>Puerto de administración abierto</td>
+<td>SSH, a un rango ajeno</td>
+<td>Ninguno</td>
+</tr>
+<tr>
+<td>Cuándo se comprueba</td>
+<td>Solo al desplegar</td>
+<td>Continuamente</td>
+</tr>
+<tr>
+<td>Si alguien cambia algo a mano</td>
+<td>Nadie se entera hasta el siguiente despliegue</td>
+<td>Se detecta, y opcionalmente se revierte</td>
+</tr>
+<tr>
+<td>Qué se rompe si cae el CI</td>
+<td>No hay despliegues</td>
+<td>Nada: el agente sigue reconciliando</td>
+</tr>
+</tbody>
+</table>
+<p>Esa penúltima fila es la novedad conceptual del día. Hasta ahora, «desplegar» era un suceso puntual. Con extracción es un estado permanente: alguien compara el repositorio con la realidad todo el rato. Es el mismo bucle de reconciliación de la S14, un nivel más arriba: si allí el clúster vigilaba que hubiera tres pods, ahora hay algo que vigila <strong>que el clúster entero se parezca a un directorio de Git</strong>.</p>
+<hr>
+<h2 id="argo-cd-el-bucle-un-nivel-por-encima">🤖 Argo CD: el bucle, un nivel por encima<a class="headerlink" href="#argo-cd-el-bucle-un-nivel-por-encima" title="Permanent link">¶</a></h2>
+<p>Argo CD es el agente que vas a instalar. Su objeto central se llama <code>Application</code> y declara de dónde salen los manifiestos, qué revisión seguir y dónde aplicarlos.</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argoproj.io/v1alpha1</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Application</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="nt">metadata</span><span class="p">:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">escaparate</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">argocd</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="nt">spec</span><span class="p">:</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">  </span><span class="nt">project</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">  </span><span class="nt">source</span><span class="p">:</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">    </span><span class="nt">repoURL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/&lt;tu-usuario&gt;/daw-despliegue.git</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="nt">targetRevision</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">k8s/eks</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="w">  </span><span class="nt">destination</span><span class="p">:</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">    </span><span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://kubernetes.default.svc</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="w">  </span><span class="nt">syncPolicy</span><span class="p">:</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="w">    </span><span class="nt">automated</span><span class="p">:</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="w">      </span><span class="nt">selfHeal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a><span class="w">      </span><span class="nt">prune</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><code>path</code> es la clave del montaje: Argo CD <strong>no mira todo el repositorio</strong>, mira un directorio. Por eso el código de Escaparate y los manifiestos conviven sin estorbarse — y por eso ese directorio no puede contener nada que no quieras aplicar.</li>
+<li><code>targetRevision: main</code> es lo que convierte un <code>merge</code> en un despliegue.</li>
+<li><code>automated</code> hace que aplique solo. Sin ello, Argo CD detecta las diferencias y espera a que alguien pulse.</li>
+<li><code>selfHeal: true</code> revierte los cambios hechos a mano en el clúster. <strong>Está desactivado por defecto</strong>, y es una elección deliberada del producto: no todo el mundo quiere que le deshagan una intervención de urgencia.</li>
+<li><code>prune: true</code> borra del clúster lo que desaparece del repositorio. Sin esto, quitar un fichero no quita nada y se acumula basura.</li>
+</ul>
+<p>Sobre los tiempos, para que la actividad no te sorprenda: Argo CD consulta el repositorio de forma periódica, con un intervalo por defecto de hasta unos tres minutos. <strong>Un cambio en Git no aparece al instante</strong>; en una instalación seria se acelera con un aviso del propio Git. Cuando lo que cambia es el clúster —porque alguien ha escalado a mano— la detección es mucho más rápida, porque el agente está observando el clúster, no consultándolo cada tanto.</p>
+<div class="admonition warning">
+<p class="admonition-title">Con sincronización automática, no se «deshace» desde el agente</p>
+<p>Si tienes <code>automated</code> activado, no tiene sentido pedirle a Argo CD que vuelva a una versión anterior: aplicaría el repositorio otra vez a los pocos segundos. <strong>La vuelta atrás se hace en Git</strong>, revirtiendo el cambio. Es coherente y es incómodo la primera vez: el procedimiento de emergencia deja de ser una orden y pasa a ser un <code>revert</code> y un <code>push</code>.</p>
+</div>
+<hr>
+<h2 id="que-vive-en-el-repositorio-y-que-no">🧾 Qué vive en el repositorio y qué no<a class="headerlink" href="#que-vive-en-el-repositorio-y-que-no" title="Permanent link">¶</a></h2>
+<p>Con GitOps el repositorio pasa a ser la descripción de producción, y eso obliga a dos decisiones.</p>
+<p><strong>Los secretos no se versionan.</strong> Sigue siendo cierto lo de siempre y ahora molesta más, porque todo lo demás sí está. La solución de aula es la de octubre: plantilla fuera del directorio que se aplica, y valor real aplicado aparte y documentado. La profesional es cifrar el secreto de forma que solo el clúster pueda descifrarlo —lo que sí permite versionarlo— o dejarlo en el gestor de secretos del proveedor y versionar solo una referencia. Se nombra y no se monta.</p>
+<p><strong>Y hay que decidir qué dispara qué.</strong> Con los manifiestos en el mismo repositorio que el código, cambiar una etiqueta de imagen en un YAML dispararía tu <code>ci.yml</code> entero: compilación, tests, cobertura y escaneo de una aplicación que no ha cambiado. La respuesta técnica es un filtro de rutas en el disparador del workflow. Pero antes de tocarlo, piénsalo dos veces: <code>main</code> está protegida y exige que esas comprobaciones pasen, así que impedir que se ejecuten deja el pull request bloqueado para siempre. La pregunta de fondo —<em>si el repositorio describe producción, ¿qué comprobación protege un cambio en producción que no toca ni una línea de código?</em>— no tiene respuesta obvia, y es la que abre de verdad este modelo.</p>
+<hr>
+<h2 id="cuatro-formas-del-mismo-catalogo">🧭 Cuatro formas del mismo catálogo<a class="headerlink" href="#cuatro-formas-del-mismo-catalogo" title="Permanent link">¶</a></h2>
+<p>Con la sesión de hoy cierras la UD6 y cierras el curso. El mismo catálogo, el mismo <code>war</code>, la misma imagen de GHCR, se ha ejecutado de cuatro maneras:</p>
+<table>
+<thead>
+<tr>
+<th>Forma</th>
+<th>Dónde</th>
+<th>Cuándo lo montaste</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contenedores sobre una instancia, con proxy propio</td>
+<td>Una máquina que administras</td>
+<td>S5 a S13</td>
+</tr>
+<tr>
+<td>Contenedor como servicio gestionado</td>
+<td>Sin servidores que administrar</td>
+<td>INU, el miércoles</td>
+</tr>
+<tr>
+<td>Clúster propio sobre una instancia</td>
+<td>Orquestación que mantienes tú</td>
+<td>S14 y S15</td>
+</tr>
+<tr>
+<td>Clúster gestionado con despliegue por extracción</td>
+<td>Orquestación que mantiene otro</td>
+<td>Hoy</td>
+</tr>
+</tbody>
+</table>
+<p>Ninguna es «la buena». Cada una tiene su tiempo de despliegue, su coste, su esfuerzo operativo y su caso. Esa comparación es el entregable conjunto de esta semana con INU, y la pregunta con la que se defiende el proyecto en febrero es exactamente esa: <strong>cuál de las cuatro le venderías a un cliente concreto, y por qué.</strong> Tienes datos propios de las cuatro. Úsalos.</p>
+<p>Con esto ya tienes las piezas para la <strong>Actividad 6.3</strong>: levantarás el clúster gestionado, publicarás el catálogo por un único balanceador, instalarás el agente, verás cómo deshace un cambio hecho a mano, cambiarás la versión por pull request sin tocar ninguna consola — y destruirás el clúster antes de salir.</p>
+<hr>
+<h2 id="que-debes-saber-hacer-al-salir-de-esta-sesion">🎯 Qué debes saber hacer al salir de esta sesión<a class="headerlink" href="#que-debes-saber-hacer-al-salir-de-esta-sesion" title="Permanent link">¶</a></h2>
+<ul>
+<li>Levantar un clúster gestionado con el código entregado, ajustando sus variables, y <strong>destruirlo</strong> dejando la cuenta limpia.</li>
+<li>Configurar el acceso con <code>kubectl</code> a ese clúster y comprobar los nodos.</li>
+<li>Adaptar los manifiestos de la semana pasada a este entorno y justificar cada cambio.</li>
+<li>Publicar la aplicación con el controlador de Ingress detrás de un único Service de tipo <code>LoadBalancer</code>, y explicar qué has perdido respecto al viernes y por qué ese balanceador no sería tu elección en una cuenta real.</li>
+<li>Instalar Argo CD y declarar una <code>Application</code> apuntando a un directorio del repositorio, con sincronización automática.</li>
+<li>Demostrar que un cambio hecho a mano en el clúster se revierte, y que un cambio hecho por pull request se despliega.</li>
+<li>Distinguir, con tu propio caso de hoy, qué credenciales siguen haciendo falta para aprovisionar la plataforma y cuáles han dejado de hacer falta para desplegar la aplicación.</li>
+</ul>
+<p><strong>Lo que basta con reconocer</strong>: la anatomía interna de Argo CD, las estrategias de gestión de secretos en GitOps, el detalle del código de infraestructura que no has editado y la sintaxis de un EndpointSlice.</p>
+<hr>
+<h2 id="ideas-clave">✅ Ideas clave<a class="headerlink" href="#ideas-clave" title="Permanent link">¶</a></h2>
+<details class="tip">
+<summary>Abrir resumen</summary>
+<ul>
+<li>Un clúster gestionado te quita el plano de control, no las decisiones sobre los nodos ni la responsabilidad sobre tu aplicación. En un grupo de nodos gestionado, el proveedor pone la mecánica y tú pones el cuándo.</li>
+<li>Se cobra por hora y por clúster, con cero contenedores dentro. Destruirlo al salir es parte del trabajo, y antes hay que quitar el balanceador.</li>
+<li>Crear el clúster son del orden de quince minutos, y el grupo de nodos va después. La hora de la destrucción se calcula desde el final de la sesión hacia atrás.</li>
+<li>Los roles del laboratorio no se pueden crear y sus nombres cambian cada sesión: no caben en el repositorio, se pasan como variables.</li>
+<li>Un balanceador por servicio no escala ni en dinero ni en administración. Con un solo balanceador delante del controlador de Ingress, publicar algo nuevo cuesta una regla, no un balanceador.</li>
+<li>Ese balanceador lo crea el mecanismo heredado del proveedor, que solo recibe correcciones críticas. Es un compromiso del laboratorio, no una recomendación.</li>
+<li>Un volumen efímero sobrevive al reinicio del contenedor y desaparece cuando el pod se elimina, se recrea o cambia de nodo. Hoy la base de datos es una demostración, no una producción.</li>
+<li>Un Service es un nombre y un conjunto de destinos; sin selector, esos destinos los escribes tú en un EndpointSlice y pueden estar fuera del clúster. La aplicación no se entera.</li>
+<li>El fallo de las imágenes en disco local, plantado en septiembre, se rompe definitivamente con varios nodos. La respuesta preferente es almacenamiento de objetos; un sistema de ficheros en red sería otra arquitectura válida.</li>
+<li>Empujar exige una credencial de acceso a producción guardada en el sistema de integración continua, y un puerto de administración abierto. Tirar no exige ninguna de las dos cosas.</li>
+<li>Pero aprovisionar la infraestructura sigue exigiendo credenciales potentes. Lo que desaparece es la credencial del <strong>despliegue de la aplicación</strong>, no todas las credenciales.</li>
+<li>Con GitOps, desplegar deja de ser un suceso y pasa a ser un estado: algo compara el repositorio con la realidad continuamente.</li>
+<li>Argo CD consulta el repositorio cada pocos minutos, mientras que un cambio hecho a mano en el clúster se detecta enseguida.</li>
+<li><code>selfHeal</code> y <code>prune</code> están desactivados por defecto: revertir intervenciones manuales y borrar lo que desaparece del repositorio son decisiones, no automatismos.</li>
+<li>Con sincronización automática, la vuelta atrás se hace revirtiendo en Git. El procedimiento de emergencia cambia de forma.</li>
+<li>El directorio que mira Argo CD no puede contener nada que no quieras aplicar, plantillas incluidas.</li>
+</ul>
+</details></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+<p style="margin: 0 auto; text-align: center; font-size: 0.7rem;">
+  © 2026 Alejandro Roig y Ángel Vidal
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">
+    Licencia CC BY-NC-SA 4.0
+  </a>
+</p>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tracking", "navigation.footer", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

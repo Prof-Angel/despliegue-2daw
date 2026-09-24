@@ -1,0 +1,2059 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alejandroroig.github.io/despliegue-daw/tema2/actividad_2_1/">
+      
+      
+        <link rel="prev" href="../fundamentos-contenedores/">
+      
+      
+        <link rel="next" href="../imagenes-contenedores/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Actividad 2.1 - Ejecutar, inspeccionar y publicar - Despliegue de Aplicaciones Web</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#actividad-21-ejecutar-inspeccionar-y-publicar" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-header__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Despliegue de Aplicaciones Web
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Actividad 2.1 - Ejecutar, inspeccionar y publicar
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo Claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-nav__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Despliegue de Aplicaciones Web
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Punto de partida
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 1 - Punto de partida
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitecturas y proceso de despliegue
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/arquitecturas-despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.1 - Qué se puede saber de un despliegue desde fuera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Control de versiones y documentación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/control-versiones-documentacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/resumen-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hoja de referencia de comandos básicos de Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.2 - Tu repositorio como herramienta de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fundamentos-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.1 - Ejecutar, inspeccionar y publicar
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.1 - Ejecutar, inspeccionar y publicar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-vas-a-practicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué vas a practicar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-ejecuta-tu-primer-contenedor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Ejecuta tu primer contenedor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-observalo-desde-fuera-y-desde-dentro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Obsérvalo desde fuera y desde dentro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-comprueba-que-pertenece-a-la-imagen-y-que-al-contenedor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Comprueba qué pertenece a la imagen y qué al contenedor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 3: Comprueba qué pertenece a la imagen y qué al contenedor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-detener-no-es-eliminar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Detener no es eliminar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-dos-contenedores-una-misma-imagen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Dos contenedores, una misma imagen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-eliminar-si-cambia-el-resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Eliminar sí cambia el resultado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-limpia-el-experimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: Limpia el experimento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-5-construye-la-imagen-de-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5: Construye la imagen de base de datos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-6-ejecuta-la-misma-imagen-con-configuracion-distinta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 6: Ejecuta la misma imagen con configuración distinta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-7-publica-la-imagen-en-ghcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 7: Publica la imagen en GHCR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 7: Publica la imagen en GHCR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-inicia-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. Inicia sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-etiqueta-y-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. Etiqueta y publica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-demuestra-que-la-copia-local-ya-no-es-necesaria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. Demuestra que la copia local ya no es necesaria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-8-documenta-e-integra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 8: Documenta e integra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-se-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué se entrega
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Imágenes de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../imagenes-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actividad_2_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.2 - Empaquetar Escaparate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker Compose
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker-compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actividad_2_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.3 - El conjunto entero con un comando
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Currículo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-vas-a-practicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué vas a practicar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-ejecuta-tu-primer-contenedor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Ejecuta tu primer contenedor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-observalo-desde-fuera-y-desde-dentro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Obsérvalo desde fuera y desde dentro
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-comprueba-que-pertenece-a-la-imagen-y-que-al-contenedor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Comprueba qué pertenece a la imagen y qué al contenedor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 3: Comprueba qué pertenece a la imagen y qué al contenedor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-detener-no-es-eliminar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Detener no es eliminar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-dos-contenedores-una-misma-imagen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Dos contenedores, una misma imagen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-eliminar-si-cambia-el-resultado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Eliminar sí cambia el resultado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-limpia-el-experimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: Limpia el experimento
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-5-construye-la-imagen-de-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5: Construye la imagen de base de datos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-6-ejecuta-la-misma-imagen-con-configuracion-distinta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 6: Ejecuta la misma imagen con configuración distinta
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-7-publica-la-imagen-en-ghcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 7: Publica la imagen en GHCR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Paso 7: Publica la imagen en GHCR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-inicia-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. Inicia sesión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-etiqueta-y-publica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2. Etiqueta y publica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-demuestra-que-la-copia-local-ya-no-es-necesaria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3. Demuestra que la copia local ya no es necesaria
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-8-documenta-e-integra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 8: Documenta e integra
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-se-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué se entrega
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><h1 id="actividad-21-ejecutar-inspeccionar-y-publicar">🧪 Actividad 2.1: Ejecutar, inspeccionar y publicar<a class="headerlink" href="#actividad-21-ejecutar-inspeccionar-y-publicar" title="Permanent link">¶</a></h1>
+<h2 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">¶</a></h2>
+<p>A partir de ahora las piezas que despliegues viajarán empaquetadas en <strong>imágenes de contenedor</strong>. Antes de construir la imagen completa de Escaparate necesitas dominar el ciclo básico: ejecutar, observar, modificar, eliminar y volver a crear.</p>
+<p>Después aplicarás ese conocimiento a una pieza real del proyecto: construirás una imagen de PostgreSQL capaz de inicializar automáticamente la base de datos de Escaparate.</p>
+<p>No recibirás una nueva versión de la aplicación. Utilizarás los scripts que ya existen en tu repositorio.</p>
+<div class="admonition abstract">
+<p class="admonition-title">Cómo vas a trabajar</p>
+<p><strong>Ejecutar → observar → comparar → construir → configurar → publicar → comprobar</strong></p>
+<p>La actividad tiene dos objetivos distintos: primero entenderás la diferencia entre <strong>imagen y contenedor</strong>; después comprobarás que una imagen propia puede construirse en tu equipo y ejecutarse desde un registro.</p>
+</div>
+<hr>
+<h2 id="que-vas-a-practicar">Qué vas a practicar<a class="headerlink" href="#que-vas-a-practicar" title="Permanent link">¶</a></h2>
+<ul>
+<li>Ejecutar contenedores con nombres y puertos publicados.</li>
+<li>Utilizar logs y una shell para diagnosticar.</li>
+<li>Distinguir imagen y contenedor mediante su ciclo de vida.</li>
+<li>Pasar configuración mediante variables de entorno.</li>
+<li>Construir una imagen sencilla con <code>FROM</code> y <code>COPY</code>.</li>
+<li>Publicar una imagen en GHCR y volver a descargarla.</li>
+</ul>
+<hr>
+<h2 id="requisitos-previos">Requisitos previos<a class="headerlink" href="#requisitos-previos" title="Permanent link">¶</a></h2>
+<p>Comprueba que Docker responde:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>docker<span class="w"> </span>version
+</code></pre></div></td></tr></table></div>
+<p>Necesitas además:</p>
+<ul>
+<li>el repositorio <code>daw-despliegue</code> de la actividad anterior;</li>
+<li>los scripts:</li>
+</ul>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>escaparate/
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>└── db/
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>    ├── 01-schema.sql
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>    └── 02-data.sql
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>el PAT preparado durante la Actividad 1.2.</li>
+</ul>
+<p>Prepara tu rama:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>git<span class="w"> </span>switch<span class="w"> </span>main
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>git<span class="w"> </span>pull<span class="w"> </span>--ff-only
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>sesion-03
+</code></pre></div></td></tr></table></div>
+<p>Crea desde el principio:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>entregas/
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>└── tema2/
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>    └── actividad-2.1/
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>        ├── actividad-2.1.md
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>        └── img/
+</code></pre></div></td></tr></table></div>
+<div class="admonition info">
+<p class="admonition-title">Evidencias</p>
+<p>Solo se piden <strong>cuatro evidencias</strong>. Documenta las respuestas y reflexiones indicadas, no cada comando que ejecutes.</p>
+</div>
+<hr>
+<h2 id="paso-1-ejecuta-tu-primer-contenedor">Paso 1: Ejecuta tu primer contenedor<a class="headerlink" href="#paso-1-ejecuta-tu-primer-contenedor" title="Permanent link">¶</a></h2>
+<p>Tu primera imagen será:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>nginx:1.30.4-alpine
+</code></pre></div></td></tr></table></div>
+<p>Arranca un contenedor con estas decisiones:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>segundo plano
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>nombre: web-1
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>puerto del anfitrión: 8080
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>puerto del contenedor: 80
+</code></pre></div></td></tr></table></div>
+<p>Construye el comando a partir del patrón:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>docker run -d --name &lt;nombre&gt; -p &lt;host&gt;:&lt;contenedor&gt; &lt;imagen&gt;
+</code></pre></div></td></tr></table></div>
+<p>Después comprueba:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>docker<span class="w"> </span>ps
+</code></pre></div></td></tr></table></div>
+<p>y abre:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>http://localhost:8080
+</code></pre></div></td></tr></table></div>
+<p>Debe aparecer la página inicial de Nginx.</p>
+<div class="admonition tip">
+<p class="admonition-title">Fíjate en la imagen</p>
+<p>Utilizamos una etiqueta concreta (<code>1.30.4-alpine</code>) en lugar de depender de una etiqueta flotante como <code>latest</code>.</p>
+</div>
+<hr>
+<h2 id="paso-2-observalo-desde-fuera-y-desde-dentro">Paso 2: Obsérvalo desde fuera y desde dentro<a class="headerlink" href="#paso-2-observalo-desde-fuera-y-desde-dentro" title="Permanent link">¶</a></h2>
+<p>Recarga varias veces la página y consulta los logs:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>docker<span class="w"> </span>logs<span class="w"> </span>web-1
+</code></pre></div></td></tr></table></div>
+<p>Solicita también:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>http://localhost:8080/no-existe
+</code></pre></div></td></tr></table></div>
+<p>y vuelve a mirar los logs.</p>
+<p><strong>Comprueba:</strong> puedes distinguir peticiones correctas y fallidas.</p>
+<p>Entra después en el contenedor:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>web-1<span class="w"> </span>sh
+</code></pre></div></td></tr></table></div>
+<p>Averigua:</p>
+<ol>
+<li>qué sistema operativo utiliza;</li>
+<li>desde qué directorio sirve Nginx sus ficheros.</li>
+</ol>
+<p>Puedes ayudarte de:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a>cat<span class="w"> </span>/etc/os-release
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a>nginx<span class="w"> </span>-T<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">'root|index'</span>
+</code></pre></div></td></tr></table></div>
+<p>Modifica la página de bienvenida dentro del contenedor para que muestre un texto reconocible. Sal de la shell y recarga el navegador.</p>
+<p><strong>Comprueba:</strong> el navegador muestra tu modificación.</p>
+<p><strong>Evidencia 1:</strong> captura donde se vea <code>web-1</code> en ejecución y los logs con al menos una petición correcta y otra fallida.</p>
+<hr>
+<h2 id="paso-3-comprueba-que-pertenece-a-la-imagen-y-que-al-contenedor">Paso 3: Comprueba qué pertenece a la imagen y qué al contenedor<a class="headerlink" href="#paso-3-comprueba-que-pertenece-a-la-imagen-y-que-al-contenedor" title="Permanent link">¶</a></h2>
+<p>Aquí está el experimento principal de esta primera parte.</p>
+<h3 id="31-detener-no-es-eliminar">3.1. Detener no es eliminar<a class="headerlink" href="#31-detener-no-es-eliminar" title="Permanent link">¶</a></h3>
+<p>Detén y vuelve a arrancar <code>web-1</code>:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a>docker<span class="w"> </span>stop<span class="w"> </span>web-1
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a>docker<span class="w"> </span>start<span class="w"> </span>web-1
+</code></pre></div></td></tr></table></div>
+<p>Abre de nuevo:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a>http://localhost:8080
+</code></pre></div></td></tr></table></div>
+<p><strong>Comprueba:</strong> tu modificación continúa allí.</p>
+<h3 id="32-dos-contenedores-una-misma-imagen">3.2. Dos contenedores, una misma imagen<a class="headerlink" href="#32-dos-contenedores-una-misma-imagen" title="Permanent link">¶</a></h3>
+<p>Crea un segundo contenedor desde <strong>la misma imagen</strong>:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>nombre: web-2
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a>puerto del anfitrión: 8081
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a>puerto del contenedor: 80
+</code></pre></div></td></tr></table></div>
+<p>Compara:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
+<span class="normal"><a href="#__codelineno-16-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a>http://localhost:8080
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a>http://localhost:8081
+</code></pre></div></td></tr></table></div>
+<p>El primer contenedor debe mostrar tu modificación; el segundo, la página original.</p>
+<p>Modifica ahora <code>web-2</code> con un texto diferente.</p>
+<p><strong>Evidencia 2:</strong> captura donde se vea que <code>web-1</code> y <code>web-2</code>, creados desde la misma imagen, muestran contenido distinto.</p>
+<h3 id="33-eliminar-si-cambia-el-resultado">3.3. Eliminar sí cambia el resultado<a class="headerlink" href="#33-eliminar-si-cambia-el-resultado" title="Permanent link">¶</a></h3>
+<p>Elimina <code>web-1</code> y créalo de nuevo con:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<span class="normal"><a href="#__codelineno-17-2">2</a></span>
+<span class="normal"><a href="#__codelineno-17-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a>mismo nombre
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a>mismo puerto
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a>misma imagen
+</code></pre></div></td></tr></table></div>
+<p><strong>Comprueba:</strong> la modificación que hiciste originalmente en <code>web-1</code> ha desaparecido.</p>
+<p>En <code>actividad-2.1.md</code> responde brevemente:</p>
+<ol>
+<li>¿Por qué <code>stop</code> y <code>start</code> conservaron el cambio?</li>
+<li>¿Por qué <code>web-1</code> y <code>web-2</code> podían contener ficheros diferentes?</li>
+<li>¿Por qué eliminar y recrear hizo desaparecer la modificación?</li>
+<li>¿Qué problema tendría este comportamiento si el fichero modificado contuviera datos importantes?</li>
+</ol>
+<div class="admonition question">
+<p class="admonition-title">La idea que debes conservar</p>
+<p>¿Dónde estaba realmente escrito tu cambio: en la imagen o en la capa de escritura del contenedor?</p>
+</div>
+<hr>
+<h2 id="paso-4-limpia-el-experimento">Paso 4: Limpia el experimento<a class="headerlink" href="#paso-4-limpia-el-experimento" title="Permanent link">¶</a></h2>
+<p>Detén y elimina los contenedores de Nginx.</p>
+<p>Comprueba:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a
+</code></pre></div></td></tr></table></div>
+<p>No debe quedar ningún contenedor de esta primera parte.</p>
+<details class="info">
+<summary>Si te sobra tiempo</summary>
+<p>Ejecuta <code>docker system df</code> antes y después de limpiar y observa qué recursos ocupan espacio en el equipo.</p>
+</details>
+<hr>
+<h2 id="paso-5-construye-la-imagen-de-base-de-datos">Paso 5: Construye la imagen de base de datos<a class="headerlink" href="#paso-5-construye-la-imagen-de-base-de-datos" title="Permanent link">¶</a></h2>
+<p>Ahora utilizarás una imagen oficial como punto de partida para crear una imagen propia.</p>
+<p>Los scripts de Escaparate están en:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
+<span class="normal"><a href="#__codelineno-19-2">2</a></span>
+<span class="normal"><a href="#__codelineno-19-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a>escaparate/db/
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a>├── 01-schema.sql
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a>└── 02-data.sql
+</code></pre></div></td></tr></table></div>
+<p>La imagen oficial de PostgreSQL ejecuta los scripts de <code>/docker-entrypoint-initdb.d/</code> cuando inicializa un directorio de datos vacío.</p>
+<p>Crea:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
+<span class="normal"><a href="#__codelineno-20-2">2</a></span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span>
+<span class="normal"><a href="#__codelineno-20-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a>practicas/
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a>└── docker/
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a>    └── db/
+<a id="__codelineno-20-4" name="__codelineno-20-4"></a>        └── Dockerfile
+</code></pre></div></td></tr></table></div>
+<p>El Dockerfile debe:</p>
+<ol>
+<li>partir de <code>postgres:18-alpine</code>;</li>
+<li>copiar <code>01-schema.sql</code> y <code>02-data.sql</code> a <code>/docker-entrypoint-initdb.d/</code>.</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">La decisión importante: el contexto</p>
+<p>El Dockerfile está en <code>practicas/docker/db/</code>, pero los scripts están en <code>escaparate/db/</code>.</p>
+<p>Los caminos utilizados por <code>COPY</code> se interpretan respecto al <strong>contexto de construcción</strong>, no respecto a la carpeta donde está el Dockerfile.</p>
+</div>
+<p>Construye desde la raíz de <code>daw-despliegue</code> utilizando:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a>Dockerfile: practicas/docker/db/Dockerfile
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a>imagen: escaparate-db:1.0.0
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a>contexto: .
+</code></pre></div></td></tr></table></div>
+<p>Puedes partir de esta forma:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>&lt;Dockerfile&gt;<span class="w"> </span>-t<span class="w"> </span>&lt;imagen&gt;<span class="w"> </span>&lt;contexto&gt;
+</code></pre></div></td></tr></table></div>
+<p>Comprueba:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a>docker<span class="w"> </span>image<span class="w"> </span>ls<span class="w"> </span>escaparate-db:1.0.0
+</code></pre></div></td></tr></table></div>
+<div class="admonition info">
+<p class="admonition-title">Inicializar no es migrar</p>
+<p>Este mecanismo es útil para aprender a construir la imagen y crear una base inicial. La evolución de un esquema real suele gestionarse mediante herramientas de migración como Flyway o Liquibase.</p>
+</div>
+<hr>
+<h2 id="paso-6-ejecuta-la-misma-imagen-con-configuracion-distinta">Paso 6: Ejecuta la misma imagen con configuración distinta<a class="headerlink" href="#paso-6-ejecuta-la-misma-imagen-con-configuracion-distinta" title="Permanent link">¶</a></h2>
+<p>Arranca un contenedor de <code>escaparate-db:1.0.0</code> con:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
+<span class="normal"><a href="#__codelineno-24-2">2</a></span>
+<span class="normal"><a href="#__codelineno-24-3">3</a></span>
+<span class="normal"><a href="#__codelineno-24-4">4</a></span>
+<span class="normal"><a href="#__codelineno-24-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a>nombre: bd-1
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a>puerto publicado: 5433:5432
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a>POSTGRES_USER: alumno
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a>POSTGRES_PASSWORD: una contraseña de prueba
+<a id="__codelineno-24-5" name="__codelineno-24-5"></a>POSTGRES_DB: escaparate
+</code></pre></div></td></tr></table></div>
+<p>Utiliza <code>-e NOMBRE=valor</code> para cada variable.</p>
+<p>Espera a que PostgreSQL esté preparado. Puedes comprobarlo con:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a>docker<span class="w"> </span>logs<span class="w"> </span>bd-1
+</code></pre></div></td></tr></table></div>
+<p>Cuando esté listo, ejecuta dentro del contenedor:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
+<span class="normal"><a href="#__codelineno-26-2">2</a></span>
+<span class="normal"><a href="#__codelineno-26-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>bd-1<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="w">  </span>psql<span class="w"> </span>-U<span class="w"> </span>alumno<span class="w"> </span>-d<span class="w"> </span>escaparate<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="w">  </span>-c<span class="w"> </span><span class="s2">"SELECT count(*) FROM productos;"</span>
+</code></pre></div></td></tr></table></div>
+<p>El resultado debe ser:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a>8
+</code></pre></div></td></tr></table></div>
+<p>Elimina <code>bd-1</code> y crea <code>bd-2</code> desde <strong>la misma imagen</strong>, pero con un usuario y una contraseña de prueba diferentes.</p>
+<p>Vuelve a ejecutar la consulta utilizando el nuevo usuario.</p>
+<p><strong>Comprueba:</strong> la imagen sigue creando el esquema de Escaparate y aparecen los mismos <strong>8 productos</strong>.</p>
+<p><strong>Evidencia 3:</strong> captura de la consulta realizada sobre <code>bd-2</code> con resultado <code>8</code>. No muestres ninguna credencial real.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>La imagen ha funcionado con dos configuraciones distintas. ¿Dónde estaban esos valores si no estaban dentro de la imagen? ¿Qué problema tendría escribir una contraseña real en el Dockerfile?</p>
+</div>
+<hr>
+<h2 id="paso-7-publica-la-imagen-en-ghcr">Paso 7: Publica la imagen en GHCR<a class="headerlink" href="#paso-7-publica-la-imagen-en-ghcr" title="Permanent link">¶</a></h2>
+<p>Hasta ahora la imagen existe únicamente en tu equipo. Ahora vas a convertirla en una pieza que pueda descargarse desde otra máquina.</p>
+<h3 id="71-inicia-sesion">7.1. Inicia sesión<a class="headerlink" href="#71-inicia-sesion" title="Permanent link">¶</a></h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a>docker<span class="w"> </span>login<span class="w"> </span>ghcr.io<span class="w"> </span>-u<span class="w"> </span>&lt;tu-usuario&gt;
+</code></pre></div></td></tr></table></div>
+<p>Cuando Docker solicite la contraseña, utiliza el PAT preparado para GHCR.</p>
+<div class="admonition danger">
+<p class="admonition-title">No pegues el token en comandos que vayas a documentar</p>
+<p>El PAT no debe aparecer en capturas, Markdown ni historial del repositorio.</p>
+</div>
+<h3 id="72-etiqueta-y-publica">7.2. Etiqueta y publica<a class="headerlink" href="#72-etiqueta-y-publica" title="Permanent link">¶</a></h3>
+<p>Añade la referencia:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a>ghcr.io/&lt;tu-usuario&gt;/escaparate-db:1.0.0
+</code></pre></div></td></tr></table></div>
+<p>utilizando <code>docker tag</code>, y publícala con <code>docker push</code>.</p>
+<p>Después localiza el paquete en GitHub y configúralo como <strong>público</strong>.</p>
+<h3 id="73-demuestra-que-la-copia-local-ya-no-es-necesaria">7.3. Demuestra que la copia local ya no es necesaria<a class="headerlink" href="#73-demuestra-que-la-copia-local-ya-no-es-necesaria" title="Permanent link">¶</a></h3>
+<p>Cierra la sesión:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a>docker<span class="w"> </span><span class="nb">logout</span><span class="w"> </span>ghcr.io
+</code></pre></div></td></tr></table></div>
+<p>Elimina primero los contenedores de PostgreSQL que queden y después las dos referencias locales:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
+<span class="normal"><a href="#__codelineno-31-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a>docker<span class="w"> </span>image<span class="w"> </span>rm<span class="w"> </span>ghcr.io/&lt;tu-usuario&gt;/escaparate-db:1.0.0
+<a id="__codelineno-31-2" name="__codelineno-31-2"></a>docker<span class="w"> </span>image<span class="w"> </span>rm<span class="w"> </span>escaparate-db:1.0.0
+</code></pre></div></td></tr></table></div>
+<p>Comprueba que ya no aparece:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a>docker<span class="w"> </span>image<span class="w"> </span>ls<span class="w"> </span>escaparate-db:1.0.0
+</code></pre></div></td></tr></table></div>
+<p>Descárgala de nuevo <strong>sin iniciar sesión</strong>:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/&lt;tu-usuario&gt;/escaparate-db:1.0.0
+</code></pre></div></td></tr></table></div>
+<p>Arráncala con unas nuevas credenciales de prueba y verifica de nuevo que:</p>
+<div class="language-sql highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">SQL</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">productos</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+<p>devuelve <code>8</code>.</p>
+<p><strong>Evidencia 4:</strong> captura donde se vea el paquete público en GitHub y la descarga posterior desde GHCR después de haber eliminado las referencias locales.</p>
+<hr>
+<h2 id="paso-8-documenta-e-integra">Paso 8: Documenta e integra<a class="headerlink" href="#paso-8-documenta-e-integra" title="Permanent link">¶</a></h2>
+<p>Revisa <code>actividad-2.1.md</code>. Debe contener únicamente:</p>
+<ul>
+<li>las respuestas del Paso 3;</li>
+<li>la reflexión sobre configuración del Paso 6;</li>
+<li>las cuatro evidencias;</li>
+<li>cualquier incidencia relevante y cómo la resolviste.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">No conviertas la entrega en una transcripción</p>
+<p>Los comandos reales, el Dockerfile y el historial ya están en el repositorio. Documenta <strong>decisiones, resultados y evidencias</strong>, no cada pulsación de teclado.</p>
+</div>
+<p>Registra los cambios de <code>sesion-03</code>, publícalos y abre una Pull Request:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1"></a>sesion-03 → main
+</code></pre></div></td></tr></table></div>
+<p>Espera a que terminen las comprobaciones. Si son correctas, revisa los cambios y fusiona mediante <strong>Create a merge commit</strong>.</p>
+<p>Actualiza después tu rama principal:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1">1</a></span>
+<span class="normal"><a href="#__codelineno-36-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a>git<span class="w"> </span>switch<span class="w"> </span>main
+<a id="__codelineno-36-2" name="__codelineno-36-2"></a>git<span class="w"> </span>pull<span class="w"> </span>--ff-only
+</code></pre></div></td></tr></table></div>
+<p>Comprueba:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a>git<span class="w"> </span>log<span class="w"> </span>--graph<span class="w"> </span>--oneline<span class="w"> </span>--all<span class="w"> </span>--decorate
+</code></pre></div></td></tr></table></div>
+<hr>
+<h2 id="que-se-entrega">Qué se entrega<a class="headerlink" href="#que-se-entrega" title="Permanent link">¶</a></h2>
+<p>Antes de terminar, comprueba:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>actividad-2.1.md</code> con respuestas, reflexiones y cuatro evidencias;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>practicas/docker/db/Dockerfile</code>;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> imagen pública <code>ghcr.io/&lt;usuario&gt;/escaparate-db:1.0.0</code>;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> prueba de que la imagen funciona después de volver a descargarla;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Pull Request <code>sesion-03 → main</code> fusionada.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Dónde queda la entrega</p>
+<p>La documentación y el Dockerfile quedan versionados en el repositorio privado. La imagen de GHCR es pública únicamente para permitir su descarga y comprobación.</p>
+</div>
+<details class="info">
+<summary>Cómo se comprobará</summary>
+<p>El profesor podrá eliminar cualquier copia local, descargar la imagen pública y arrancarla con credenciales de prueba distintas.</p>
+<p>Una comprobación equivalente sería:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-38-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-38-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-38-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-38-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-38-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-38-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-38-10">10</a></span>
+<span class="normal"><a href="#__codelineno-38-11">11</a></span>
+<span class="normal"><a href="#__codelineno-38-12">12</a></span>
+<span class="normal"><a href="#__codelineno-38-13">13</a></span>
+<span class="normal"><a href="#__codelineno-38-14">14</a></span>
+<span class="normal"><a href="#__codelineno-38-15">15</a></span>
+<span class="normal"><a href="#__codelineno-38-16">16</a></span>
+<span class="normal"><a href="#__codelineno-38-17">17</a></span>
+<span class="normal"><a href="#__codelineno-38-18">18</a></span>
+<span class="normal"><a href="#__codelineno-38-19">19</a></span>
+<span class="normal"><a href="#__codelineno-38-20">20</a></span>
+<span class="normal"><a href="#__codelineno-38-21">21</a></span>
+<span class="normal"><a href="#__codelineno-38-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1"></a>docker<span class="w"> </span><span class="nb">logout</span><span class="w"> </span>ghcr.io<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>verifica<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3"></a>docker<span class="w"> </span>image<span class="w"> </span>rm<span class="w"> </span>ghcr.io/&lt;usuario&gt;/escaparate-db:1.0.0<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4"></a>
+<a id="__codelineno-38-5" name="__codelineno-38-5"></a>docker<span class="w"> </span>pull<span class="w"> </span>ghcr.io/&lt;usuario&gt;/escaparate-db:1.0.0
+<a id="__codelineno-38-6" name="__codelineno-38-6"></a>
+<a id="__codelineno-38-7" name="__codelineno-38-7"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>verifica<span class="w"> </span>-p<span class="w"> </span><span class="m">5434</span>:5432<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-38-8" name="__codelineno-38-8"></a><span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_USER</span><span class="o">=</span>profesor<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9"></a><span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>prueba-verificacion<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10"></a><span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_DB</span><span class="o">=</span>escaparate<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-38-11" name="__codelineno-38-11"></a><span class="w">  </span>ghcr.io/&lt;usuario&gt;/escaparate-db:1.0.0
+<a id="__codelineno-38-12" name="__codelineno-38-12"></a>
+<a id="__codelineno-38-13" name="__codelineno-38-13"></a><span class="k">until</span><span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>verifica<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-38-14" name="__codelineno-38-14"></a><span class="w">  </span>pg_isready<span class="w"> </span>-U<span class="w"> </span>profesor<span class="w"> </span>-d<span class="w"> </span>escaparate<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-38-15" name="__codelineno-38-15"></a><span class="w">  </span>sleep<span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-38-16" name="__codelineno-38-16"></a><span class="k">done</span>
+<a id="__codelineno-38-17" name="__codelineno-38-17"></a>
+<a id="__codelineno-38-18" name="__codelineno-38-18"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>verifica<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-38-19" name="__codelineno-38-19"></a><span class="w">  </span>psql<span class="w"> </span>-U<span class="w"> </span>profesor<span class="w"> </span>-d<span class="w"> </span>escaparate<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-38-20" name="__codelineno-38-20"></a><span class="w">  </span>-c<span class="w"> </span><span class="s2">"SELECT count(*) FROM productos;"</span>
+<a id="__codelineno-38-21" name="__codelineno-38-21"></a>
+<a id="__codelineno-38-22" name="__codelineno-38-22"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>verifica
+</code></pre></div></td></tr></table></div>
+<p>La consulta debe devolver <strong>8</strong>.</p>
+</details>
+<hr>
+<h2 id="cierre">✅ Cierre<a class="headerlink" href="#cierre" title="Permanent link">¶</a></h2>
+<p>Has comprobado de forma práctica que <strong>imagen y contenedor no son lo mismo</strong>: varios contenedores pueden partir del mismo contenido y mantener estados independientes, y eliminar un contenedor elimina también su capa de escritura.</p>
+<p>Después has construido una imagen propia de PostgreSQL, has mantenido la configuración fuera del paquete y la has publicado en un registro.</p>
+<p>En la próxima sesión aplicarás el mismo proceso a la aplicación completa de Escaparate.</p></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../fundamentos-contenedores/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Fundamentos de contenedores">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Fundamentos de contenedores
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../imagenes-contenedores/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Imágenes de contenedores">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Imágenes de contenedores
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+<p style="margin: 0 auto; text-align: center; font-size: 0.7rem;">
+  © 2026 Alejandro Roig y Ángel Vidal
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">
+    Licencia CC BY-NC-SA 4.0
+  </a>
+</p>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tracking", "navigation.footer", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1897 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alejandroroig.github.io/despliegue-daw/tema3/observabilidad/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>👁️ Observabilidad: logs, métricas y alertas - Despliegue de Aplicaciones Web</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#observabilidad-logs-metricas-y-alertas" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-header__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Despliegue de Aplicaciones Web
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              👁️ Observabilidad: logs, métricas y alertas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo Claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-nav__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Despliegue de Aplicaciones Web
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Punto de partida
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 1 - Punto de partida
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitecturas y proceso de despliegue
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/arquitecturas-despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.1 - Qué se puede saber de un despliegue desde fuera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Control de versiones y documentación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/control-versiones-documentacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/resumen-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hoja de referencia de comandos básicos de Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.2 - Tu repositorio como herramienta de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/fundamentos-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.1 - Ejecutar, inspeccionar y publicar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Imágenes de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/imagenes-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.2 - Empaquetar Escaparate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker Compose
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/docker-compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.3 - El conjunto entero con un comando
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Currículo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-las-senales-de-un-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📡 1. Las señales de un sistema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📡 1. Las señales de un sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-metricas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Métricas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-trazas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Trazas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-que-registra-un-servidor-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧾 2. Qué registra un servidor web
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧾 2. Qué registra un servidor web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-access-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Access log
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-error-log" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Error log
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-del-texto-libre-al-log-estructurado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧱 3. Del texto libre al log estructurado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧱 3. Del texto libre al log estructurado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-registrar-el-backend-utilizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Registrar el backend utilizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-escapar-correctamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Escapar correctamente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-no-todo-debe-entrar-en-los-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. No todo debe entrar en los logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-centralizar-registros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🗃️ 4. Centralizar registros
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-que-merece-nuestra-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 5. Qué merece nuestra atención
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 5. Qué merece nuestra atención">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-red-para-un-servicio-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. RED para un servicio web
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-la-media-puede-ocultar-problemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 6. La media puede ocultar problemas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 6. La media puede ocultar problemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-la-media" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. La media
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-p95" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. p95
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-un-dashboard-debe-responder-preguntas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📈 7. Un dashboard debe responder preguntas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-alertas-cuando-merece-la-pena-avisar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 8. Alertas: cuándo merece la pena avisar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-observar-tambien-tiene-coste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💾 9. Observar también tiene coste
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-debes-saber-hacer-al-salir-de-esta-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Qué debes saber hacer al salir de esta sesión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ideas-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Ideas clave
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><h1 id="observabilidad-logs-metricas-y-alertas">👁️ Observabilidad: logs, métricas y alertas<a class="headerlink" href="#observabilidad-logs-metricas-y-alertas" title="Permanent link">¶</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Descarga de diapositivas</p>
+<!-- <a href="diapositivas/servidores-web-dns.pptx">Descarga las diapositivas</a>{target="_blank" rel="noopener"} -->
+</div>
+<hr>
+<p>Un servicio puede estar correctamente desplegado y, aun así, ser difícil de administrar si no sabemos qué está ocurriendo.</p>
+<p>Decir:</p>
+<blockquote>
+<p>“La web va mal.”</p>
+</blockquote>
+<p>aporta poco.</p>
+<p>Una descripción observable sería más útil:</p>
+<blockquote>
+<p>“<code>/api/productos</code> devuelve más errores <code>5xx</code> y el p95 de latencia ha aumentado.”</p>
+</blockquote>
+<p>La <strong>observabilidad</strong> es la capacidad de comprender el estado interno de un sistema a partir de las señales que emite.</p>
+<hr>
+<h2 id="1-las-senales-de-un-sistema">📡 1. Las señales de un sistema<a class="headerlink" href="#1-las-senales-de-un-sistema" title="Permanent link">¶</a></h2>
+<p>Tradicionalmente se habla de tres grandes tipos:</p>
+<table>
+<thead>
+<tr>
+<th>Señal</th>
+<th>Qué aporta</th>
+<th>Pregunta típica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Logs</strong></td>
+<td>sucesos concretos con contexto</td>
+<td>¿qué ocurrió?</td>
+</tr>
+<tr>
+<td><strong>Métricas</strong></td>
+<td>valores numéricos a lo largo del tiempo</td>
+<td>¿cómo evoluciona?</td>
+</tr>
+<tr>
+<td><strong>Trazas</strong></td>
+<td>recorrido de una petición</td>
+<td>¿dónde se consume el tiempo?</td>
+</tr>
+</tbody>
+</table>
+<h3 id="11-logs">1.1. Logs<a class="headerlink" href="#11-logs" title="Permanent link">¶</a></h3>
+<p>Ejemplo:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>GET /api/productos
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>estado=500
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>duracion=1.84s
+</code></pre></div></td></tr></table></div>
+<p>Un log permite investigar un caso y conservar contexto.</p>
+<h3 id="12-metricas">1.2. Métricas<a class="headerlink" href="#12-metricas" title="Permanent link">¶</a></h3>
+<p>Ejemplos:</p>
+<ul>
+<li>peticiones por segundo;</li>
+<li>porcentaje de errores;</li>
+<li>latencia;</li>
+<li>CPU;</li>
+<li>memoria.</li>
+</ul>
+<p>Son útiles para tendencias, paneles y alertas.</p>
+<h3 id="13-trazas">1.3. Trazas<a class="headerlink" href="#13-trazas" title="Permanent link">¶</a></h3>
+<p>Una traza sigue una petición entre varios componentes:</p>
+<pre class="mermaid"><code>flowchart LR
+    C["Cliente"] --&gt; P["Proxy"]
+    P --&gt; S["Servicio"]
+    S --&gt; D[("Base de datos")]</code></pre>
+<p>En esta sesión basta con <strong>reconocer</strong> su utilidad. La práctica se centrará principalmente en logs y en agregaciones calculadas a partir de ellos.</p>
+<div class="admonition warning">
+<p class="admonition-title">Log agregado no es lo mismo que sistema de métricas</p>
+<p>Podemos contar errores o calcular latencias a partir de logs. Eso no significa que hayamos desplegado un sistema completo que mida periódicamente CPU, memoria, disco o colas.</p>
+</div>
+<hr>
+<h2 id="2-que-registra-un-servidor-web">🧾 2. Qué registra un servidor web<a class="headerlink" href="#2-que-registra-un-servidor-web" title="Permanent link">¶</a></h2>
+<p>Un servidor como Nginx suele producir dos tipos de registro especialmente útiles.</p>
+<h3 id="21-access-log">2.1. Access log<a class="headerlink" href="#21-access-log" title="Permanent link">¶</a></h3>
+<p>Normalmente registra una entrada por petición con campos como:</p>
+<ul>
+<li>cliente;</li>
+<li>método;</li>
+<li>ruta;</li>
+<li>estado;</li>
+<li>tamaño;</li>
+<li>duración.</li>
+</ul>
+<p>Por ejemplo:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>GET /api/productos
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>200
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>42 ms
+</code></pre></div></td></tr></table></div>
+<p>Permite responder preguntas como:</p>
+<ul>
+<li><strong>¿Qué ruta se utilizó?</strong></li>
+<li><strong>¿Qué código recibió el cliente?</strong></li>
+<li><strong>¿Cuánto tardó?</strong></li>
+</ul>
+<h3 id="22-error-log">2.2. Error log<a class="headerlink" href="#22-error-log" title="Permanent link">¶</a></h3>
+<p>Registra problemas del propio servidor, por ejemplo:</p>
+<ul>
+<li>upstream no disponible;</li>
+<li>problemas de permisos;</li>
+<li>configuración incorrecta;</li>
+<li>fichero no encontrado.</li>
+</ul>
+<p>Una misma incidencia puede verse desde dos perspectivas:</p>
+<table>
+<thead>
+<tr>
+<th>Registro</th>
+<th>Qué muestra</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>access log</code></td>
+<td><code>/api/productos → 502</code></td>
+</tr>
+<tr>
+<td><code>error log</code></td>
+<td>fallo al conectar con el upstream</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-del-texto-libre-al-log-estructurado">🧱 3. Del texto libre al log estructurado<a class="headerlink" href="#3-del-texto-libre-al-log-estructurado" title="Permanent link">¶</a></h2>
+<p>Un texto pensado para personas puede ser incómodo de analizar automáticamente.</p>
+<p>Comparar:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>192.0.2.24 GET /api/productos 200 0.042
+</code></pre></div></td></tr></table></div>
+<p>con:</p>
+<div class="language-json highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">JSON</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span>
+<span class="normal"><a href="#__codelineno-3-6">6</a></span>
+<span class="normal"><a href="#__codelineno-3-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="nt">"ip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192.0.2.24"</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">  </span><span class="nt">"metodo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GET"</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">  </span><span class="nt">"ruta"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/api/productos"</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">  </span><span class="nt">"estado"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">  </span><span class="nt">"duracion"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.042</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>En el segundo caso cada dato tiene un nombre.</p>
+<p>Eso permite:</p>
+<ul>
+<li>filtrar;</li>
+<li>agrupar;</li>
+<li>contar;</li>
+<li>calcular medias;</li>
+<li>calcular percentiles.</li>
+</ul>
+<h3 id="31-registrar-el-backend-utilizado">3.1. Registrar el backend utilizado<a class="headerlink" href="#31-registrar-el-backend-utilizado" title="Permanent link">¶</a></h3>
+<p>Cuando un proxy reparte tráfico, también puede ser útil conservar el campo <strong>destino</strong>, es decir, la dirección del backend que respondió.</p>
+<p>Así podemos comprobar desde los logs si varias réplicas están recibiendo peticiones.</p>
+<h3 id="32-escapar-correctamente">3.2. Escapar correctamente<a class="headerlink" href="#32-escapar-correctamente" title="Permanent link">¶</a></h3>
+<p>Si se genera JSON, una petición con caracteres especiales no debe romper el formato.</p>
+<p>Nginx permite:</p>
+<div class="language-nginx highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Nginx Configuration File</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">escape=json</span>
+</code></pre></div></td></tr></table></div>
+<p>al definir un <code>log_format</code>.</p>
+<h3 id="33-no-todo-debe-entrar-en-los-logs">3.3. No todo debe entrar en los logs<a class="headerlink" href="#33-no-todo-debe-entrar-en-los-logs" title="Permanent link">¶</a></h3>
+<p>Evita registrar información sensible innecesaria:</p>
+<ul>
+<li>contraseñas;</li>
+<li>tokens;</li>
+<li>cookies de sesión;</li>
+<li>datos bancarios;</li>
+<li>datos personales no necesarios.</li>
+</ul>
+<p>Un log suele copiarse, centralizarse y conservarse. Por eso debe tratarse como información potencialmente sensible.</p>
+<hr>
+<h2 id="4-centralizar-registros">🗃️ 4. Centralizar registros<a class="headerlink" href="#4-centralizar-registros" title="Permanent link">¶</a></h2>
+<p>Con una sola pieza puede bastar:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs
+</code></pre></div></td></tr></table></div>
+<p>Pero en un sistema con proxy, varias réplicas y base de datos la investigación se complica.</p>
+<p>El patrón general es:</p>
+<pre class="mermaid"><code>flowchart LR
+    P["Proxy"] --&gt; R["Recolector"]
+    A1["app-1"] --&gt; R
+    A2["app-2"] --&gt; R
+    A3["app-3"] --&gt; R
+    D["Base de datos"] --&gt; R
+    R --&gt; E["Almacén / índice"]
+    E --&gt; V["Consulta + visualización"]</code></pre>
+<table>
+<thead>
+<tr>
+<th>Pieza</th>
+<th>Responsabilidad</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Recolector</strong></td>
+<td>recibe, transforma o etiqueta</td>
+</tr>
+<tr>
+<td><strong>Almacén</strong></td>
+<td>conserva e indexa</td>
+</tr>
+<tr>
+<td><strong>Visualización</strong></td>
+<td>permite buscar, agregar y representar</td>
+</tr>
+</tbody>
+</table>
+<p>Las herramientas concretas pueden cambiar. El patrón es más importante que una marca concreta.</p>
+<p>En entornos de contenedores es habitual que los procesos escriban en <strong><code>stdout</code> y <code>stderr</code></strong>, y que la plataforma recoja esas salidas.</p>
+<p><strong>Retención.</strong></p>
+<p>Los logs crecen.</p>
+<p>Todo sistema debe decidir:</p>
+<ul>
+<li>qué guardar;</li>
+<li>durante cuánto tiempo;</li>
+<li>qué eliminar.</li>
+</ul>
+<p>Guardar todo indefinidamente no es una estrategia.</p>
+<hr>
+<h2 id="5-que-merece-nuestra-atencion">🎯 5. Qué merece nuestra atención<a class="headerlink" href="#5-que-merece-nuestra-atencion" title="Permanent link">¶</a></h2>
+<p>Una referencia muy conocida son las <strong>cuatro señales de oro</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Señal</th>
+<th>Qué mide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Latencia</strong></td>
+<td>cuánto tarda una operación</td>
+</tr>
+<tr>
+<td><strong>Tráfico</strong></td>
+<td>cuánta demanda recibe el sistema</td>
+</tr>
+<tr>
+<td><strong>Errores</strong></td>
+<td>cuántas operaciones fallan</td>
+</tr>
+<tr>
+<td><strong>Saturación</strong></td>
+<td>cuánto margen queda antes del límite</td>
+</tr>
+</tbody>
+</table>
+<p>En una práctica basada en access logs podemos observar especialmente <strong>latencia, tráfico y errores</strong>.</p>
+<p>La saturación de CPU, memoria, disco o conexiones requiere normalmente señales específicas de infraestructura.</p>
+<h3 id="51-red-para-un-servicio-web">5.1. RED para un servicio web<a class="headerlink" href="#51-red-para-un-servicio-web" title="Permanent link">¶</a></h3>
+<p>Para servicios y APIs resulta útil pensar en <strong>RED: Rate, Errors y Duration</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Pregunta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Rate</strong></td>
+<td>¿cuántas peticiones llegan?</td>
+</tr>
+<tr>
+<td><strong>Errors</strong></td>
+<td>¿cuántas fallan?</td>
+</tr>
+<tr>
+<td><strong>Duration</strong></td>
+<td>¿cuánto tardan?</td>
+</tr>
+</tbody>
+</table>
+<p>RED encaja muy bien con lo que puede observarse desde un access log.</p>
+<div class="admonition info">
+<p class="admonition-title">USE</p>
+<p>Para recursos de infraestructura existe otra regla útil: <strong>Utilization, Saturation, Errors</strong>. Basta con reconocerla en esta sesión; no vamos a instrumentar recursos de infraestructura siguiendo USE.</p>
+</div>
+<hr>
+<h2 id="6-la-media-puede-ocultar-problemas">📊 6. La media puede ocultar problemas<a class="headerlink" href="#6-la-media-puede-ocultar-problemas" title="Permanent link">¶</a></h2>
+<h3 id="61-la-media">6.1. La media<a class="headerlink" href="#61-la-media" title="Permanent link">¶</a></h3>
+<p>Supón:</p>
+<table>
+<thead>
+<tr>
+<th>Petición</th>
+<th style="text-align: right;">Latencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align: right;">50 ms</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: right;">50 ms</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: right;">55 ms</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align: right;">60 ms</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align: right;">800 ms</td>
+</tr>
+</tbody>
+</table>
+<p>La mayoría de peticiones son rápidas, pero existe una claramente lenta.</p>
+<p>Una media resume todos los valores y puede ocultar la cola.</p>
+<p>Por eso se utilizan <strong>percentiles</strong>.</p>
+<h3 id="62-p95">6.2. p95<a class="headerlink" href="#62-p95" title="Permanent link">¶</a></h3>
+<p>Una interpretación suficiente es:</p>
+<blockquote>
+<p><strong>p95</strong> es el tiempo que el 95 % de las peticiones no supera.</p>
+</blockquote>
+<p>Por ejemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Medida</th>
+<th style="text-align: right;">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>media</td>
+<td style="text-align: right;">90 ms</td>
+</tr>
+<tr>
+<td>p95</td>
+<td style="text-align: right;">420 ms</td>
+</tr>
+</tbody>
+</table>
+<p>El comportamiento promedio parece bueno, pero una parte del tráfico experimenta latencias mucho mayores.</p>
+<p>No necesitas calcular manualmente el percentil. Debes saber <strong>interpretarlo</strong>.</p>
+<hr>
+<h2 id="7-un-dashboard-debe-responder-preguntas">📈 7. Un dashboard debe responder preguntas<a class="headerlink" href="#7-un-dashboard-debe-responder-preguntas" title="Permanent link">¶</a></h2>
+<p>Un panel no es mejor por tener más gráficos.</p>
+<div class="admonition warning">
+<p class="admonition-title">Mal criterio</p>
+<p>Diseñar un dashboard para <strong>mostrar todo lo posible</strong>.</p>
+</div>
+<p>Un criterio mejor es partir de una pregunta:</p>
+<blockquote>
+<p><strong>¿Qué necesito saber para decidir si el servicio funciona bien?</strong></p>
+</blockquote>
+<p>Por ejemplo:</p>
+<ul>
+<li>¿qué rutas acumulan errores?;</li>
+<li>¿qué rutas tienen peor latencia?;</li>
+<li>¿están respondiendo varias réplicas?</li>
+</ul>
+<p>Cada visualización debería existir porque ayuda a responder una pregunta.</p>
+<hr>
+<h2 id="8-alertas-cuando-merece-la-pena-avisar">🚨 8. Alertas: cuándo merece la pena avisar<a class="headerlink" href="#8-alertas-cuando-merece-la-pena-avisar" title="Permanent link">¶</a></h2>
+<p>Un panel necesita que alguien lo mire.</p>
+<p>Una alerta evalúa una condición y avisa cuando esa condición merece una actuación.</p>
+<p>Una alerta útil necesita cuatro decisiones:</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Pregunta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Umbral</strong></td>
+<td>¿a partir de qué valor preocupa?</td>
+</tr>
+<tr>
+<td><strong>Ventana</strong></td>
+<td>¿durante cuánto tiempo?</td>
+</tr>
+<tr>
+<td><strong>Destinatario</strong></td>
+<td>¿quién debe recibirla?</td>
+</tr>
+<tr>
+<td><strong>Acción</strong></td>
+<td>¿qué debería comprobar o hacer?</td>
+</tr>
+</tbody>
+</table>
+<p>Ejemplo:</p>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Decisión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Condición</td>
+<td>más de 10 respuestas <code>5xx</code></td>
+</tr>
+<tr>
+<td>Ventana</td>
+<td>durante 2 minutos</td>
+</tr>
+<tr>
+<td>Destinatario</td>
+<td>responsable del servicio</td>
+</tr>
+<tr>
+<td>Acción</td>
+<td>comprobar aplicación y dependencias</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fatiga de alertas.</strong> Una alerta que se dispara continuamente y no exige actuación termina siendo ignorada.</p>
+<blockquote>
+<p><strong>Más alertas ≠ mejor observabilidad.</strong></p>
+</blockquote>
+<p>Suele ser más útil alertar sobre un <strong>síntoma que afecta al servicio</strong> que sobre una posible causa aislada.</p>
+<hr>
+<h2 id="9-observar-tambien-tiene-coste">💾 9. Observar también tiene coste<a class="headerlink" href="#9-observar-tambien-tiene-coste" title="Permanent link">¶</a></h2>
+<p>La observabilidad también consume recursos y trabajo:</p>
+<ul>
+<li>CPU;</li>
+<li>memoria;</li>
+<li>disco y almacenamiento;</li>
+<li>índices;</li>
+<li>mantenimiento.</li>
+</ul>
+<p>Por eso hay que elegir qué recoger y cuánto conservar.</p>
+<p>No se trata de almacenar todo, sino de conservar información que ayude a <strong>detectar, explicar o resolver</strong> problemas.</p>
+<hr>
+<h2 id="que-debes-saber-hacer-al-salir-de-esta-sesion">🎯 Qué debes saber hacer al salir de esta sesión<a class="headerlink" href="#que-debes-saber-hacer-al-salir-de-esta-sesion" title="Permanent link">¶</a></h2>
+<p>Al terminar, deberías poder:</p>
+<ul>
+<li>Explicar qué significa observabilidad.</li>
+<li>Distinguir logs, métricas y trazas.</li>
+<li>Diferenciar access log y error log.</li>
+<li>Explicar por qué un log estructurado facilita consultas y agregaciones.</li>
+<li>Identificar información que no debería registrarse.</li>
+<li>Explicar el patrón recolector → almacén → visualización.</li>
+<li>Reconocer latencia, tráfico, errores y saturación.</li>
+<li>Aplicar RED a un servicio web.</li>
+<li>Interpretar una media y un p95.</li>
+<li>Explicar qué pregunta debe responder una visualización.</li>
+<li>Diseñar una alerta con umbral, ventana, destinatario y acción.</li>
+<li>Explicar qué es la fatiga de alertas.</li>
+<li>Reconocer que la observabilidad también consume recursos.</li>
+</ul>
+<p>Lo que basta con <strong>reconocer</strong>:</p>
+<ul>
+<li>trazas distribuidas;</li>
+<li>identificadores de petición;</li>
+<li>USE para recursos;</li>
+<li>sistemas específicos de métricas de infraestructura;</li>
+<li>políticas avanzadas de retención;</li>
+<li>plataformas APM.</li>
+</ul>
+<hr>
+<h2 id="ideas-clave">✅ Ideas clave<a class="headerlink" href="#ideas-clave" title="Permanent link">¶</a></h2>
+<details class="tip">
+<summary>Abrir resumen</summary>
+<ul>
+<li>La observabilidad permite comprender un sistema a partir de las señales que emite.</li>
+<li>Logs, métricas y trazas responden preguntas distintas y complementarias.</li>
+<li>Un access log puede registrar ruta, estado, duración y backend utilizado.</li>
+<li>Un log estructurado convierte texto en campos que pueden filtrarse y agregarse.</li>
+<li>Los registros de varias piezas pueden centralizarse mediante recolector → almacén → visualización.</li>
+<li>Latencia, tráfico, errores y saturación son señales útiles de salud.</li>
+<li>RED ayuda a observar servicios: tasa, errores y duración.</li>
+<li>La media puede ocultar peticiones lentas; p95 ayuda a observar la cola.</li>
+<li>Un dashboard debe responder preguntas, no acumular gráficos.</li>
+<li>Una alerta útil necesita umbral, ventana, destinatario y acción.</li>
+<li>Alertar demasiado produce fatiga y reduce el valor de los avisos.</li>
+<li>Recoger y conservar observabilidad también tiene coste.</li>
+</ul>
+</details>
+<hr>
+<p>En la actividad aplicarás estos patrones a un despliegue con varias réplicas: centralizarás logs, estructurarás el registro de acceso, comprobarás qué backend atiende cada petición, compararás media y p95 y utilizarás incidencias controladas para razonar sobre alertas.</p>
+<p>La sesión siguiente cambiará el punto de vista: después de observar la entrada y el tráfico, miraremos <strong>dentro del backend</strong> para entender qué ejecuta cada réplica, dónde vive su estado y cómo interpretar una prueba sencilla de rendimiento.</p></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+<p style="margin: 0 auto; text-align: center; font-size: 0.7rem;">
+  © 2026 Alejandro Roig y Ángel Vidal
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">
+    Licencia CC BY-NC-SA 4.0
+  </a>
+</p>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tracking", "navigation.footer", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

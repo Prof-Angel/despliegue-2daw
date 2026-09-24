@@ -1,0 +1,1652 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alejandroroig.github.io/despliegue-daw/tema4/despliegue-continuo/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>🧩 2. Despliegue continuo - Despliegue de Aplicaciones Web</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#2-despliegue-continuo" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-header__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Despliegue de Aplicaciones Web
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🧩 2. Despliegue continuo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo Claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-nav__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Despliegue de Aplicaciones Web
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Punto de partida
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 1 - Punto de partida
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitecturas y proceso de despliegue
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/arquitecturas-despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.1 - Qué se puede saber de un despliegue desde fuera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Control de versiones y documentación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/control-versiones-documentacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/resumen-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hoja de referencia de comandos básicos de Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.2 - Tu repositorio como herramienta de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/fundamentos-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.1 - Ejecutar, inspeccionar y publicar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Imágenes de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/imagenes-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.2 - Empaquetar Escaparate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker Compose
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/docker-compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.3 - El conjunto entero con un comando
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Currículo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reengancha-que-hace-hoy-tu-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⏸️ Reengancha: qué hace hoy tu pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega-continua-y-despliegue-continuo-no-son-lo-mismo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚦 Entrega continua y despliegue continuo no son lo mismo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚦 Entrega continua y despliegue continuo no son lo mismo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#main-deja-de-significar-lo-que-significaba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        main deja de significar lo que significaba
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publicar-la-imagen-la-etiqueta-deja-de-ser-decorativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 Publicar la imagen: la etiqueta deja de ser decorativa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#como-llega-el-pipeline-hasta-tu-servidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔑 Cómo llega el pipeline hasta tu servidor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuatro-maneras-de-sustituir-lo-que-esta-corriendo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔀 Cuatro maneras de sustituir lo que está corriendo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#el-fallo-que-atraviesa-todas-las-puertas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        💥 El fallo que atraviesa todas las puertas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#volver-atras-es-desplegar-una-etiqueta-anterior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ↩️ Volver atrás es desplegar una etiqueta anterior
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-debes-saber-hacer-al-salir-de-esta-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Qué debes saber hacer al salir de esta sesión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ideas-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Ideas clave
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><h1 id="2-despliegue-continuo">🧩 2. Despliegue continuo<a class="headerlink" href="#2-despliegue-continuo" title="Permanent link">¶</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Descarga de diapositivas</p>
+<p><a href="diapositivas/despliegue-continuo.pptx" rel="noopener" target="_blank">Descarga las diapositivas</a></p>
+</div>
+<hr>
+<p>Hace dos semanas dejaste una puerta montada delante de <code>main</code>. Después vinieron los exámenes, y es muy probable que ahora mismo no recuerdes ni qué disparaba tu workflow ni cómo se llamaban los jobs. No pasa nada: no vamos a repasarlo de memoria. Abre tu repositorio, entra en la última ejecución del pipeline —la del 4 de diciembre— y míralo. El pipeline es la documentación de sí mismo, y esa es una de las razones por las que existe.</p>
+<p>Lo que veas ahí es el punto de partida de hoy. Y también su límite: esa ejecución construyó una imagen, la comprobó, la escaneó y <strong>la tiró a la basura</strong>. Tu instancia lleva desde el 4 de diciembre esperando a que alguien entre a mano un viernes por la mañana. Hoy dejamos de entrar.</p>
+<hr>
+<h2 id="reengancha-que-hace-hoy-tu-pipeline">⏸️ Reengancha: qué hace hoy tu pipeline<a class="headerlink" href="#reengancha-que-hace-hoy-tu-pipeline" title="Permanent link">¶</a></h2>
+<p>Antes de añadir nada, reconstruye lo que tienes mirándolo, no recordándolo. Abre <code>.github/workflows/ci.yml</code> y completa esta tabla en tu cuaderno:</p>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Dónde se responde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>¿Qué suceso lo dispara?</td>
+<td>El bloque <code>on</code> del principio</td>
+</tr>
+<tr>
+<td>¿Cuántos jobs hay y qué hace cada uno?</td>
+<td>Las claves bajo <code>jobs</code></td>
+</tr>
+<tr>
+<td>¿En qué paso se decide si el código pasa o no?</td>
+<td>El que ejecuta <code>verify</code></td>
+</tr>
+<tr>
+<td>¿Qué hace que un hallazgo del escáner bloquee?</td>
+<td>La configuración de severidad del segundo job</td>
+</tr>
+<tr>
+<td>¿Qué impide fusionar cuando algo está en rojo?</td>
+<td><strong>Nada de lo que hay en este fichero</strong>: está en la regla de protección de <code>main</code></td>
+</tr>
+</tbody>
+</table>
+<p>Esa última fila conviene tenerla fresca. Tu pipeline no impide nada: solo produce un veredicto. Lo que impide es la regla del repositorio. Hoy añadimos un tercer actor —uno que sí toca cosas— y esa separación entre quien opina y quien actúa va a volver a aparecer.</p>
+<hr>
+<h2 id="entrega-continua-y-despliegue-continuo-no-son-lo-mismo">🚦 Entrega continua y despliegue continuo no son lo mismo<a class="headerlink" href="#entrega-continua-y-despliegue-continuo-no-son-lo-mismo" title="Permanent link">¶</a></h2>
+<p>Las dos expresiones se usan como sinónimos y no lo son. La diferencia está en un único punto: <strong>si queda o no una decisión humana entre el código válido y la producción</strong>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Integración continua</th>
+<th>Entrega continua</th>
+<th>Despliegue continuo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Qué consigue</td>
+<td>Que lo que entra en <code>main</code> <strong>supere las puertas de calidad que hayas definido</strong></td>
+<td>Que lo que está en <code>main</code> <strong>pueda</strong> desplegarse en cualquier momento</td>
+<td>Que lo que está en <code>main</code> <strong>esté</strong> desplegado</td>
+</tr>
+<tr>
+<td>Dónde acaba</td>
+<td>En un veredicto</td>
+<td>En un artefacto publicado y listo</td>
+<td>En producción</td>
+</tr>
+<tr>
+<td>Decisión humana</td>
+<td>Fusionar</td>
+<td>Fusionar y decidir cuándo sale</td>
+<td>Solo fusionar</td>
+</tr>
+<tr>
+<td>Qué tienes tú</td>
+<td>✅ desde el 4 de diciembre</td>
+<td>Lo montas hoy</td>
+<td>Lo dejas a un paso</td>
+</tr>
+</tbody>
+</table>
+<p>Que la tercera columna sea la mejor no es evidente. Desplegar cada fusión exige mucha confianza en las pruebas, y hay negocios donde la salida a producción depende de una campaña, de un aviso legal o de que haya alguien de guardia. <strong>Elegir entrega continua no es quedarse corto: es reservarse el cuándo.</strong> Lo que no es aceptable es que ese «cuándo» cueste una hora de trabajo manual, porque entonces la decisión ya no es cuándo, sino si compensa.</p>
+<p>Fíjate además en que la primera columna dice «supere las puertas que hayas definido», no «esté sano». Dentro de un rato vas a ver una versión atravesar las cuatro comprobaciones y romper la aplicación al arrancar: un pipeline en verde significa exactamente lo que hayas puesto dentro, ni un gramo más.</p>
+<h3 id="main-deja-de-significar-lo-que-significaba"><code>main</code> deja de significar lo que significaba<a class="headerlink" href="#main-deja-de-significar-lo-que-significaba" title="Permanent link">¶</a></h3>
+<p>Desde septiembre trabajas con una norma: <strong><code>main</code> es lo que está desplegado</strong>. Era cierta mientras el despliegue lo hacías tú desde <code>main</code> un viernes por la mañana. A partir de hoy deja de serlo:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Hasta la sesión 12</th>
+<th>Desde hoy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>main</code></td>
+<td>Aproximadamente, lo desplegado</td>
+<td>El último estado integrado que <strong>ha superado las puertas de calidad</strong>: un candidato a despliegue</td>
+</tr>
+<tr>
+<td>Producción</td>
+<td>Lo mismo, si nadie se ha despistado</td>
+<td>La <strong>etiqueta</strong> que se desplegó por última vez</td>
+</tr>
+</tbody>
+</table>
+<p>Y sí, «candidato» es la palabra, no «versión desplegable»: dentro de un rato vas a desplegar una que superó todas las puertas y rompió el servicio.</p>
+<p>Que <code>main</code> vaya por delante de producción no es un fallo: es lo normal en cuanto existen versiones. El fallo es no saber cuál está corriendo. Por eso, a partir de hoy, «¿qué hay en producción?» no se responde mirando el repositorio, sino mirando qué etiqueta se desplegó.</p>
+<hr>
+<h2 id="publicar-la-imagen-la-etiqueta-deja-de-ser-decorativa">📦 Publicar la imagen: la etiqueta deja de ser decorativa<a class="headerlink" href="#publicar-la-imagen-la-etiqueta-deja-de-ser-decorativa" title="Permanent link">¶</a></h2>
+<p>Desde la sesión 4 publicas imágenes en GHCR con su etiqueta, y desde la 2 usas versionado semántico. Hasta hoy las etiquetas las ponías a mano después de probar a mano, así que eran una anotación. A partir de hoy son <strong>la referencia con la que el servidor decide qué arranca</strong>, y eso las obliga a comportarse:</p>
+<ul>
+<li><strong>Una etiqueta de versión no se reescribe nunca.</strong> Si <code>1.4.0</code> señala hoy a una imagen y mañana a otra, «volver a la 1.4.0» no significa nada y el rollback deja de existir.</li>
+<li><strong><code>latest</code> no sirve para desplegar.</strong> Es una etiqueta móvil: te dice «lo último», que es justo lo que no quieres saber cuando lo último está roto.</li>
+</ul>
+<p>A partir de ahora hay <strong>tres cosas distintas</strong> que pueden ocurrirle a tu código, y cada una vive en su fichero en lugar de amontonarse en un workflow lleno de condiciones:</p>
+<table>
+<thead>
+<tr>
+<th>Fichero</th>
+<th>Se dispara con</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ci.yml</code></td>
+<td>Un pull request hacia <code>main</code></td>
+<td>Las puertas de calidad de la sesión 12. No toca producción</td>
+</tr>
+<tr>
+<td><code>release.yml</code></td>
+<td>Publicar una etiqueta <code>v*</code></td>
+<td>Comprueba y construye la imagen, la publica etiquetada en GHCR y pide que se despliegue</td>
+</tr>
+<tr>
+<td><code>deploy.yml</code></td>
+<td>Que otro workflow lo invoque, o una ejecución manual</td>
+<td>Pone a correr <strong>una versión que ya existe en el registro</strong></td>
+</tr>
+</tbody>
+</table>
+<p>La clave está en la última fila: <code>deploy.yml</code> <strong>no construye nada</strong>. Recibe un número de versión y despliega la imagen ya publicada con ese número. Eso es lo que hace posible el rollback, porque volver atrás no puede depender de reconstruir algo de hace tres semanas.</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># deploy.yml</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="w">  </span><span class="nt">workflow_call</span><span class="p">:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="w">      </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{</span><span class="nt"> required</span><span class="p">:</span><span class="w"> </span><span class="nv">true</span><span class="p p-Indicator">,</span><span class="nt"> type</span><span class="p">:</span><span class="w"> </span><span class="nv">string</span><span class="w"> </span><span class="p p-Indicator">}</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">      </span><span class="nt">version</span><span class="p">:</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="w">        </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Versión</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">desplegar</span><span class="nv"> </span><span class="s">(por</span><span class="nv"> </span><span class="s">ejemplo</span><span class="nv"> </span><span class="s">v1.0.0)'</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">        </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div></td></tr></table></div>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span>
+<span class="normal"><a href="#__codelineno-1-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># release.yml</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nt">on</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'v*'</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="nt">jobs</span><span class="p">:</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">  </span><span class="nt">comprobar-y-publicar</span><span class="p">:</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="nt">permissions</span><span class="p">:</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">      </span><span class="nt">contents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">read</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">      </span><span class="nt">packages</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">write</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">      </span><span class="c1"># 1. descargar el código de la etiqueta</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">      </span><span class="c1"># 2. mvnw verify  (tests + cobertura)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">      </span><span class="c1"># 3. construir la imagen</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">      </span><span class="c1"># 4. escanearla</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">      </span><span class="c1"># 5. solo si todo lo anterior pasa: subirla como</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">      </span><span class="c1">#    ghcr.io/&lt;usuario&gt;/escaparate:${{ github.ref_name }}</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="w">  </span><span class="nt">desplegar</span><span class="p">:</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comprobar-y-publicar</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./.github/workflows/deploy.yml</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="w">    </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="w">      </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.ref_name }}</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><code>workflow_call</code> convierte <code>deploy.yml</code> en una pieza reutilizable: existe <strong>una sola</strong> implementación del despliegue y todo lo que quiera desplegar la invoca. Cuando le añadas una comprobación posterior, protegerá igual a las versiones nuevas y a las vueltas atrás, sin escribirla dos veces.</li>
+<li><code>workflow_dispatch</code> con la misma entrada permite lanzarlo a mano indicando la versión. Parece un añadido menor. Es el mecanismo de rollback.</li>
+<li><code>github.ref_name</code> es aquí el nombre de la etiqueta recién publicada. La versión que se pone en la imagen y la que se despliega son la misma, sin teclearla dos veces.</li>
+<li><code>permissions</code> sube a <code>packages: write</code> porque este job <strong>sí</strong> escribe. Compáralo con el <code>contents: read</code> del workflow de los pull requests: cada workflow pide lo que hace, no lo que podría hacer.</li>
+<li><strong>No hay <code>secrets: inherit</code></strong>, y no es un olvido. La llave del servidor es un secreto del entorno <code>produccion</code>, y <code>deploy.yml</code> la obtiene porque su propio job declara ese entorno. <code>release.yml</code> no la conoce ni la reenvía: sabe publicar, pero no tiene con qué entrar en tu máquina. Mínimo privilegio otra vez, ahora entre dos piezas de tu propio pipeline.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Lo que escaneaste en el pull request no es lo que vas a desplegar</p>
+<p>Mira los pasos 2, 3 y 4 de <code>comprobar-y-publicar</code> y pregúntate por qué se repiten, si el pull request ya hizo eso mismo hace un rato. Porque <strong>no es la misma imagen</strong>: aquella se construyó, se comprobó y se destruyó, y esta es una construcción nueva. Y porque una etiqueta se puede publicar sobre cualquier estado del repositorio, no necesariamente sobre lo que fusionaste. La protección de <code>main</code> decide qué se integra; el workflow de publicación tiene que responder por <strong>el artefacto que sale</strong>. Una imagen no se da por buena porque una construcción anterior del mismo código pasara las pruebas.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Para saber más</p>
+<p>Hay una forma de no repetir el trabajo: construir la imagen una sola vez, identificarla por su huella digital en lugar de por su etiqueta, y <strong>promover ese mismo artefacto</strong> de una etapa a la siguiente sin reconstruirlo. Es lo que hacen los pipelines maduros y elimina de raíz la duda de si lo que despliegas es lo que probaste. Requiere maquinaria que no cabe hoy; quédate con la idea.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title"><code>github.ref_name</code> no es lo que has escrito en el formulario</p>
+<p>Es el error silencioso de este montaje. En una ejecución manual, <code>github.ref_name</code> vale la rama o etiqueta <strong>desde la que lanzaste</strong> el workflow —casi siempre <code>main</code>—; el valor que tecleaste está en <code>inputs.version</code>. Si el job de despliegue lee <code>github.ref_name</code>, tu rollback desplegará algo que no habías pedido, sin dar ningún error. Dentro de <code>deploy.yml</code>, la versión se lee <strong>siempre</strong> de <code>inputs.version</code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Un job que despliega no puede dispararse con un pull request</p>
+<p>Si lo hiciera, cualquiera que abriera una propuesta de cambio en tu repositorio público estaría ejecutando código con acceso a la llave de tu servidor. Los jobs que tocan producción se disparan con sucesos que solo puede provocar quien tiene permisos de escritura.</p>
+</div>
+<hr>
+<h2 id="como-llega-el-pipeline-hasta-tu-servidor">🔑 Cómo llega el pipeline hasta tu servidor<a class="headerlink" href="#como-llega-el-pipeline-hasta-tu-servidor" title="Permanent link">¶</a></h2>
+<p>El ejecutor es una máquina de GitHub en internet y tu instancia está en el laboratorio. Para que una hable con la otra hacen falta tres cosas: saber a dónde ir, saber que quien contesta es tu servidor, y tener con qué entrar.</p>
+<p><strong>A dónde ir: el nombre, no la dirección.</strong> Tu laboratorio caduca cada semana y la instancia recibe una IP nueva cada viernes. Si el destino fuera una IP guardada en el repositorio, tu primera tarea de cada sesión sería editarla, y el pipeline automatizaría todo menos lo que se rompe. El destino es el <strong>subdominio delegado de tu equipo</strong>, el mismo desde la sesión 8. Y el nombre <strong>no es un secreto</strong> —está en tu certificado, que es público por diseño—, así que se guarda como variable.</p>
+<p><strong>Saber que es tu servidor.</strong> Cuando un cliente SSH se conecta por primera vez pregunta si te fías de la huella de la máquina. Un ejecutor no puede contestar, así que hay que dársela contestada. La forma cómoda es que pregunte por la clave del servidor justo antes de conectarse, y esa forma cómoda <strong>no verifica nada</strong>: si alguien se ha colado en medio, el ejecutor apuntará su clave como si fuera la buena. Lo correcto es obtener la clave pública del servidor una vez, verificándola, y guardarla como variable. Es el problema de identidad que resolviste con TLS en la sesión 8, en la otra dirección.</p>
+<p><strong>Con qué entrar: una llave dedicada.</strong> Aquí sí hay secreto, y es el más peligroso del curso: la clave privada de un par generado <strong>solo para esto</strong>, cuya pública autorizas en la instancia para un usuario dedicado. Ni tu clave personal de la sesión 2, ni el usuario con el que administras.</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># deploy.yml</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="nt">jobs</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">  </span><span class="nt">desplegar</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">produccion</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Autorizar al ejecutor</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">          </span><span class="no">install -m 600 -D /dev/null ~/.ssh/id_ed25519</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">          </span><span class="no">echo "${{ secrets.CLAVE_DESPLIEGUE }}" &gt; ~/.ssh/id_ed25519</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">          </span><span class="no">echo "${{ vars.CLAVE_HOST }}" &gt; ~/.ssh/known_hosts</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Desplegar la versión</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">          </span><span class="nt">VERSION</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ inputs.version }}</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">          </span><span class="no">ssh despliegue@${{ vars.HOST_EQUIPO }} \</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">            </span><span class="no">"export VERSION=$VERSION; cd /opt/escaparate; docker compose pull; docker compose up -d"</span>
+</code></pre></div></td></tr></table></div>
+<ul>
+<li><code>environment: produccion</code> asocia el job a un entorno con secretos propios y permite exigir una aprobación manual antes de ejecutarlo. Ahí vive la diferencia entre entrega y despliegue continuo.</li>
+<li>El primer paso escribe la clave privada en el disco efímero del ejecutor y, como host conocido, <strong>la clave del servidor que verificaste tú</strong>.</li>
+<li><code>VERSION</code> sale de <code>inputs.version</code>, igual si lo ha invocado <code>release.yml</code> que si lo has lanzado a mano. Y fíjate en los puntos y coma: si escribieras <code>VERSION=$VERSION docker compose pull &amp;&amp; docker compose up -d</code>, la asignación valdría <strong>solo para el primer comando</strong> y el <code>up</code> recrearía los servicios sin saber qué versión toca. Es un fallo que no da error: simplemente despliega otra cosa.</li>
+<li><strong>En el servidor no se compila nada</strong>, igual que desde la sesión 4: la instancia descarga una imagen pública ya construida y ni siquiera necesita credenciales del registro. La versión llega hasta el <code>compose.yaml</code>, que no cambia entre despliegues: cambia el valor.</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Quien controle tu repositorio controla tu servidor</p>
+<p>Has creado un camino nuevo: repositorio → ejecutor → instancia. Cualquiera que consiga fusionar código o modificar el workflow puede ejecutar lo que quiera en tu máquina. Se recorta como cualquier otro acceso: usuario dedicado, llave que sirve solo para eso, secreto asociado al entorno y no al repositorio entero, y ninguna acción de terceros que no sea imprescindible.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">«Sin <code>sudo</code>» no es «sin privilegios»</p>
+<p>El usuario de despliegue no administra el sistema, pero necesita hablar con el demonio de Docker para levantar los contenedores. Y quien puede hablar con ese demonio puede arrancar un contenedor que monte el disco entero: en la práctica, <strong>equivale a ser administrador de la máquina</strong>. Lo decimos claro porque es el tipo de detalle que se vende como seguridad y no lo es. En un sistema real se acota de otras formas —limitando la llave a ejecutar un único guion, o usando un demonio sin privilegios—; ninguna cabe hoy. Lo que sí cabe es no engañarse sobre lo construido.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Para saber más</p>
+<p>Existe una forma de evitar del todo la llave: que sea la instancia la que <strong>tire</strong> del repositorio en vez de que el pipeline <strong>empuje</strong> hacia ella. Ninguna credencial del servidor sale de él. Es el modelo de la sesión 16 con Argo CD, y la comparación con lo de hoy es la mitad de aquella sesión.</p>
+</div>
+<hr>
+<h2 id="cuatro-maneras-de-sustituir-lo-que-esta-corriendo">🔀 Cuatro maneras de sustituir lo que está corriendo<a class="headerlink" href="#cuatro-maneras-de-sustituir-lo-que-esta-corriendo" title="Permanent link">¶</a></h2>
+<p>Desplegar es sustituir algo que está funcionando mientras hay gente usándolo. Hay cuatro formas clásicas:</p>
+<table>
+<thead>
+<tr>
+<th>Estrategia</th>
+<th>Cómo</th>
+<th>¿Corta?</th>
+<th>Qué cuesta</th>
+<th>Cuándo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Recreate</strong></td>
+<td>Para todo y arranca lo nuevo</td>
+<td>Sí</td>
+<td>Nada</td>
+<td>Herramientas internas, ventanas de mantenimiento, o cambios en los que las dos versiones no pueden convivir</td>
+</tr>
+<tr>
+<td><strong>Rolling</strong></td>
+<td>Sustituye copia a copia, esperando a que cada nueva esté sana</td>
+<td>No</td>
+<td>Nada extra, pero conviven dos versiones un rato</td>
+<td>El caso normal cuando tienes varias copias <strong>y un orquestador</strong></td>
+</tr>
+<tr>
+<td><strong>Blue-green</strong></td>
+<td>Levanta el entorno nuevo entero al lado y conmuta el tráfico</td>
+<td>No</td>
+<td>El doble de infraestructura mientras dura</td>
+<td>Cuando la vuelta atrás tiene que ser instantánea</td>
+</tr>
+<tr>
+<td><strong>Canary</strong></td>
+<td>Manda una fracción del tráfico a la nueva versión y va subiendo</td>
+<td>No</td>
+<td>Enrutado por peso y métricas separadas por versión</td>
+<td>Cambios arriesgados que se quieren medir con tráfico real</td>
+</tr>
+</tbody>
+</table>
+<p>Ahora mira lo tuyo y sé honesto sobre cuál estás haciendo.</p>
+<p><strong>Lo que haces hoy no es rolling.</strong> Tu despliegue son dos órdenes: descargar la imagen y pedirle a Compose que deje el conjunto como dice el fichero. Compose recrea lo que ha cambiado, pero <strong>no es un orquestador</strong>: no secuencia la sustitución copia a copia, no espera a que la nueva esté sana antes de tocar la siguiente y no se detiene si algo va mal. Llamarlo <em>rolling</em> sería regalarte garantías que nadie te ha dado.</p>
+<p><strong>Lo que sí tienes son sus requisitos previos</strong>, y no por casualidad: tres copias detrás de Nginx e intercambiables desde la sesión 10, porque la sesión vive en Redis y las imágenes en almacenamiento compartido. Aquel viernes en que la sesión se perdía al balancear estabas pagando por adelantado la factura del Tema 6, que es cuando llega el mecanismo que aprovecha todo esto.</p>
+<p><strong>Blue-green no resulta práctico hoy</strong> porque exigiría dos entornos completos en una máquina donde ya vas justo, y un punto de entrada preparado para conmutar. Ojo: el nombre público y el certificado <strong>no</strong> son el obstáculo —podrían ser los mismos, y sería tu Nginx quien decidiera a dónde va el tráfico—; el obstáculo es duplicar la infraestructura. Por eso es una estrategia que se abarata cuando la infraestructura se pide por API. <strong>Canary se puede insinuar</strong>, porque Nginx reparte por pesos, pero sin métricas separadas por versión no tendrías con qué decidir si sigues o te vuelves.</p>
+<div class="admonition warning">
+<p class="admonition-title">Cualquier actualización sin corte exige que las dos versiones puedan convivir</p>
+<p>Mientras se sustituyen las copias hay versiones viejas y nuevas atendiendo a la vez. Si la nueva necesita una columna que la vieja no conoce, o cambia el formato de lo que guarda en la sesión compartida, ese rato de convivencia es un rato de errores intermitentes. Cuando un cambio no admite convivencia, la estrategia correcta es <code>recreate</code> con su corte, no disimularlo.</p>
+</div>
+<hr>
+<h2 id="el-fallo-que-atraviesa-todas-las-puertas">💥 El fallo que atraviesa todas las puertas<a class="headerlink" href="#el-fallo-que-atraviesa-todas-las-puertas" title="Permanent link">¶</a></h2>
+<p>Si el pipeline construye, prueba, mide la cobertura y escanea la imagen, <strong>¿por qué hace falta poder volver atrás?</strong></p>
+<p>Vuelve a la reflexión del paso 1 de la actividad anterior: los tests pasaron en una máquina limpia que no tenía tu base de datos, ni Redis, ni Nginx, ni tu <code>.env</code>, ni tu certificado. Todo lo que has montado desde octubre <strong>no estaba allí</strong>. De ahí sale una lista de cosas que ninguna puerta de calidad puede ver:</p>
+<ul>
+<li>Una variable de entorno que falta, o escrita con el valor de otro entorno.</li>
+<li>Una configuración que apunta a donde no debe: un nombre de servicio equivocado, un puerto cambiado, una dirección que en tu ordenador resolvía.</li>
+<li>Un secreto caducado o mal copiado.</li>
+<li>Una dependencia externa que se comporta distinto en producción.</li>
+<li>Un cambio en el esquema de datos que la versión anterior no entiende.</li>
+</ul>
+<p>Ninguno rompe un test, porque el test no los mira. Todos rompen el arranque o el primer minuto de servicio real. Por eso la conclusión no es «con integración continua no hacen falta redes de seguridad», sino la contraria: <strong>cuanto más automático es el despliegue, más rápido llega a producción un fallo de configuración, y más falta hace poder deshacerlo en un minuto.</strong></p>
+<p>Esto justifica además separar la configuración de la imagen, decisión que arrastras desde la sesión 5: la misma imagen funciona o no según qué variables reciba. La imagen es la constante y el entorno es la variable, y por eso los secretos se guardan <strong>por entorno</strong>.</p>
+<hr>
+<h2 id="volver-atras-es-desplegar-una-etiqueta-anterior">↩️ Volver atrás es desplegar una etiqueta anterior<a class="headerlink" href="#volver-atras-es-desplegar-una-etiqueta-anterior" title="Permanent link">¶</a></h2>
+<p>Cuando algo va mal en producción hay dos instintos y solo uno sirve. El malo es <strong>arreglarlo hacia delante</strong>: encontrar el fallo, corregirlo, abrir un pull request, esperar al pipeline, fusionar, etiquetar y desplegar. Es lo correcto a medio plazo y carísimo a corto: entre veinte minutos y una hora con el servicio caído, con prisa y con gente mirando, que es exactamente la situación en la que se cometen los errores graves.</p>
+<p>El bueno es <strong>volver a lo que funcionaba</strong> y luego investigar con calma. Como cada versión tiene su imagen inmutable en el registro, volver atrás no reconstruye nada: es lanzar <code>deploy.yml</code> a mano indicando la versión anterior. El tiempo hasta recuperar el servicio deja de depender de lo rápido que encuentres el fallo y pasa a depender de lo que tarde una descarga.</p>
+<p>Aquí se cobra haber separado <code>deploy.yml</code> de <code>release.yml</code>. Si volver atrás implicara reconstruir, estarías compilando código de hace semanas con el servicio caído mientras tanto, y republicar arriesgaría a sobrescribir una etiqueta que ya existía, que es justo lo que rompe la posibilidad de volver atrás la próxima vez.</p>
+<div class="admonition tip">
+<p class="admonition-title">La velocidad de la vuelta atrás es lo que te deja desplegar a menudo</p>
+<p>Los equipos que despliegan varias veces al día no lo hacen porque acierten más, sino porque equivocarse les cuesta dos minutos. Un rollback lento convierte cada despliegue en un acontecimiento y hace que se acumulen los cambios, que es lo que de verdad los vuelve peligrosos.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Volver la imagen atrás no vuelve atrás los datos</p>
+<p>El rollback recupera el código, no lo que ese código hizo mientras corría. Si la versión defectuosa modificó el esquema de la base de datos o escribió datos con un formato nuevo, la anterior se encontrará algo que no espera. Por eso los cambios de esquema se diseñan compatibles hacia atrás y se despliegan por separado del código que los usa. Hoy no vas a tropezar con esto, pero es la primera pregunta antes de prometer que un rollback es seguro.</p>
+</div>
+<hr>
+<h2 id="que-debes-saber-hacer-al-salir-de-esta-sesion">🎯 Qué debes saber hacer al salir de esta sesión<a class="headerlink" href="#que-debes-saber-hacer-al-salir-de-esta-sesion" title="Permanent link">¶</a></h2>
+<ul>
+<li>Distinguir integración, entrega y despliegue continuos, y decir qué corre en producción sin mirar <code>main</code>.</li>
+<li>Separar el workflow que publica una versión del que la despliega, y explicar por qué el segundo no puede construir nada y el primero no puede fiarse de una comprobación anterior.</li>
+<li>Extender tu pipeline para que, al publicar una etiqueta, construya la imagen, la publique en GHCR y la despliegue en tu instancia.</li>
+<li>Configurar el acceso al servidor con un nombre estable, la clave del host verificada de antemano y una llave dedicada guardada como secreto de entorno.</li>
+<li>Ejecutar un rollback desplegando una etiqueta anterior sin reconstruirla, y medir cuánto tarda el servicio en recuperarse.</li>
+<li>Explicar por qué un pipeline en verde no garantiza que la versión arranque, y qué privilegios tiene de verdad el usuario que despliega.</li>
+</ul>
+<p><strong>Lo que basta con reconocer</strong>: la mecánica interna de blue-green y canary, cómo se implementa una actualización progresiva orquestada, las aprobaciones por entorno con revisores, y los cambios de esquema compatibles hacia atrás.</p>
+<hr>
+<h2 id="ideas-clave">✅ Ideas clave<a class="headerlink" href="#ideas-clave" title="Permanent link">¶</a></h2>
+<details class="tip">
+<summary>Abrir resumen</summary>
+<ul>
+<li>Entrega y despliegue continuos se diferencian en una sola cosa: si queda o no una decisión humana entre el código válido y la producción. Reservarse el cuándo es legítimo; que ese cuándo cueste una hora de trabajo manual no lo es.</li>
+<li>Un pipeline en verde significa «ha superado las puertas que definiste», no «está sano».</li>
+<li><code>main</code> pasa a ser el último estado integrado que ha superado las puertas: un candidato, no una garantía. Lo que corre en producción lo dice la etiqueta.</li>
+<li>La imagen que publicas no es la que se escaneó en el pull request, y una etiqueta puede crearse sobre cualquier estado del repositorio: el workflow que publica responde por el artefacto que sale.</li>
+<li>Una etiqueta de versión no se reescribe jamás, y <code>latest</code> no vale para desplegar: sin referencias inmutables no hay vuelta atrás.</li>
+<li>Publicar y desplegar son workflows distintos: el que despliega recibe un número de versión y no construye nada.</li>
+<li>En una ejecución manual, la versión que tecleaste está en <code>inputs</code>, no en la referencia desde la que lanzaste el workflow.</li>
+<li>Cada workflow declara los permisos que necesita, y ninguno que toque producción se dispara con un pull request.</li>
+<li>El destino es un nombre estable, no una IP: el nombre no es un secreto, la llave sí. Y recoger la huella del servidor justo antes de conectarse no verifica nada.</li>
+<li>Un usuario sin <code>sudo</code> que puede hablar con el demonio de Docker tiene, en la práctica, privilegios de administrador sobre la máquina.</li>
+<li>Compose recrea lo que ha cambiado, pero no secuencia la sustitución ni espera a que la copia nueva esté sana: eso no es un rolling update orquestado.</li>
+<li>Ninguna puerta de calidad ve una variable que falta, un destino equivocado o un secreto caducado. Cuanto más automático es el despliegue, antes llega ese fallo a producción.</li>
+<li>Volver atrás es desplegar una etiqueta anterior, no arreglar hacia delante con el servicio caído. Y devuelve el código, no los datos que ese código escribió.</li>
+</ul>
+</details>
+<p>Con esto ya tienes las piezas para la <strong>Actividad 5.2</strong>, donde vas a cerrar el círculo entero por primera vez en el curso: un cambio tuyo, con su etiqueta, construido, publicado y desplegado en tu servidor sin que toques la instancia. Y después lo romperás a propósito de la única forma que tu pipeline no puede detectar, para descubrir en directo por qué ninguna cantidad de comprobaciones sustituye a poder volver atrás. Con esa actividad se cierra la unidad 5 y el resultado de aprendizaje que abriste el 18 de septiembre.</p></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+<p style="margin: 0 auto; text-align: center; font-size: 0.7rem;">
+  © 2026 Alejandro Roig y Ángel Vidal
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">
+    Licencia CC BY-NC-SA 4.0
+  </a>
+</p>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tracking", "navigation.footer", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

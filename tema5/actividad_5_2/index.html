@@ -1,0 +1,1440 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alejandroroig.github.io/despliegue-daw/tema5/actividad_5_2/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>🧪 Actividad 5.2: Publicar, vigilar y actualizar sin cortar - Despliegue de Aplicaciones Web</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#actividad-52-publicar-vigilar-y-actualizar-sin-cortar" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-header__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Despliegue de Aplicaciones Web
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🧪 Actividad 5.2: Publicar, vigilar y actualizar sin cortar
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo Claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-nav__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Despliegue de Aplicaciones Web
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Punto de partida
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 1 - Punto de partida
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitecturas y proceso de despliegue
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/arquitecturas-despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.1 - Qué se puede saber de un despliegue desde fuera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Control de versiones y documentación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/control-versiones-documentacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/resumen-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hoja de referencia de comandos básicos de Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.2 - Tu repositorio como herramienta de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/fundamentos-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.1 - Ejecutar, inspeccionar y publicar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Imágenes de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/imagenes-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.2 - Empaquetar Escaparate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker Compose
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/docker-compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.3 - El conjunto entero con un comando
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Currículo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-vas-a-practicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué vas a practicar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-levantar-el-entorno-entero-desde-el-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1 — Levantar el entorno entero desde el repositorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-la-configuracion-y-las-credenciales-fuera-del-manifiesto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2 — La configuración y las credenciales, fuera del manifiesto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-el-catalogo-por-su-nombre-y-con-candado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3 — El catálogo por su nombre, y con candado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-declarar-la-salud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4 — Declarar la salud
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-5-actualizar-midiendo-lo-que-se-pierde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5 — Actualizar midiendo lo que se pierde
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-6-dos-despliegues-que-no-deberian-llegar-al-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 6 — Dos despliegues que no deberían llegar al usuario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#si-te-sobra-tiempo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Si te sobra tiempo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-se-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qué se entrega
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><h1 id="actividad-52-publicar-vigilar-y-actualizar-sin-cortar">🧪 Actividad 5.2: Publicar, vigilar y actualizar sin cortar<a class="headerlink" href="#actividad-52-publicar-vigilar-y-actualizar-sin-cortar" title="Permanent link">¶</a></h1>
+<h2 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">¶</a></h2>
+<p>La semana pasada entregaste un informe diciendo que el catálogo ya corría sobre el clúster. La dirección técnica te ha contestado lo obvio: eso no es publicable. No tiene el nombre del equipo, no tiene HTTPS, y la contraseña de la base de datos está escrita en un fichero del repositorio. Tal como está, es un retroceso respecto a lo que había en diciembre.</p>
+<p>El encargo de hoy es ponerlo al nivel de lo que sustituye, y además cobrar la promesa que llevas desde el 18 de diciembre sin cumplir: desplegar una versión nueva <strong>midiendo cuántas peticiones se pierden por el camino</strong>, con el mecanismo que hasta ahora no tenías. Al final vas a comprobar también hasta dónde llega esa protección, y la respuesta no va a ser tan cómoda como parece.</p>
+<h2 id="que-vas-a-practicar">Qué vas a practicar<a class="headerlink" href="#que-vas-a-practicar" title="Permanent link">¶</a></h2>
+<ul>
+<li>Reconstruir un entorno completo a partir de manifiestos versionados, sin instalar nada a mano.</li>
+<li>Externalizar configuración y credenciales a ConfigMap y Secret, dejando el repositorio limpio.</li>
+<li>Publicar la aplicación por el nombre del equipo con Ingress y TLS.</li>
+<li>Declarar las tres sondas y medir con tráfico encima qué ocurre durante una actualización progresiva.</li>
+<li>Provocar un despliegue atascado, distinguirlo de una caída y deshacerlo.</li>
+</ul>
+<h2 id="requisitos-previos">Requisitos previos<a class="headerlink" href="#requisitos-previos" title="Permanent link">¶</a></h2>
+<ul>
+<li>Rama <code>sesion-15</code> abierta desde <code>main</code>, con los manifiestos de la S14 ya en <code>k8s/base/</code>.</li>
+<li>Tu <code>.env</code> de la S5, que hoy se desmonta.</li>
+<li>La imagen <code>v2.0.1</code> publicada en GHCR al cerrar la S13. Hoy es el destino de la actualización.</li>
+<li>VS Code conectado por SSH a la instancia, como la semana pasada.</li>
+<li>El certificado del subdominio en la instancia. <strong>Compruébalo antes de nada</strong>: la renovación automática vivía en el stack de Compose que apagaste el 8 de enero, así que puede haber caducado. Si es el caso, avísame al empezar y pasas al certificado autofirmado, que sabes generar desde la S8 y vale igual para la actividad.</li>
+</ul>
+<p>Ficheros que se entregan hoy (carpeta <code>entregados/tema6/</code>):</p>
+<ul>
+<li><code>nginx-ic.yaml</code> — manifiesto del <strong>NGINX Ingress Controller de F5</strong>, ya descargado y ajustado para que escuche en los puertos 80 y 443 del nodo. Se aplica tal cual: instalarlo es andamiaje, no es objeto de estudio.</li>
+<li><code>medir-despliegue.sh</code> — bucle de peticiones que cuenta códigos de respuesta y escribe un resumen. Es el instrumento de medida de hoy.</li>
+<li><code>fragmentos-6-2.yaml</code> — los bloques de sondas y de estrategia de despliegue, con los valores en blanco para que los rellenes.</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">No confundas el controlador, y no actives el complemento de minikube</p>
+<p>Hay dos proyectos con nombres casi idénticos. El de la comunidad, <code>kubernetes/ingress-nginx</code>, <strong>está retirado desde marzo de 2026</strong> y no recibe parches — y es precisamente el que instala <code>minikube addons enable ingress</code>. <strong>No lo actives.</strong> El que usas hoy es el <strong>NGINX Ingress Controller de F5</strong> (<code>nginx/kubernetes-ingress</code>), que sí está mantenido, y se instala con el manifiesto entregado. Sus ejemplos y sus anotaciones no son intercambiables.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Reparto de tiempo orientativo</p>
+<p><strong>10:00</strong> arranque del laboratorio y de la instancia, se deja encendiendo. <strong>10:10 a 10:55</strong>, teoría. Paso 1, hasta las 11:15. Paso 2, hasta las 11:35. Paso 3, hasta las 12:00. Paso 4, hasta las 12:15. Paso 5, hasta las 12:45. <strong>A las 12:45 se deja de medir, tengas lo que tengas.</strong> Paso 6, hasta las 13:05. El resto, para la rama y el pull request.</p>
+</div>
+<hr>
+<h2 id="paso-1-levantar-el-entorno-entero-desde-el-repositorio">Paso 1 — Levantar el entorno entero desde el repositorio<a class="headerlink" href="#paso-1-levantar-el-entorno-entero-desde-el-repositorio" title="Permanent link">¶</a></h2>
+<p>La instancia ha estado apagada una semana. Haz la rutina de arranque de siempre —IP nueva, registro A— y después <strong>borra el clúster de la semana pasada y vuelve a crearlo</strong> con el script entregado. Cuando esté en pie, aplica todo lo que hay en <code>k8s/base/</code>.</p>
+<p>No reconstruyas nada a mano ni copies ficheros de ningún sitio. Si algo no vuelve, es que la semana pasada no lo dejaste declarado.</p>
+<p><strong>Comprueba</strong>: nodo listo, base de datos con su volumen enlazado, tres pods del catálogo listos y respondiendo por el puerto de nodo.
+<strong>Captura</strong>: <code>entregas/tema6/6-2-reconstruccion.txt</code> con el tiempo que has tardado desde que el clúster no existía hasta que el catálogo respondió, y el listado de objetos.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>Compara ese tiempo con lo que te costaba en octubre dejar la instancia lista tras un rearranque. ¿Qué parte del trabajo ha desaparecido y qué parte sigue siendo tuya? Nombra al menos una cosa que <strong>no</strong> haya vuelto sola — mira las imágenes de los productos antes de contestar.</p>
+</div>
+<hr>
+<h2 id="paso-2-la-configuracion-y-las-credenciales-fuera-del-manifiesto">Paso 2 — La configuración y las credenciales, fuera del manifiesto<a class="headerlink" href="#paso-2-la-configuracion-y-las-credenciales-fuera-del-manifiesto" title="Permanent link">¶</a></h2>
+<p>Desmonta tu <code>.env</code>. Todo lo que no sea sensible pasa a un ConfigMap; la contraseña de la base de datos y cualquier otra credencial, a un Secret. El Deployment deja de tener valores escritos dentro y pasa a consumirlos de esos dos objetos.</p>
+<p>En el repositorio se versiona el ConfigMap y <strong>una plantilla del Secret en <code>docs/secret.example.yaml</code></strong>. Fíjate en dónde va: fuera de <code>k8s/</code>, porque ese directorio se aplica entero y una plantilla con valores vacíos machacaría el Secret real. El Secret de verdad se aplica a mano y se documenta en el <code>README</code> cómo generarlo. Añade el fichero real al <code>.gitignore</code> antes de crearlo, no después.</p>
+<p>Cuando esté aplicado, provoca que los pods recojan los valores nuevos de forma ordenada, sin borrar nada a mano.</p>
+<p><strong>Comprueba</strong>: ningún valor sensible bajo <code>k8s/</code>; los tres pods en marcha con la configuración nueva; el catálogo sigue mostrando productos.
+<strong>Captura</strong>: <code>entregas/tema6/6-2-configuracion.txt</code> con el listado de ConfigMaps y Secrets y la descripción del Deployment mostrando de dónde saca las variables.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>Has consumido esos valores como variables de entorno. Si ahora cambias el ConfigMap y no haces nada más, ¿qué ven los pods que ya estaban corriendo? Contesta y después compruébalo.</p>
+</div>
+<hr>
+<h2 id="paso-3-el-catalogo-por-su-nombre-y-con-candado">Paso 3 — El catálogo por su nombre, y con candado<a class="headerlink" href="#paso-3-el-catalogo-por-su-nombre-y-con-candado" title="Permanent link">¶</a></h2>
+<p>Instala el controlador con el manifiesto entregado y espera a que su pod esté listo. Después:</p>
+<ul>
+<li>Mete el certificado y la clave del subdominio del equipo en un Secret de tipo TLS.</li>
+<li>Declara un Ingress de clase <code>nginx</code> que sirva el catálogo por el nombre del equipo, con TLS.</li>
+</ul>
+<p>Te bastará <strong>una sola regla</strong>, porque tu aplicación empaqueta el front y la API en el mismo artefacto y ambos salen del mismo Service. No lo des por trivial: apúntalo, porque en la sesión que viene esa decisión vuelve a aparecer.</p>
+<p>Cuando funcione, quita el puerto de nodo del Service. Ya no hace falta y no debe quedar una puerta trasera abierta.</p>
+<p><strong>Comprueba</strong>: <code>https://equipoNN.midominio.es/</code> carga el catálogo con datos; <code>/api/productos</code> responde por el mismo nombre; el Service ha vuelto a ser de tipo interno.
+<strong>Captura</strong>: <code>entregas/tema6/6-2-ingress.png</code> con el navegador mostrando el catálogo por su nombre, y la salida del listado de Ingress.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p><strong>(a)</strong> En la S6 y la S8 escribiste a mano un <code>server_name</code> y un <code>ssl_certificate</code>. Hoy no has escrito ninguna de las dos directivas, y sin embargo hay un Nginx configurado con ellas dentro del clúster. ¿Quién lo ha escrito y a partir de qué? <strong>(b)</strong> Si mañana el front se separase en su propia imagen y su propio Deployment, ¿cuánto tendrías que cambiar de lo que has montado hoy?</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Punto de rescate — 11:55</p>
+<p>Si a las 11:55 no cargas el catálogo por el nombre, avísame y publico el Ingress resuelto. Los tres fallos habituales: el controlador aún no está listo, el Secret TLS se creó con un tipo incorrecto, o el registro A todavía apunta a la IP de la semana pasada. Antes de pedir rescate, comprueba una cosa: si respondes por la IP de la instancia pero no por el nombre, el problema es DNS y no Kubernetes.</p>
+</div>
+<hr>
+<h2 id="paso-4-declarar-la-salud">Paso 4 — Declarar la salud<a class="headerlink" href="#paso-4-declarar-la-salud" title="Permanent link">¶</a></h2>
+<p>Añade al Deployment las tres sondas, con este reparto:</p>
+<ul>
+<li><strong>Arranque y vida</strong>: comprobación de conexión al puerto 8080. La de arranque, con umbral generoso, porque Escaparate tarda en levantar.</li>
+<li><strong>Disponibilidad</strong>: petición HTTP a <code>/api/salud</code>.</li>
+</ul>
+<p>Rellena los valores del fragmento entregado con criterio, no al azar: una sonda de vida impaciente durante el arranque mata el contenedor antes de que llegue a servir.</p>
+<p>Aplica y observa cómo los pods pasan por el estado no listo antes de entrar en el reparto.</p>
+<p><strong>Comprueba</strong>: los tres pods llegan a <code>1/1</code> y <code>Running</code>; durante el arranque hay un intervalo en el que aparecen como no listos.
+<strong>Captura</strong>: <code>entregas/tema6/6-2-sondas.txt</code> con la parte de la descripción de un pod donde aparecen las tres sondas y sus valores.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>Dos preguntas. <strong>(a)</strong> ¿Por qué la sonda de vida comprueba el puerto y no <code>/api/salud</code>? Piensa en qué pasaría con tus tres copias si la base de datos tuviera un mal minuto. <strong>(b)</strong> Con los valores que has escrito, si un pod empieza a responder muy despacio pero sigue respondiendo, ¿el clúster lo reinicia, lo saca del reparto, las dos cosas o ninguna?</p>
+</div>
+<hr>
+<h2 id="paso-5-actualizar-midiendo-lo-que-se-pierde">Paso 5 — Actualizar midiendo lo que se pierde<a class="headerlink" href="#paso-5-actualizar-midiendo-lo-que-se-pierde" title="Permanent link">¶</a></h2>
+<p>Configura la estrategia del Deployment para que durante el cambio <strong>no baje el número de copias disponibles</strong>, y deja margen para que sobre una.</p>
+<p>Lanza el script de medida contra tu nombre público y, <strong>con el bucle corriendo</strong>, cambia la imagen a <code>v2.0.1</code> y aplica. Deja que el trasvase termine antes de parar la medición.</p>
+<p>No des por hecho el resultado. Lo que entregas es lo que has medido: si aparece alguna respuesta distinta de 200, se anota y se explica cuándo ocurrió; eso no invalida la práctica, la completa.</p>
+<p><strong>Comprueba</strong>: la portada cambia de color al terminar; tienes un resumen del script con el recuento por código de respuesta.
+<strong>Captura</strong>: <code>entregas/tema6/6-2-medicion.txt</code> con el resumen, y <code>6-2-rollout.txt</code> con el historial de revisiones del Deployment.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>En diciembre, el mismo cambio de versión provocaba un hueco de varios segundos sin servicio. Hoy, según tu medición, ¿cuánto se ha perdido? <strong>Dos cosas</strong> han tenido que ser ciertas para que el mecanismo funcione: una la configuraste hace diez minutos y la otra la conseguiste en noviembre, en la sesión del servidor de aplicaciones. Nómbralas.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Alto obligatorio — 12:45</p>
+<p>A las 12:45 se deja de medir. Si el bucle no ha terminado limpio, entregas lo que tengas con una línea explicando qué observaste: una medición incompleta bien descrita vale; una inventada, no.</p>
+</div>
+<hr>
+<h2 id="paso-6-dos-despliegues-que-no-deberian-llegar-al-usuario">Paso 6 — Dos despliegues que no deberían llegar al usuario<a class="headerlink" href="#paso-6-dos-despliegues-que-no-deberian-llegar-al-usuario" title="Permanent link">¶</a></h2>
+<p><strong>(a) El que se atasca.</strong> Rompe a propósito la sonda de disponibilidad en el manifiesto: apúntala a una ruta que no existe y aplica. Observa durante un par de minutos qué les pasa a los pods nuevos, qué les pasa a los viejos y qué contesta tu nombre público mientras tanto. Después deshaz el despliegue y comprueba que vuelve a la revisión anterior.</p>
+<p><strong>(b) El que pasa.</strong> Cambia ahora la imagen a la <code>v2.0.0</code> —la rota de diciembre, la del <code>config.js</code> mal apuntado— y aplica con las sondas correctas. Observa el despliegue hasta el final y <strong>abre el catálogo en el navegador</strong>. Después, deshazlo.</p>
+<p><strong>Comprueba</strong>: en (a), los pods nuevos nunca llegan a listos, los viejos siguen sirviendo y el sitio responde con normalidad durante todo el episodio. En (b), el despliegue termina correctamente y la portada carga con el aspecto nuevo y sin productos.
+<strong>Captura</strong>: <code>entregas/tema6/6-2-atasco.txt</code> con el listado de pods durante el episodio (a) y el estado del despliegue, y <code>6-2-v200.png</code> con la portada rota del episodio (b).</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>Tres preguntas, y la tercera es la de hoy. <strong>(a)</strong> Durante el atasco, ¿estaba el servicio caído? Justifícalo con lo que devolvía tu nombre público. <strong>(b)</strong> ¿Deshizo el clúster algo por su cuenta, o lo deshiciste tú? <strong>(c)</strong> El mecanismo que acaba de proteger al usuario en el caso (a) no lo ha protegido en el caso (b). ¿Qué pregunta hacía tu sonda, qué pregunta habría hecho falta hacer, y en qué se parece esto a lo que descubriste en diciembre con la prueba de humo?</p>
+</div>
+<hr>
+<h2 id="si-te-sobra-tiempo">Si te sobra tiempo<a class="headerlink" href="#si-te-sobra-tiempo" title="Permanent link">¶</a></h2>
+<p>Repite la actualización a <code>v2.0.1</code>, pero <strong>pausa el despliegue a mitad del trasvase</strong>. Con el despliegue pausado, mira cuántos pods hay de cada versión y pide la portada varias veces desde el navegador. Después reanúdalo.</p>
+<p>En tres líneas: qué acabas de tener durante ese minuto, qué te permitiría hacer si tuvieras una forma de medir errores por versión, y por qué el apunte menciona esa técnica como una de las dos cosas que sí habrían parado la <code>v2.0.0</code>.</p>
+<hr>
+<h2 id="verificacion">Verificación<a class="headerlink" href="#verificacion" title="Permanent link">¶</a></h2>
+<p>Para dar por válida la práctica se ejecutará, <strong>en la instancia del equipo</strong>:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ingress,svc,configmap,secret
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>escaparate<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s1">'{.spec.type}'</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>escaparate
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>curl<span class="w"> </span>-sI<span class="w"> </span>https://equipoNN.midominio.es/<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>curl<span class="w"> </span>-s<span class="w"> </span>https://equipoNN.midominio.es/api/productos<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-c<span class="w"> </span><span class="m">200</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>deploy<span class="w"> </span>escaparate<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">"Liveness|Readiness|Startup|RollingUpdate"</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>kubectl<span class="w"> </span>rollout<span class="w"> </span><span class="nb">history</span><span class="w"> </span>deploy<span class="w"> </span>escaparate
+</code></pre></div></td></tr></table></div>
+<p>Y <strong>sobre el repositorio</strong>:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>git<span class="w"> </span>grep<span class="w"> </span>-nEi<span class="w"> </span><span class="s2">"password|passwd|contrasena"</span><span class="w"> </span>--<span class="w"> </span>k8s/
+</code></pre></div></td></tr></table></div>
+<p>Debe observarse:</p>
+<ul>
+<li>Un Ingress de clase <code>nginx</code> con el nombre del equipo y una entrada TLS; el Service de tipo <code>ClusterIP</code>, sin puerto de nodo.</li>
+<li>Respuesta <code>200</code> por HTTPS en la raíz y productos con datos en <code>/api/productos</code>.</li>
+<li>Sondas de arranque y vida por conexión al puerto, sonda de disponibilidad por HTTP, todas con valores concretos, y <code>maxUnavailable: 0</code>.</li>
+<li>Un historial con <strong>al menos cinco revisiones</strong>: la inicial, la de configuración, la de <code>v2.0.1</code>, la de la sonda rota y la vuelta atrás.</li>
+<li>La última búsqueda <strong>sin resultados</strong>.</li>
+</ul>
+<hr>
+<h2 id="que-se-entrega">Qué se entrega<a class="headerlink" href="#que-se-entrega" title="Permanent link">¶</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Rama <code>sesion-15</code> fusionada en <code>main</code> mediante pull request, con su URL en la plantilla de Moodle.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>k8s/base/</code> con ConfigMap, Deployment, Service e Ingress con TLS. Ninguna plantilla de Secret dentro.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>docs/secret.example.yaml</code> con los valores vacíos, <code>.gitignore</code> actualizado y procedimiento del Secret real documentado en el <code>README</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Las tres sondas declaradas con valores propios, no copiados del fragmento en blanco.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Estrategia de despliegue con <code>maxUnavailable: 0</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Evidencias en <code>entregas/tema6/</code>: reconstrucción, configuración, Ingress, sondas, medición del despliegue, atasco y portada de la <code>v2.0.0</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Sección del <code>README</code> sobre cómo desplegar una versión nueva y cómo deshacerla en este entorno.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Respuestas a las seis reflexiones, con las dos partes de las del Paso 3 y el Paso 4, y las tres del Paso 6.</li>
+</ul>
+<hr>
+<h2 id="cierre">✅ Cierre<a class="headerlink" href="#cierre" title="Permanent link">¶</a></h2>
+<p>El catálogo vuelve a estar al nivel de diciembre —nombre propio, HTTPS, credenciales fuera del repositorio— y por encima de él en una cosa concreta: ahora tienes una medición propia de lo que cuesta cambiar de versión, y volver atrás son segundos en vez de minutos. Has pagado la deuda que quedó abierta el 18 de diciembre, y has visto también dónde termina lo que compra: en el caso (b) el mecanismo funcionó perfectamente y el fallo llegó igual.</p>
+<p>Quedan dos cosas incómodas apuntadas. La primera: todo esto vive en <strong>tu</strong> máquina, montada por ti, con un clúster que desaparece si se apaga la instancia — como has comprobado esta mañana al recrearlo. La segunda, más de fondo: para desplegar hoy has entrado por SSH y has ejecutado órdenes a mano, exactamente como en octubre. El repositorio tiene los manifiestos, pero nadie comprueba que lo que corre en el clúster se parezca a lo que dice el repositorio.</p>
+<p>La semana que viene se cierran las dos. El clúster pasa a ser gestionado, el plano de control deja de ser tuyo —y empieza a facturar—, y un agente instalado dentro del clúster se encarga de leer el repositorio y hacer que la realidad se le parezca, sin que nadie entre por SSH y sin que el pipeline necesite ninguna llave de producción. Es la respuesta a lo que montaste en diciembre, y es la última sesión de contenido del curso.</p></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+<p style="margin: 0 auto; text-align: center; font-size: 0.7rem;">
+  © 2026 Alejandro Roig y Ángel Vidal
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">
+    Licencia CC BY-NC-SA 4.0
+  </a>
+</p>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tracking", "navigation.footer", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

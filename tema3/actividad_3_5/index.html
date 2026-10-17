@@ -1,0 +1,2122 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alejandroroig.github.io/despliegue-daw/tema3/actividad_3_5/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Actividad 3.5 — Tomcat y sesiones compartidas con Redis - Despliegue de Aplicaciones Web</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#actividad-35-tomcat-y-sesiones-compartidas-con-redis" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-header__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Despliegue de Aplicaciones Web
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Actividad 3.5 — Tomcat y sesiones compartidas con Redis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo Claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-nav__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Despliegue de Aplicaciones Web
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Punto de partida
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 1 - Punto de partida
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitecturas y proceso de despliegue
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/arquitecturas-despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.1 - Qué se puede saber de un despliegue desde fuera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Control de versiones y documentación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/control-versiones-documentacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/resumen-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hoja de referencia de comandos básicos de Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.2 - Tu repositorio como herramienta de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/fundamentos-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.1 - Ejecutar, inspeccionar y publicar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Imágenes de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/imagenes-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.2 - Empaquetar Escaparate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker Compose
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/docker-compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.3 - El conjunto entero con un comando
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 3 - Publicación y ejecución de aplicaciones web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 3 - Publicación y ejecución de aplicaciones web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 3 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servidores web y DNS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Servidores web y DNS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../servidores-web-dns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servidores web y DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actividad_3_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 3.1 - Dos sitios, un servidor y dos nombres
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxy inverso y balanceo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Proxy inverso y balanceo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proxy-inverso-balanceo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxy inverso y balanceo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actividad_3_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 3.2 - Una puerta, tres copias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad web y HTTPS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Seguridad web y HTTPS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seguridad-web-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad web y HTTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actividad_3_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 3.3 - Cierra la puerta y echa la llave
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Currículo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#antes-de-comenzar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de comenzar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-reconoce-el-punto-de-partida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Reconoce el punto de partida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-lee-cuatro-decisiones-y-arranca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Lee cuatro decisiones y arranca
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-comprueba-el-contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Comprueba el contexto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-cambia-una-unica-linea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cambia una única línea
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-retira-el-laboratorio-y-comprueba-el-servicio-habitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Retira el laboratorio y comprueba el servicio habitual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-comprende-que-vamos-a-comparar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Comprende qué vamos a comparar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Comprende qué vamos a comparar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-que-es-una-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. ¿Qué es una sesión?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-para-que-sirve-la-cookie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. ¿Para qué sirve la cookie?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-que-ocurre-cuando-hay-tres-replicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. ¿Qué ocurre cuando hay tres réplicas?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-que-aportan-redis-y-spring-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4. ¿Qué aportan Redis y Spring Session?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-que-contiene-cada-imagen-que-entrega-el-profesor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.5. ¿Qué contiene cada imagen que entrega el profesor?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#66-carga-el-material-preparado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.6. Carga el material preparado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-observa-el-problema-con-una-sesion-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Observa el problema con una sesión local
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-comparte-la-sesion-con-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Comparte la sesión con Redis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-deja-redis-integrado-en-el-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Deja Redis integrado en el despliegue
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega-breve" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrega breve
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documenta-e-integra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documenta e integra
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><h1 id="actividad-35-tomcat-y-sesiones-compartidas-con-redis">Actividad 3.5 — Tomcat y sesiones compartidas con Redis<a class="headerlink" href="#actividad-35-tomcat-y-sesiones-compartidas-con-redis" title="Permanent link">¶</a></h1>
+<h2 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">¶</a></h2>
+<p>El despliegue ya tiene Nginx, HTTPS, varias réplicas y registros centralizados. En esta sesión te centrarás en el servidor que ejecuta la aplicación Java y en cómo conserva información entre peticiones de un mismo cliente.</p>
+<p>Primero desplegarás el archivo WAR de Escaparate en un Tomcat externo y comprobarás cómo su nombre determina la ruta de acceso. Después observarás qué sucede cuando una sesión se guarda en una sola réplica y el balanceador envía la siguiente petición a otra. Utilizarás Redis como almacén compartido de sesiones, con las imágenes que entrega el profesor y una explicación previa de los conceptos.</p>
+<h2 id="antes-de-comenzar">Antes de comenzar<a class="headerlink" href="#antes-de-comenzar" title="Permanent link">¶</a></h2>
+<p><strong>Toda la actividad es obligatoria y se realiza en EC2.</strong> El código Java y las configuraciones están preparados. El profesor proporciona las dos imágenes de sesiones antes de clase; las instrucciones para prepararlas están incluidas en el material. No se hacen pruebas de rendimiento.</p>
+<p>Trabaja en el repositorio de EC2 con la 3.4 terminada. Desde su raíz:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>git<span class="w"> </span>switch<span class="w"> </span>main
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>git<span class="w"> </span>pull<span class="w"> </span>--ff-only
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>sesion-10
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>entregas/tema3/actividad-3.5/img
+</code></pre></div></td></tr></table></div>
+<h2 id="1-reconoce-el-punto-de-partida">1. Reconoce el punto de partida<a class="headerlink" href="#1-reconoce-el-punto-de-partida" title="Permanent link">¶</a></h2>
+<p>Las tres réplicas actuales ejecutan un WAR mediante <code>java -jar</code>. En ese caso, la aplicación inicia su Tomcat embebido. Vamos a extraer ese mismo WAR y entregárselo a un Tomcat externo temporal:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>Imagen de Escaparate
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>  └── /app/app.war
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>         ├── java -jar → Tomcat embebido
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>         └── webapps/  → Tomcat externo
+</code></pre></div></td></tr></table></div>
+<p>Esta posibilidad depende de cómo se haya empaquetado la aplicación: el proyecto de clase genera un WAR desplegable y declara Tomcat como dependencia <code>provided</code>. No cualquier JAR ejecutable puede copiarse a Tomcat.</p>
+<p>Desde la raíz del repositorio:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>practicas/aplicaciones
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>cp<span class="w"> </span>soporte-tema3/3.5/compose.tomcat-lab.yaml<span class="w"> </span>practicas/compose/
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>cp<span class="w"> </span>soporte-tema3/3.5/tomcat-lab.sh<span class="w"> </span>soporte-tema3/3.5/extraer-war.sh<span class="w"> </span>practicas/aplicaciones/
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'\n/practicas/aplicaciones/tomcat/*.war\n'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>.gitignore
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a>bash<span class="w"> </span>practicas/aplicaciones/extraer-war.sh
+</code></pre></div></td></tr></table></div>
+<p>El script utiliza la imagen de <code>app-1</code>, crea un contenedor sin arrancarlo, extrae <code>/app/app.war</code> y retira el contenedor temporal. Debe mostrar <code>escaparate.war</code> con un tamaño distinto de cero. No modifica la imagen.</p>
+<h2 id="2-lee-cuatro-decisiones-y-arranca">2. Lee cuatro decisiones y arranca<a class="headerlink" href="#2-lee-cuatro-decisiones-y-arranca" title="Permanent link">¶</a></h2>
+<p>Abre <code>practicas/compose/compose.tomcat-lab.yaml</code>. Identifica:</p>
+<table>
+<thead>
+<tr>
+<th>Decisión</th>
+<th>Motivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Imagen <code>tomcat:11.0.25-jre21-temurin-noble</code></td>
+<td>proporciona un servidor compatible y Java</td>
+</tr>
+<tr>
+<td>Montaje en <code>webapps/escaparate.war</code></td>
+<td>Tomcat descubre y despliega la aplicación</td>
+</tr>
+<tr>
+<td><code>SPRING_CONFIG_IMPORT</code> y <code>secrets</code></td>
+<td>reutilizan la contraseña de PostgreSQL como archivo</td>
+</tr>
+<tr>
+<td>Sin <code>ports</code></td>
+<td>es un laboratorio interno, no otra puerta pública</td>
+</tr>
+</tbody>
+</table>
+<p>El archivo auxiliar se combina con el Compose base y el de observabilidad. El script <code>tomcat-lab.sh</code> escribe por ti esa lista de archivos; puedes abrirlo para comprobarlo.</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>practicas/compose
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>bash<span class="w"> </span>../aplicaciones/tomcat-lab.sh<span class="w"> </span>config<span class="w"> </span>--quiet
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>bash<span class="w"> </span>../aplicaciones/tomcat-lab.sh<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>tomcat-lab
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>bash<span class="w"> </span>../aplicaciones/tomcat-lab.sh<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>tomcat-lab
+</code></pre></div></td></tr></table></div>
+<p>Espera a <code>Started EscaparateApplication</code>. Pulsa <strong>Ctrl+C</strong> para salir del seguimiento: no detiene Tomcat. Si aparecen errores de autenticación o de despliegue, consulta al profesor antes de continuar.</p>
+<h2 id="3-comprueba-el-contexto">3. Comprueba el contexto<a class="headerlink" href="#3-comprueba-el-contexto" title="Permanent link">¶</a></h2>
+<p>Desde el mismo directorio:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>bash<span class="w"> </span>../aplicaciones/tomcat-lab.sh<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>web<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">  </span>wget<span class="w"> </span>-S<span class="w"> </span>-O<span class="w"> </span>/dev/null<span class="w"> </span>http://tomcat-lab:8080/escaparate/api/salud/listo<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">  </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'HTTP/'</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a>bash<span class="w"> </span>../aplicaciones/tomcat-lab.sh<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>web<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">  </span>wget<span class="w"> </span>-S<span class="w"> </span>-O<span class="w"> </span>/dev/null<span class="w"> </span>http://tomcat-lab:8080/api/salud/listo<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">  </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'HTTP/'</span>
+</code></pre></div></td></tr></table></div>
+<p>Esperado: <strong>200 con <code>/escaparate</code> y 404 sin él</strong>. Aquí el 404 es el resultado buscado, no un fallo de instalación. Lanzamos las consultas desde <code>web</code> porque Tomcat solo es accesible en la red interna.</p>
+<h2 id="4-cambia-una-unica-linea">4. Cambia una única línea<a class="headerlink" href="#4-cambia-una-unica-linea" title="Permanent link">¶</a></h2>
+<p>En <code>compose.tomcat-lab.yaml</code>, sustituye el destino del montaje:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../aplicaciones/tomcat/escaparate.war:/usr/local/tomcat/webapps/ROOT.war:ro</span>
+</code></pre></div></td></tr></table></div>
+<p>El archivo del anfitrión sigue llamándose <code>escaparate.war</code>: solo cambia su nombre dentro de Tomcat. Recrea el contenedor para aplicar el montaje:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>bash<span class="w"> </span>../aplicaciones/tomcat-lab.sh<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--force-recreate<span class="w"> </span>tomcat-lab
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>bash<span class="w"> </span>../aplicaciones/tomcat-lab.sh<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>tomcat-lab
+</code></pre></div></td></tr></table></div>
+<p>Espera otra vez a <code>Started EscaparateApplication</code> y pulsa Ctrl+C. Repite la consulta sin contexto:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>bash<span class="w"> </span>../aplicaciones/tomcat-lab.sh<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>web<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="w">  </span>wget<span class="w"> </span>-S<span class="w"> </span>-O<span class="w"> </span>/dev/null<span class="w"> </span>http://tomcat-lab:8080/api/salud/listo<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">  </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">'HTTP/'</span>
+</code></pre></div></td></tr></table></div>
+<p>Ahora debe devolver <strong>200</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Nombre dentro de Tomcat</th>
+<th>URL de readiness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>escaparate.war</code></td>
+<td><code>/escaparate/api/salud/listo</code></td>
+</tr>
+<tr>
+<td><code>ROOT.war</code></td>
+<td><code>/api/salud/listo</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-retira-el-laboratorio-y-comprueba-el-servicio-habitual">5. Retira el laboratorio y comprueba el servicio habitual<a class="headerlink" href="#5-retira-el-laboratorio-y-comprueba-el-servicio-habitual" title="Permanent link">¶</a></h2>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>bash<span class="w"> </span>../aplicaciones/tomcat-lab.sh<span class="w"> </span>stop<span class="w"> </span>tomcat-lab
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>bash<span class="w"> </span>../aplicaciones/tomcat-lab.sh<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>tomcat-lab
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>sudo<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>ps
+</code></pre></div></td></tr></table></div>
+<p>Las tres réplicas habituales siguen funcionando. Define tu dirección actual y comprueba:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>-p<span class="w"> </span><span class="s1">'URL HTTPS del catálogo: '</span><span class="w"> </span>URL
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>curl<span class="w"> </span>--max-time<span class="w"> </span><span class="m">60</span><span class="w"> </span>-fsS<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">URL</span><span class="p">%/</span><span class="si">}</span><span class="s2">/api/salud/listo"</span>
+</code></pre></div></td></tr></table></div>
+<p>Esperado: <code>{"estado":"ok"}</code>. HTTPS, Secrets, imágenes compartidas y observabilidad se mantienen. No hemos cambiado el balanceador ni añadido otra aplicación al grupo.</p>
+<h2 id="6-comprende-que-vamos-a-comparar">6. Comprende qué vamos a comparar<a class="headerlink" href="#6-comprende-que-vamos-a-comparar" title="Permanent link">¶</a></h2>
+<p>No necesitas haber utilizado Redis ni Spring Session. Primero vamos a entender el problema que resuelven y después lo observaremos con dos imágenes que entrega el profesor <strong>ya construidas</strong>.</p>
+<h3 id="61-que-es-una-sesion">6.1. ¿Qué es una sesión?<a class="headerlink" href="#61-que-es-una-sesion" title="Permanent link">¶</a></h3>
+<p>Piensa en una tienda web: visitas una página, añades un producto al carrito y abres otra página. Cada acción produce una petición HTTP diferente. Por sí solo, HTTP no relaciona esas peticiones como acciones del mismo usuario.</p>
+<p>Una <strong>sesión</strong> permite a la aplicación conservar información entre peticiones: por ejemplo, el usuario que ha iniciado sesión o un carrito. En el mecanismo que usaremos, los datos se guardan en el servidor y se les asigna un identificador. La sesión suele caducar tras un tiempo de inactividad.</p>
+<p>Para simplificar, nuestro ejemplo solo guardará un dato: <code>usuario = demo</code>. No habrá contraseñas ni una pantalla de inicio de sesión. El nombre <code>demo</code> es ficticio y sirve para comprobar si la aplicación recuerda ese dato.</p>
+<h3 id="62-para-que-sirve-la-cookie">6.2. ¿Para qué sirve la cookie?<a class="headerlink" href="#62-para-que-sirve-la-cookie" title="Permanent link">¶</a></h3>
+<p>La <strong>cookie de sesión</strong> permite que el cliente conserve el identificador y lo envíe en las peticiones siguientes. El proceso será:</p>
+<ol>
+<li>El cliente pide crear una sesión.</li>
+<li>La aplicación guarda <code>usuario = demo</code> y genera un identificador, por ejemplo <code>abc123</code>.</li>
+<li>La respuesta entrega ese identificador mediante la cabecera <code>Set-Cookie</code>.</li>
+<li>El cliente lo guarda y lo devuelve mediante la cabecera <code>Cookie</code> en las siguientes peticiones.</li>
+<li>La aplicación busca la sesión asociada a ese identificador y recupera el dato guardado.</li>
+</ol>
+<p>En este ejercicio, <strong>la cookie lleva el identificador; el dato <code>usuario = demo</code> permanece en el servidor</strong>. Las cookies pueden tener otros usos, pero aquí solo necesitamos este.</p>
+<p>Usaremos <code>curl</code> como cliente en lugar del navegador: <code>-c</code> guarda las cookies recibidas en un archivo y <code>-b</code> las envía. El script proporcionado hace ambas cosas por ti. Aunque no abras una página web, estás probando el mismo mecanismo HTTP.</p>
+<h3 id="63-que-ocurre-cuando-hay-tres-replicas">6.3. ¿Qué ocurre cuando hay tres réplicas?<a class="headerlink" href="#63-que-ocurre-cuando-hay-tres-replicas" title="Permanent link">¶</a></h3>
+<p>Cada réplica es un proceso Java independiente, con su propia memoria. Si <code>app-1</code> crea la sesión y la guarda en su memoria, <code>app-2</code> y <code>app-3</code> no reciben automáticamente una copia.</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>Primera petición → Nginx → app-1: crea la sesión abc123 con usuario demo
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>Siguiente petición, con la cookie abc123:
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>    → app-1: encuentra la sesión
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>    → app-2: no la encuentra
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>    → app-3: no la encuentra
+</code></pre></div></td></tr></table></div>
+<p>El cliente sigue enviando la misma cookie y Nginx sigue repartiendo peticiones correctamente. El problema es que el servidor elegido puede no tener los datos asociados a esa cookie. Reiniciar la réplica también hace perder las sesiones que solo estaban en su memoria.</p>
+<p>En la 3.2 compartiste archivos mediante un volumen. Eso no comparte la memoria de los procesos: una sesión local no se convierte en un archivo del volumen por montarlo en los tres contenedores.</p>
+<h3 id="64-que-aportan-redis-y-spring-session">6.4. ¿Qué aportan Redis y Spring Session?<a class="headerlink" href="#64-que-aportan-redis-y-spring-session" title="Permanent link">¶</a></h3>
+<p><strong>Redis</strong> es un servicio que permite almacenar y consultar datos mediante claves. Trabaja principalmente en memoria y admite distintas estructuras de datos. En esta práctica lo usaremos como un almacén común para las sesiones.</p>
+<p>Redis tendrá <strong>su propio contenedor</strong>. Las tres réplicas accederán a él por la red interna de Compose. PostgreSQL seguirá almacenando los datos habituales de Escaparate; Redis tendrá una función diferente: guardar las sesiones de esta prueba.</p>
+<p><strong>Spring Session</strong> es una biblioteca que se incorpora a la aplicación Java y permite gestionar las sesiones utilizando un almacenamiento como Redis. Su integración con Redis se encarga de guardar y recuperar los datos: no tendrás que programar esas operaciones.</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a>Cliente con cookie → Nginx → app-1 ─┐
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a>                         → app-2 ─┼→ Redis: sesión abc123 → usuario demo
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a>                         → app-3 ─┘
+</code></pre></div></td></tr></table></div>
+<p>Ahora cualquier réplica puede recuperar la misma sesión. El cliente continúa enviando una cookie; no se conecta directamente a Redis. Compartir las sesiones no convierte Redis en un servicio infalible: en este laboratorio usamos un único contenedor, sin configurar alta disponibilidad ni persistencia.</p>
+<h3 id="65-que-contiene-cada-imagen-que-entrega-el-profesor">6.5. ¿Qué contiene cada imagen que entrega el profesor?<a class="headerlink" href="#65-que-contiene-cada-imagen-que-entrega-el-profesor" title="Permanent link">¶</a></h3>
+<p>Las dos imágenes contienen Escaparate, su entorno de ejecución Java y el mismo código didáctico para crear y consultar sesiones. En este bloque se ejecutan con Tomcat embebido, igual que las réplicas habituales.</p>
+<table>
+<thead>
+<tr>
+<th>Imagen de aplicación</th>
+<th>Diferencia</th>
+<th>Almacenamiento de sesión</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>escaparate:sesion-10-local</code></td>
+<td>Utiliza la sesión local del contenedor web</td>
+<td>Memoria de cada réplica</td>
+</tr>
+<tr>
+<td><code>escaparate:sesion-10-redis</code></td>
+<td>Añade la integración de Spring Session con Redis</td>
+<td>Servicio Redis compartido</td>
+</tr>
+</tbody>
+</table>
+<p><strong>La segunda imagen no contiene el servidor Redis.</strong> Compose lo arranca por separado a partir de la imagen <code>redis:8-alpine</code> y proporciona a las aplicaciones su nombre y puerto. Cambiar únicamente una variable no añade la biblioteca: por eso el profesor entrega dos variantes preparadas.</p>
+<p>El código didáctico incorpora estas dos rutas:</p>
+<table>
+<thead>
+<tr>
+<th>Petición</th>
+<th>Qué hace</th>
+<th>Respuesta esperada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /api/sesion/abrir?usuario=demo</code></td>
+<td>Crea una sesión y guarda el dato ficticio</td>
+<td>200 y cookie de sesión</td>
+</tr>
+<tr>
+<td><code>GET /api/sesion/estado</code></td>
+<td>Busca la sesión identificada por la cookie recibida</td>
+<td>200 si la encuentra; 401 si no</td>
+</tr>
+</tbody>
+</table>
+<p>Las respuestas incluyen <code>instancia</code> para reconocer qué réplica atendió la petición. Aquí usamos 401 para hacer visible la ausencia de sesión; <strong>esto no implementa un sistema de autenticación real</strong>.</p>
+<p>Antes de ejecutar los comandos, formula una predicción: si conservas la misma cookie y cambia la réplica, ¿en qué variante esperas que siempre se recuerde al usuario <code>demo</code>?</p>
+<h3 id="66-carga-el-material-preparado">6.6. Carga el material preparado<a class="headerlink" href="#66-carga-el-material-preparado" title="Permanent link">¶</a></h3>
+<p>El profesor proporciona <code>imagenes-sesiones.tar.gz</code>. Copia ese archivo a tu instancia EC2 y, desde el directorio que lo contiene, importa las imágenes:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>load<span class="w"> </span>-i<span class="w"> </span>imagenes-sesiones.tar.gz
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>image<span class="w"> </span>inspect<span class="w"> </span>escaparate:sesion-10-local<span class="w"> </span>escaparate:sesion-10-redis<span class="w"> </span>--format<span class="w"> </span><span class="s1">'{{.RepoTags}}'</span>
+</code></pre></div></td></tr></table></div>
+<p>Deben aparecer ambas etiquetas. <code>docker load</code> importa imágenes ya construidas; todavía no arranca los contenedores. Si el profesor ya las ha cargado en la instancia, basta con comprobar las etiquetas con el segundo comando. No necesitas construir imágenes, modificar Java ni instalar Maven.</p>
+<p>Desde la raíz del repositorio, copia el soporte:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a>cp<span class="w"> </span>soporte-tema3/3.5/compose.sesiones-*.yaml<span class="w"> </span>practicas/compose/
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a>cp<span class="w"> </span>soporte-tema3/3.5/sesiones.sh<span class="w"> </span>soporte-tema3/3.5/probar-sesion.sh<span class="w"> </span>practicas/aplicaciones/
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a>cp<span class="w"> </span>soporte-tema3/comprobar-replicas.sh<span class="w"> </span>practicas/aplicaciones/
+</code></pre></div></td></tr></table></div>
+<p>Los archivos de sesiones se añaden al Compose base y al de observabilidad. El script <code>sesiones.sh</code> selecciona esos tres archivos, sin cambiar <code>.env</code>. Mantiene Secrets, los archivos compartidos y los logs. Durante esta comparación usa los comandos indicados: un <code>docker compose up</code> sin el archivo de sesiones seleccionaría otra vez las imágenes anteriores.</p>
+<h2 id="7-observa-el-problema-con-una-sesion-local">7. Observa el problema con una sesión local<a class="headerlink" href="#7-observa-el-problema-con-una-sesion-local" title="Permanent link">¶</a></h2>
+<p>Desde <code>practicas/compose</code>:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span>
+<span class="normal"><a href="#__codelineno-14-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a>bash<span class="w"> </span>../aplicaciones/sesiones.sh<span class="w"> </span><span class="nb">local</span><span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--no-deps<span class="w"> </span>app-1<span class="w"> </span>app-2<span class="w"> </span>app-3
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a>bash<span class="w"> </span>../aplicaciones/comprobar-replicas.sh
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>-p<span class="w"> </span><span class="s1">'URL HTTPS del catálogo: '</span><span class="w"> </span>URL
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a>bash<span class="w"> </span>../aplicaciones/probar-sesion.sh<span class="w"> </span><span class="s2">"</span><span class="nv">$URL</span><span class="s2">"</span>
+</code></pre></div></td></tr></table></div>
+<p>Espera a que la comprobación indique <strong>preparado: si</strong> para las tres réplicas. Si alguna falla, no interpretes todavía el resultado de sesiones; consulta sus logs.</p>
+<p>El script crea una sesión nueva, guarda su cookie y hace doce consultas con esa misma cookie. Es breve y puedes abrirlo: <code>curl -c</code> guarda la cookie y <code>curl -b</code> la envía. El archivo temporal se elimina al terminar.</p>
+<p><strong>Esperado:</strong> alternan 200 y 401. El cuerpo de cada respuesta muestra <code>instancia</code>, por ejemplo <code>app-1</code>. La réplica que creó la sesión responde 200; las otras no la encuentran. Con reparto uniforme y sin otro tráfico, verás aproximadamente cuatro 200 y ocho 401. No es necesario que comiencen en un orden concreto.</p>
+<p>No cambies el balanceador para ocultar el problema: lo que falta es compartir el estado de sesión.</p>
+<h2 id="8-comparte-la-sesion-con-redis">8. Comparte la sesión con Redis<a class="headerlink" href="#8-comparte-la-sesion-con-redis" title="Permanent link">¶</a></h2>
+<p>Abre <code>compose.sesiones-redis.yaml</code> y localiza estas decisiones:</p>
+<table>
+<thead>
+<tr>
+<th>Configuración</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Imagen con el soporte Spring Session para Redis</td>
+<td>Cambia el almacenamiento de sesiones</td>
+</tr>
+<tr>
+<td><code>SPRING_DATA_REDIS_HOST: redis</code></td>
+<td>Localiza Redis por su nombre de servicio</td>
+</tr>
+<tr>
+<td><code>SPRING_DATA_REDIS_PORT: "6379"</code></td>
+<td>Puerto interno de Redis</td>
+</tr>
+<tr>
+<td><code>depends_on</code> con <code>service_healthy</code></td>
+<td>Espera a que Redis responda antes de arrancar las réplicas</td>
+</tr>
+<tr>
+<td>Redis sin <code>ports</code></td>
+<td>Evita publicarlo en la instancia</td>
+</tr>
+</tbody>
+</table>
+<p>Arranca Redis y después aplica la imagen preparada a las tres réplicas:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span>
+<span class="normal"><a href="#__codelineno-15-5">5</a></span>
+<span class="normal"><a href="#__codelineno-15-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>bash<span class="w"> </span>../aplicaciones/sesiones.sh<span class="w"> </span>redis<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>redis
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a>bash<span class="w"> </span>../aplicaciones/sesiones.sh<span class="w"> </span>redis<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>app-1<span class="w"> </span>app-2<span class="w"> </span>app-3
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a>bash<span class="w"> </span>../aplicaciones/comprobar-replicas.sh
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a>bash<span class="w"> </span>../aplicaciones/probar-sesion.sh<span class="w"> </span><span class="s2">"</span><span class="nv">$URL</span><span class="s2">"</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a>bash<span class="w"> </span>../aplicaciones/sesiones.sh<span class="w"> </span>redis<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>redis<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="w">  </span>redis-cli<span class="w"> </span>--scan<span class="w"> </span>--pattern<span class="w"> </span><span class="s1">'spring:session*'</span>
+</code></pre></div></td></tr></table></div>
+<p><strong>Esperado:</strong> doce respuestas 200, atendidas por diferentes instancias, y alguna clave <code>spring:session...</code> en Redis. El último comando usa <code>redis-cli</code>, el cliente de Redis: <code>--scan</code> recorre los nombres de claves y <code>--pattern</code> muestra solo los que empiezan por <code>spring:session</code>. Una clave es el nombre con el que se localizan datos; este comando muestra su nombre, no todo su contenido. La sesión tiene el mismo identificador en las respuestas. El script crea una cookie nueva: no se ha migrado la sesión anterior de la memoria a Redis.</p>
+<p>Ahora cada réplica consulta el mismo estado, aunque Nginx cambie el destino. El volumen de imágenes compartidas no interviene en este proceso. Redis se usa aquí como servicio interno de laboratorio; no se está configurando persistencia ni alta disponibilidad de Redis.</p>
+<h2 id="9-deja-redis-integrado-en-el-despliegue">9. Deja Redis integrado en el despliegue<a class="headerlink" href="#9-deja-redis-integrado-en-el-despliegue" title="Permanent link">¶</a></h2>
+<p>La comparación ha terminado. Mantendremos las sesiones compartidas como parte del proyecto. Hasta ahora el script añadía un archivo de sesiones de forma explícita; vamos a incorporar esa configuración al archivo automático de Compose para que un <code>docker compose up -d</code> normal conserve Redis.</p>
+<p>Desde <code>practicas/compose</code>, abre <code>compose.override.yaml</code>. Conserva los servicios y las opciones de logging de la 3.4. Para cada <code>app-1</code>, <code>app-2</code> y <code>app-3</code>, incorpora las propiedades de <code>compose.sesiones-redis.yaml</code>: <code>image</code>, <code>pull_policy</code>, <code>environment</code> y <code>depends_on</code>. Copia también el servicio <code>redis</code> al bloque <code>services</code> existente. <strong>No crees dos entradas con el mismo nombre ni un segundo bloque <code>services</code>.</strong></p>
+<p>El servicio de cada aplicación quedará así en el archivo de observabilidad (cambia el nombre para las otras dos):</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-16-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="w">  </span><span class="nt">app-1</span><span class="p">:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">escaparate:sesion-10-redis</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">    </span><span class="nt">pull_policy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">never</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">    </span><span class="nt">logging</span><span class="p">:</span><span class="w"> </span><span class="nv">*fluent-logging</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">      </span><span class="nt">SPRING_DATA_REDIS_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">redis</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="w">      </span><span class="nt">SPRING_DATA_REDIS_PORT</span><span class="p">:</span><span class="w"> </span><span class="s">"6379"</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">      </span><span class="nt">redis</span><span class="p">:</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">        </span><span class="nt">condition</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">service_healthy</span>
+</code></pre></div></td></tr></table></div>
+<p>El Compose base sigue aportando PostgreSQL, Secrets, el resto de variables y el volumen de imágenes. Comprueba el resultado combinado antes de aplicarlo:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<span class="normal"><a href="#__codelineno-17-2">2</a></span>
+<span class="normal"><a href="#__codelineno-17-3">3</a></span>
+<span class="normal"><a href="#__codelineno-17-4">4</a></span>
+<span class="normal"><a href="#__codelineno-17-5">5</a></span>
+<span class="normal"><a href="#__codelineno-17-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a>sudo<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>config<span class="w"> </span>--quiet
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>config<span class="w"> </span>--images
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a>sudo<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>redis<span class="w"> </span>app-1<span class="w"> </span>app-2<span class="w"> </span>app-3
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a>bash<span class="w"> </span>../aplicaciones/comprobar-replicas.sh
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a>bash<span class="w"> </span>../aplicaciones/probar-sesion.sh<span class="w"> </span><span class="s2">"</span><span class="nv">$URL</span><span class="s2">"</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6"></a>sudo<span class="w"> </span>docker<span class="w"> </span>compose<span class="w"> </span>ps
+</code></pre></div></td></tr></table></div>
+<p>La lista de imágenes debe incluir <code>escaparate:sesion-10-redis</code>. Esperamos las tres réplicas listas y doce respuestas 200 con la misma sesión sobre distintas instancias. Comprueba también que siguen llegando peticiones nuevas a Discover. Tomcat externo ya está retirado; Redis queda activo sin publicar puertos.</p>
+<p>Al levantar el proyecto en otra instancia habrá que importar primero las imágenes proporcionadas por el profesor. Versionar el Compose no incluye las imágenes Docker.</p>
+<h2 id="entrega-breve">Entrega breve<a class="headerlink" href="#entrega-breve" title="Permanent link">¶</a></h2>
+<p>En <code>entregas/tema3/actividad-3.5/actividad-3.5.md</code>, entrega tres evidencias (si son capturas, guárdalas en <code>img/</code>): el contexto de Tomcat <strong>200 / 404 / 200</strong>, la mezcla de <strong>200 y 401</strong> con sesiones locales y los <strong>200 sobre distintas réplicas junto a una clave de Redis</strong>. Pueden ser salidas de texto, no hace falta capturar cada petición.</p>
+<p>Responde brevemente:</p>
+<ol>
+<li>¿Qué diferencia hay entre imagen Docker, WAR y servidor Tomcat? ¿Por qué cambió la URL al usar <code>ROOT.war</code>?</li>
+<li>¿Qué guarda la cookie y dónde se guarda el usuario <code>demo</code> en cada variante?</li>
+<li>¿Por qué el volumen compartido de la 3.2 no soluciona la sesión local? ¿Qué aporta Redis?</li>
+</ol>
+<p>Conserva las configuraciones y scripts en Git. No subas WAR, imágenes Docker exportadas ni cookies. No hay ampliaciones ni pruebas de rendimiento.</p>
+<h2 id="documenta-e-integra">Documenta e integra<a class="headerlink" href="#documenta-e-integra" title="Permanent link">¶</a></h2>
+<p>Completa el diagrama de <code>entregas/tema3/memoria-publicacion-ejecucion.md</code> con Redis y su conexión a las tres aplicaciones. Distingue los tres tipos de datos: productos en PostgreSQL, archivos en el volumen compartido y sesiones en Redis. Indica que las réplicas usan Tomcat embebido y que el Tomcat externo fue un laboratorio temporal.</p>
+<p>Actualiza el README con la importación de las imágenes y la comprobación de sesiones. Revisa <code>git status</code>, registra los cambios de configuración, scripts y evidencias, publica <code>sesion-10</code> y abre la PR hacia <code>main</code>. Fusiona mediante <strong>Create a merge commit</strong> cuando los checks sean correctos. No incorpores las imágenes exportadas ni el WAR al repositorio.</p></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+<p style="margin: 0 auto; text-align: center; font-size: 0.7rem;">
+  © 2026 Alejandro Roig y Ángel Vidal
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">
+    Licencia CC BY-NC-SA 4.0
+  </a>
+</p>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tracking", "navigation.footer", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

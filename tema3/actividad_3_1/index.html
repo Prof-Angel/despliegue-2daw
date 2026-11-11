@@ -1,0 +1,3452 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://alejandroroig.github.io/despliegue-daw/tema3/actividad_3_1/">
+      
+      
+        <link rel="prev" href="../servidores-web-dns/">
+      
+      
+        <link rel="next" href="../proxy-inverso-balanceo/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Actividad 3.1 - Dos sitios, un servidor y dos nombres - Despliegue de Aplicaciones Web</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#actividad-31-dos-sitios-un-servidor-y-dos-nombres" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-header__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Despliegue de Aplicaciones Web
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Actividad 3.1 - Dos sitios, un servidor y dos nombres
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo oscuro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Modo oscuro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="cyan"  aria-label="Modo Claro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Modo Claro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Despliegue de Aplicaciones Web" class="md-nav__button md-logo" aria-label="Despliegue de Aplicaciones Web" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Despliegue de Aplicaciones Web
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Punto de partida
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 1 - Punto de partida
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 1 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitecturas y proceso de despliegue
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/arquitecturas-despliegue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitecturas y proceso de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.1 - Qué se puede saber de un despliegue desde fuera
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Control de versiones y documentación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/control-versiones-documentacion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control de versiones y documentación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/resumen-git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hoja de referencia de comandos básicos de Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema1/actividad_1_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 1.2 - Tu repositorio como herramienta de despliegue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 2 - Virtualización y contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 2 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Fundamentos de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/fundamentos-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fundamentos de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.1 - Ejecutar, inspeccionar y publicar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Imágenes de contenedores
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/imagenes-contenedores/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imágenes de contenedores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.2 - Empaquetar Escaparate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Docker Compose
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/docker-compose/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Docker Compose
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tema2/actividad_2_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 2.3 - El conjunto entero con un comando
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 3 - Publicación y ejecución de aplicaciones web
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tema 3 - Publicación y ejecución de aplicaciones web
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tema 3 - Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servidores web y DNS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Servidores web y DNS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../servidores-web-dns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servidores web y DNS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 3.1 - Dos sitios, un servidor y dos nombres
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 3.1 - Dos sitios, un servidor y dos nombres
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌐 Contexto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-vas-a-practicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Qué vas a practicar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧰 Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-anade-nginx-como-puerta-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚪 Paso 1: Añade Nginx como puerta de entrada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚪 Paso 1: Añade Nginx como puerta de entrada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-coloca-el-frontend-estatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Coloca el frontend estático
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-anade-el-servicio-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Añade el servicio web
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-configura-el-primer-sitio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Configura el primer sitio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-levanta-y-valida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Levanta y valida
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-publica-dos-sitios-sobre-la-misma-direccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌍 Paso 2: Publica dos sitios sobre la misma dirección
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🌍 Paso 2: Publica dos sitios sobre la misma dirección">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-observa-la-resolucion-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Observa la resolución DNS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-coloca-la-documentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Coloca la documentación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-monta-la-documentacion-en-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Monta la documentación en Nginx
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-anade-el-segundo-sitio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Añade el segundo sitio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-aplica-correctamente-el-cambio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Aplica correctamente el cambio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-decide-que-ocurre-con-un-nombre-desconocido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛡️ Paso 3: Decide qué ocurre con un nombre desconocido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛡️ Paso 3: Decide qué ocurre con un nombre desconocido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-observa-el-comportamiento-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Observa el comportamiento actual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-declara-un-servidor-por-defecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Declara un servidor por defecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-aplica-politicas-al-contenido-estatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 Paso 4: Aplica políticas al contenido estático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 Paso 4: Aplica políticas al contenido estático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-configura-gzip-y-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Configura gzip y caché
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-comprueba-las-cabeceras-del-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Comprueba las cabeceras del CSS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-mide-el-efecto-de-la-compresion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Mide el efecto de la compresión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-contrasta-con-una-respuesta-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Contrasta con una respuesta dinámica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-5-documenta-e-integra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Paso 5: Documenta e integra
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 Paso 5: Documenta e integra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-valida-el-estado-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Valida el estado final
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-actualiza-el-readme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Actualiza el README
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-revisa-la-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. Revisa la entrega
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-integra-la-rama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4. Integra la rama
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#si-algo-falla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Si algo falla
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-se-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Qué se entrega
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 Cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxy inverso y balanceo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Proxy inverso y balanceo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proxy-inverso-balanceo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proxy inverso y balanceo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actividad_3_2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 3.2 - Una puerta, tres copias
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad web y HTTPS
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Seguridad web y HTTPS
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seguridad-web-https/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Seguridad web y HTTPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actividad_3_3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 3.3 - Cierra la puerta y echa la llave
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observabilidad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Observabilidad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../observabilidad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observabilidad - logs, métricas y alertas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actividad_3_4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 3.4 - Que te lo cuente el sistema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servidor de aplicaciones, estado y rendimiento
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Servidor de aplicaciones, estado y rendimiento
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../servidor-aplicaciones/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Servidor de aplicaciones - ejecución, estado y rendimiento
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actividad_3_5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad 3.5 - El backend por dentro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Currículo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌐 Contexto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-vas-a-practicar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Qué vas a practicar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧰 Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-1-anade-nginx-como-puerta-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚪 Paso 1: Añade Nginx como puerta de entrada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚪 Paso 1: Añade Nginx como puerta de entrada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-coloca-el-frontend-estatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Coloca el frontend estático
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-anade-el-servicio-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Añade el servicio web
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-configura-el-primer-sitio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Configura el primer sitio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-levanta-y-valida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Levanta y valida
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-2-publica-dos-sitios-sobre-la-misma-direccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🌍 Paso 2: Publica dos sitios sobre la misma dirección
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🌍 Paso 2: Publica dos sitios sobre la misma dirección">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-observa-la-resolucion-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Observa la resolución DNS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-coloca-la-documentacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Coloca la documentación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-monta-la-documentacion-en-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Monta la documentación en Nginx
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-anade-el-segundo-sitio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4. Añade el segundo sitio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-aplica-correctamente-el-cambio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Aplica correctamente el cambio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-3-decide-que-ocurre-con-un-nombre-desconocido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛡️ Paso 3: Decide qué ocurre con un nombre desconocido
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛡️ Paso 3: Decide qué ocurre con un nombre desconocido">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-observa-el-comportamiento-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Observa el comportamiento actual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-declara-un-servidor-por-defecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Declara un servidor por defecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-4-aplica-politicas-al-contenido-estatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 Paso 4: Aplica políticas al contenido estático
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 Paso 4: Aplica políticas al contenido estático">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-configura-gzip-y-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Configura gzip y caché
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-comprueba-las-cabeceras-del-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Comprueba las cabeceras del CSS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-mide-el-efecto-de-la-compresion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Mide el efecto de la compresión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-contrasta-con-una-respuesta-dinamica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Contrasta con una respuesta dinámica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-5-documenta-e-integra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Paso 5: Documenta e integra
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 Paso 5: Documenta e integra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-valida-el-estado-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Valida el estado final
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-actualiza-el-readme" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Actualiza el README
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-revisa-la-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3. Revisa la entrega
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-integra-la-rama" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.4. Integra la rama
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#si-algo-falla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Si algo falla
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#que-se-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Qué se entrega
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧠 Cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div><h1 id="actividad-31-dos-sitios-un-servidor-y-dos-nombres">🧪 Actividad 3.1: Dos sitios, un servidor y dos nombres<a class="headerlink" href="#actividad-31-dos-sitios-un-servidor-y-dos-nombres" title="Permanent link">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Descarga los materiales</p>
+<p>Para esta actividad necesitas:</p>
+<ul>
+<li>📦 <a href="../descargas/escaparate-estatico.zip" rel="noopener" target="_blank"><code>escaparate-estatico.zip</code></a></li>
+<li>📦 <a href="../descargas/escaparate-docs.zip" rel="noopener" target="_blank"><code>escaparate-docs.zip</code></a></li>
+</ul>
+</div>
+<h2 id="contexto">🌐 Contexto<a class="headerlink" href="#contexto" title="Permanent link">¶</a></h2>
+<p>Al terminar el Tema 2, el navegador accedía directamente a Escaparate:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>navegador → app → bd
+</code></pre></div></td></tr></table></div>
+<p>En esta sesión aparece una nueva puerta de entrada:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a>                 ┌→ frontend estático
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>navegador → web ─┼→ documentación
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>                 └→ /api/ → app → bd
+</code></pre></div></td></tr></table></div>
+<p><code>web</code> será Nginx. Desde el anfitrión solo se publicará Nginx; <code>app</code> y <code>bd</code> permanecerán dentro de la red de Compose.</p>
+<p>En los equipos del aula el puerto 80 ya está ocupado por Apache. Para no modificar servicios del sistema, publicaremos el puerto 80 del contenedor Nginx como <strong>8088 en el anfitrión</strong>:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>equipo del aula :8088
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>        ↓
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>contenedor Nginx :80
+</code></pre></div></td></tr></table></div>
+<p>No debes detener ni deshabilitar Apache.</p>
+<div class="admonition abstract">
+<p class="admonition-title">Cómo vas a trabajar</p>
+<p><strong>Añadir → comprobar → nombrar → comparar → proteger → medir → interpretar</strong></p>
+<p>La configuración base se proporciona cuando el objetivo no es memorizar sintaxis. Tu trabajo será aplicarla correctamente, comprobar qué ocurre y explicar por qué.</p>
+<p>El bloque <code>/api/</code> funcionará todavía como una <strong>caja negra</strong>. En la Actividad 3.2 estudiarás el proxy inverso con detalle.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Si ya estás trabajando en EC2</p>
+<p>Si trasladastes el proyecto a EC2 por la incidencia del puerto 80, no necesitas volver a local.</p>
+<p>En EC2 puedes mantener:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"80:80"</span>
+</code></pre></div></td></tr></table></div>
+<p>y sustituir en las comprobaciones:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>escaparate.127.0.0.1.nip.io:8088
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a>docs.127.0.0.1.nip.io:8088
+</code></pre></div></td></tr></table></div>
+<p>por:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a>escaparate.&lt;IP-PUBLICA&gt;.nip.io
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>docs.&lt;IP-PUBLICA&gt;.nip.io
+</code></pre></div></td></tr></table></div>
+<p>El resto de la actividad es equivalente.</p>
+</div>
+<h2 id="que-vas-a-practicar">🎯 Qué vas a practicar<a class="headerlink" href="#que-vas-a-practicar" title="Permanent link">¶</a></h2>
+<p>Al terminar la actividad deberías ser capaz de:</p>
+<ul>
+<li>incorporar Nginx como única puerta de entrada del despliegue;</li>
+<li>distinguir entre el puerto del anfitrión y el puerto del contenedor;</li>
+<li>servir contenido estático desde raíces distintas;</li>
+<li>comprobar cómo dos nombres pueden llegar al mismo Nginx y seleccionar sitios diferentes;</li>
+<li>relacionar DNS, dirección IP, cabecera <code>Host</code> y <code>server_name</code>;</li>
+<li>definir explícitamente qué ocurre con nombres no reconocidos;</li>
+<li>comprobar gzip y una política de caché sobre recursos estáticos;</li>
+<li>distinguir entre recargar Nginx y recrear un contenedor cuando cambia Compose;</li>
+<li>validar la configuración antes de aplicarla;</li>
+<li>versionar la configuración del servidor web.</li>
+</ul>
+<h2 id="requisitos-previos">🧰 Requisitos previos<a class="headerlink" href="#requisitos-previos" title="Permanent link">¶</a></h2>
+<p>Necesitas haber terminado la Actividad 2.3 y conservar su configuración de Compose.</p>
+<p>Debes disponer de:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>ghcr.io/&lt;usuario&gt;/escaparate:sesion-04
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>ghcr.io/&lt;usuario&gt;/escaparate-db:1.0.0
+</code></pre></div></td></tr></table></div>
+<p>y de los dos paquetes descargables indicados al inicio.</p>
+<p>Conserva:</p>
+<ul>
+<li><code>.env</code> para la configuración local;</li>
+<li><code>secrets/bd_clave.txt</code> para la contraseña;</li>
+<li>el volumen de PostgreSQL;</li>
+<li>el <code>healthcheck</code> de <code>bd</code>;</li>
+<li>la dependencia <code>service_healthy</code> de <code>app</code>.</li>
+</ul>
+<p>Prepara tu rama:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>git<span class="w"> </span>switch<span class="w"> </span>main
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a>git<span class="w"> </span>pull<span class="w"> </span>--ff-only
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a>git<span class="w"> </span>switch<span class="w"> </span>-c<span class="w"> </span>sesion-06
+</code></pre></div></td></tr></table></div>
+<p>Crea:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>entregas/
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>└── tema3/
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>    └── actividad-3.1/
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>        ├── actividad-3.1.md
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>        └── img/
+</code></pre></div></td></tr></table></div>
+<p>Los ficheros técnicos quedarán en:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a>practicas/
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>├── compose/
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>│   ├── compose.yaml
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>│   ├── .env
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>│   └── .env.example
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>└── nginx/
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a>    ├── conf.d/
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a>    │   └── sitios.conf
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a>    ├── sitio-escaparate/
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a>    │   └── escaparate/
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a>    └── sitio-docs/
+</code></pre></div></td></tr></table></div>
+<div class="admonition info">
+<p class="admonition-title">Evidencias</p>
+<p>Solo se piden <strong>tres evidencias</strong>.</p>
+<p>Documenta decisiones, resultados y reflexiones. No conviertas <code>actividad-3.1.md</code> en una transcripción de todos los comandos.</p>
+</div>
+<h2 id="paso-1-anade-nginx-como-puerta-de-entrada">🚪 Paso 1: Añade Nginx como puerta de entrada<a class="headerlink" href="#paso-1-anade-nginx-como-puerta-de-entrada" title="Permanent link">¶</a></h2>
+<p>El primer objetivo es que el navegador deje de entrar directamente a Spring Boot. Nginx servirá el frontend y reenviará únicamente <code>/api/</code> hacia la aplicación.</p>
+<h3 id="11-coloca-el-frontend-estatico">1.1. Coloca el frontend estático<a class="headerlink" href="#11-coloca-el-frontend-estatico" title="Permanent link">¶</a></h3>
+<p>Descomprime <code>escaparate-estatico.zip</code> dentro de:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a>practicas/nginx/sitio-escaparate/
+</code></pre></div></td></tr></table></div>
+<p>Debe existir:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a>practicas/nginx/sitio-escaparate/escaparate/index.html
+</code></pre></div></td></tr></table></div>
+<p>No muevas ni aplanes su contenido.</p>
+<p>El frontend está formado por archivos estáticos, pero los productos se consultan en la API. Abre <code>config.js</code> y comprueba que contiene:</p>
+<div class="language-javascript highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">JavaScript</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="nb">window</span><span class="p">.</span><span class="nx">APP_CONFIG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">    </span><span class="nx">modo</span><span class="o">:</span><span class="w"> </span><span class="s2">"api"</span><span class="p">,</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">    </span><span class="nx">apiBase</span><span class="o">:</span><span class="w"> </span><span class="s2">"/api"</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+<p>El navegador pedirá así los datos a <code>/api/</code> en el mismo sitio desde el que recibe HTML, CSS y JavaScript.</p>
+<h3 id="12-anade-el-servicio-web">1.2. Añade el servicio <code>web</code><a class="headerlink" href="#12-anade-el-servicio-web" title="Permanent link">¶</a></h3>
+<p>Abre <code>practicas/compose/compose.yaml</code> y añade este servicio:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span>
+<span class="normal"><a href="#__codelineno-13-4">4</a></span>
+<span class="normal"><a href="#__codelineno-13-5">5</a></span>
+<span class="normal"><a href="#__codelineno-13-6">6</a></span>
+<span class="normal"><a href="#__codelineno-13-7">7</a></span>
+<span class="normal"><a href="#__codelineno-13-8">8</a></span>
+<span class="normal"><a href="#__codelineno-13-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="w">  </span><span class="nt">web</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:1.30.4-alpine</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"8088:80"</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../nginx/conf.d/:/etc/nginx/conf.d/:ro</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../nginx/sitio-escaparate/escaparate/:/srv/www/escaparate/:ro</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app</span>
+</code></pre></div></td></tr></table></div>
+<p>Al mismo tiempo, elimina la publicación de <code>8080</code> de <code>app</code> borrando la siguiente línea:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"8080:8080"</span>
+</code></pre></div></td></tr></table></div>
+<p>No cambies el resto de <code>app</code> ni de <code>bd</code>.</p>
+<p>La arquitectura debe quedar:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-15-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-15-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-15-10">10</a></span>
+<span class="normal"><a href="#__codelineno-15-11">11</a></span>
+<span class="normal"><a href="#__codelineno-15-12">12</a></span>
+<span class="normal"><a href="#__codelineno-15-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a>ANFITRIÓN
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a>localhost:8088
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a>      │
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a>      ▼
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a>   web:Nginx
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a>      │
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a>      └── /api/ → app:8080 → bd:5432
+<a id="__codelineno-15-9" name="__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a>
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a>RED DE COMPOSE
+<a id="__codelineno-15-12" name="__codelineno-15-12"></a>
+<a id="__codelineno-15-13" name="__codelineno-15-13"></a>web → app → bd
+</code></pre></div></td></tr></table></div>
+<div class="admonition question">
+<p class="admonition-title">Comprueba que entiendes el puerto</p>
+<p>En:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"8088:80"</span>
+</code></pre></div></td></tr></table></div>
+<p>¿qué número corresponde al equipo del aula y cuál al contenedor Nginx?</p>
+<p>¿Por qué <code>app</code> puede seguir escuchando en <code>8080</code> aunque ya no publique ese puerto hacia el anfitrión?</p>
+</div>
+<h3 id="13-configura-el-primer-sitio">1.3. Configura el primer sitio<a class="headerlink" href="#13-configura-el-primer-sitio" title="Permanent link">¶</a></h3>
+<p>Crea:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a>practicas/nginx/conf.d/sitios.conf
+</code></pre></div></td></tr></table></div>
+<p>con este contenido:</p>
+<div class="language-nginx highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Nginx Configuration File</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-18-10">10</a></span>
+<span class="normal"><a href="#__codelineno-18-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">escaparate.*</span><span class="p">;</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">    </span><span class="kn">root</span><span class="w"> </span><span class="s">/srv/www/escaparate</span><span class="p">;</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="w">    </span><span class="kn">index</span><span class="w"> </span><span class="s">index.html</span><span class="p">;</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/api/</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">        </span><span class="kn">proxy_pass</span><span class="w"> </span><span class="s">http://app:8080</span><span class="p">;</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Lee el bloque antes de continuar:</p>
+<table>
+<thead>
+<tr>
+<th>Directiva</th>
+<th>Qué estamos indicando</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>listen 80</code></td>
+<td>Nginx escucha en el puerto 80 <strong>dentro del contenedor</strong></td>
+</tr>
+<tr>
+<td><code>server_name</code></td>
+<td>este bloque atiende el nombre del catálogo</td>
+</tr>
+<tr>
+<td><code>root</code></td>
+<td>los ficheros públicos están en <code>/srv/www/escaparate</code></td>
+</tr>
+<tr>
+<td><code>index</code></td>
+<td><code>index.html</code> es la página inicial</td>
+</tr>
+<tr>
+<td><code>location /api/</code></td>
+<td>las peticiones dinámicas se entregan a <code>app</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Por qué usamos <code>escaparate.*</code></p>
+<p>En lugar de escribir un nombre completo, utilizamos:</p>
+<div class="language-nginx highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Nginx Configuration File</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="k">server_name</span><span class="w"> </span><span class="s">escaparate.*</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+<p>Así la misma configuración de Nginx sirve en los dos entornos del módulo:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
+<span class="normal"><a href="#__codelineno-20-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a>aula → escaparate.127.0.0.1.nip.io
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a>EC2  → escaparate.&lt;IP-PUBLICA&gt;.nip.io
+</code></pre></div></td></tr></table></div>
+<p>El <code>*</code> <strong>no hace que el nombre exista ni sustituye a DNS</strong>. El cliente debe resolver primero el nombre a una dirección IP y llegar hasta Nginx.</p>
+<p>Una vez recibida la petición, Nginx compara la cabecera HTTP <code>Host</code> con sus <code>server_name</code>. En este laboratorio, <code>escaparate.*</code> permite reconocer los nombres del catálogo aunque cambie la parte que contiene la dirección IP.</p>
+<p>Más adelante utilizaremos de la misma forma:</p>
+<div class="language-nginx highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Nginx Configuration File</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="k">server_name</span><span class="w"> </span><span class="s">docs.*</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+<p>para el sitio de documentación.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Todavía no estudies <code>proxy_pass</code></p>
+<p>Copia el bloque <code>/api/</code> tal como aparece.</p>
+<p>En esta sesión solo necesitamos que la API siga funcionando detrás de Nginx. En la Actividad 3.2 estudiarás qué hace realmente <code>proxy_pass</code>.</p>
+</div>
+<h3 id="14-levanta-y-valida">1.4. Levanta y valida<a class="headerlink" href="#14-levanta-y-valida" title="Permanent link">¶</a></h3>
+<p>Desde <code>practicas/compose/</code> ejecuta:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
+<span class="normal"><a href="#__codelineno-22-2">2</a></span>
+<span class="normal"><a href="#__codelineno-22-3">3</a></span>
+<span class="normal"><a href="#__codelineno-22-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>config<span class="w"> </span>--quiet
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>nginx<span class="w"> </span>-t
+</code></pre></div></td></tr></table></div>
+<p>Debes comprobar que:</p>
+<ul>
+<li><code>web</code> publica <code>8088</code>;</li>
+<li><code>app</code> no publica ningún puerto;</li>
+<li><code>bd</code> no publica ningún puerto;</li>
+<li><code>nginx -t</code> termina correctamente.</li>
+</ul>
+<p>Prueba el sitio indicando explícitamente la cabecera <code>Host</code>:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
+<span class="normal"><a href="#__codelineno-23-2">2</a></span>
+<span class="normal"><a href="#__codelineno-23-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a>curl<span class="w"> </span>-I<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Host: escaparate.127.0.0.1.nip.io"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="w">  </span>http://127.0.0.1:8088/
+</code></pre></div></td></tr></table></div>
+<p>Y comprueba la parte dinámica:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
+<span class="normal"><a href="#__codelineno-24-2">2</a></span>
+<span class="normal"><a href="#__codelineno-24-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a>curl<span class="w"> </span>-fsS<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Host: escaparate.127.0.0.1.nip.io"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="w">  </span>http://127.0.0.1:8088/api/salud/listo
+</code></pre></div></td></tr></table></div>
+<p>Abre también:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a>http://escaparate.127.0.0.1.nip.io:8088/
+</code></pre></div></td></tr></table></div>
+<p><strong>Evidencia 1:</strong> <code>docker compose ps</code> mostrando que solo <code>web</code> publica puerto y una comprobación correcta del catálogo a través de Nginx.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>Las dos peticiones anteriores llegan primero a Nginx.</p>
+<p>¿Por qué <code>/</code> puede resolverse leyendo un fichero mientras <code>/api/salud/listo</code> termina ejecutando código de Spring Boot?</p>
+</div>
+<h2 id="paso-2-publica-dos-sitios-sobre-la-misma-direccion">🌍 Paso 2: Publica dos sitios sobre la misma dirección<a class="headerlink" href="#paso-2-publica-dos-sitios-sobre-la-misma-direccion" title="Permanent link">¶</a></h2>
+<p>Ahora vas a servir dos contenidos distintos desde el mismo Nginx. Los dos nombres llegarán a la misma dirección y al mismo puerto, pero Nginx seleccionará un sitio diferente.</p>
+<h3 id="21-observa-la-resolucion-dns">2.1. Observa la resolución DNS<a class="headerlink" href="#21-observa-la-resolucion-dns" title="Permanent link">¶</a></h3>
+<p>Ejecuta:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a>dig<span class="w"> </span>escaparate.127.0.0.1.nip.io
+</code></pre></div></td></tr></table></div>
+<p>En <code>actividad-3.1.md</code> anota únicamente:</p>
+<table>
+<thead>
+<tr>
+<th>Dato</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tipo de registro</td>
+<td></td>
+</tr>
+<tr>
+<td>Dirección IPv4</td>
+<td></td>
+</tr>
+<tr>
+<td>TTL</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>No copies toda la salida de <code>dig</code>.</p>
+<p>Después ejecuta:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a>dig<span class="w"> </span>docs.127.0.0.1.nip.io
+</code></pre></div></td></tr></table></div>
+<p>Los dos nombres deberían resolver hacia:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a>127.0.0.1
+</code></pre></div></td></tr></table></div>
+<div class="admonition question">
+<p class="admonition-title">Antes de continuar</p>
+<p>Si ambos nombres llegan a la misma IP y al mismo puerto <code>8088</code>, ¿qué información necesitará Nginx para decidir qué contenido debe devolver?</p>
+</div>
+<h3 id="22-coloca-la-documentacion">2.2. Coloca la documentación<a class="headerlink" href="#22-coloca-la-documentacion" title="Permanent link">¶</a></h3>
+<p>Descomprime <code>escaparate-docs.zip</code> dentro de:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a>practicas/nginx/sitio-docs/
+</code></pre></div></td></tr></table></div>
+<p>Debe existir:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a>practicas/nginx/sitio-docs/index.html
+</code></pre></div></td></tr></table></div>
+<h3 id="23-monta-la-documentacion-en-nginx">2.3. Monta la documentación en Nginx<a class="headerlink" href="#23-monta-la-documentacion-en-nginx" title="Permanent link">¶</a></h3>
+<p>Añade al servicio <code>web</code>:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../nginx/sitio-docs/:/srv/www/docs/:ro</span>
+</code></pre></div></td></tr></table></div>
+<p>El bloque de volúmenes de <code>web</code> debe incluir ahora tres montajes:</p>
+<div class="language-yaml highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">YAML</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
+<span class="normal"><a href="#__codelineno-32-2">2</a></span>
+<span class="normal"><a href="#__codelineno-32-3">3</a></span>
+<span class="normal"><a href="#__codelineno-32-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../nginx/conf.d/:/etc/nginx/conf.d/:ro</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../nginx/sitio-escaparate/escaparate/:/srv/www/escaparate/:ro</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../nginx/sitio-docs/:/srv/www/docs/:ro</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="24-anade-el-segundo-sitio">2.4. Añade el segundo sitio<a class="headerlink" href="#24-anade-el-segundo-sitio" title="Permanent link">¶</a></h3>
+<p>Añade al final de <code>sitios.conf</code>:</p>
+<div class="language-nginx highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Nginx Configuration File</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-33-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-33-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-33-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-33-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-33-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-33-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-33-10">10</a></span>
+<span class="normal"><a href="#__codelineno-33-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="p">;</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">docs.*</span><span class="p">;</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4"></a>
+<a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">    </span><span class="kn">root</span><span class="w"> </span><span class="s">/srv/www/docs</span><span class="p">;</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="w">    </span><span class="kn">index</span><span class="w"> </span><span class="s">index.html</span><span class="p">;</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7"></a>
+<a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="w">    </span><span class="kn">location</span><span class="w"> </span><span class="s">/informes/</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9"></a><span class="w">        </span><span class="kn">autoindex</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<a id="__codelineno-33-10" name="__codelineno-33-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-33-11" name="__codelineno-33-11"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Compara los dos bloques <code>server</code>.</p>
+<p>Solo cambian las decisiones que distinguen un sitio de otro:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span>
+<span class="normal"><a href="#__codelineno-34-2">2</a></span>
+<span class="normal"><a href="#__codelineno-34-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a>nombre
+<a id="__codelineno-34-2" name="__codelineno-34-2"></a>raíz de documentos
+<a id="__codelineno-34-3" name="__codelineno-34-3"></a>reglas específicas de rutas
+</code></pre></div></td></tr></table></div>
+<h3 id="25-aplica-correctamente-el-cambio">2.5. Aplica correctamente el cambio<a class="headerlink" href="#25-aplica-correctamente-el-cambio" title="Permanent link">¶</a></h3>
+<p>Has modificado <strong>Compose</strong> añadiendo un nuevo montaje. Por tanto, una recarga de Nginx no es suficiente para incorporar ese directorio al contenedor.</p>
+<p>Ejecuta:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1">1</a></span>
+<span class="normal"><a href="#__codelineno-35-2">2</a></span>
+<span class="normal"><a href="#__codelineno-35-3">3</a></span>
+<span class="normal"><a href="#__codelineno-35-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>config<span class="w"> </span>--quiet
+<a id="__codelineno-35-2" name="__codelineno-35-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>web
+<a id="__codelineno-35-3" name="__codelineno-35-3"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>nginx<span class="w"> </span>-t
+<a id="__codelineno-35-4" name="__codelineno-35-4"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>nginx<span class="w"> </span>-s<span class="w"> </span>reload
+</code></pre></div></td></tr></table></div>
+<div class="admonition info">
+<p class="admonition-title"><code>up -d</code> y <code>reload</code> no hacen lo mismo</p>
+<p><code>docker compose up -d web</code> aplica cambios en la definición del contenedor, como nuevos montajes.</p>
+<p><code>nginx -s reload</code> únicamente hace que Nginx vuelva a leer su configuración.</p>
+</div>
+<p>Comprueba:</p>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>Debe mostrar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>http://escaparate.127.0.0.1.nip.io:8088/</code></td>
+<td>catálogo</td>
+</tr>
+<tr>
+<td><code>http://docs.127.0.0.1.nip.io:8088/</code></td>
+<td>documentación</td>
+</tr>
+<tr>
+<td><code>http://docs.127.0.0.1.nip.io:8088/informes/</code></td>
+<td>listado de informes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Evidencia 2:</strong> catálogo y documentación funcionando mediante los dos nombres diferentes.</p>
+<div class="admonition question">
+<p class="admonition-title">Reflexiona</p>
+<p>Los dos nombres resuelven a <code>127.0.0.1</code> y llegan al mismo Nginx.</p>
+<p>¿Qué información de la petición HTTP permite a Nginx seleccionar un bloque <code>server</code> diferente?</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Si <code>nip.io</code> no funciona en la red del centro</p>
+<p>Puedes añadir temporalmente:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1">1</a></span>
+<span class="normal"><a href="#__codelineno-36-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a>127.0.0.1 escaparate.127.0.0.1.nip.io
+<a id="__codelineno-36-2" name="__codelineno-36-2"></a>127.0.0.1 docs.127.0.0.1.nip.io
+</code></pre></div></td></tr></table></div>
+<p>a <code>/etc/hosts</code>.</p>
+<p><code>dig</code> seguirá consultando DNS y no utilizará <code>/etc/hosts</code>. Si la red bloquea <code>nip.io</code>, documenta el hecho y realiza la observación DNS sobre otro nombre público que sí pueda resolver.</p>
+</div>
+<h2 id="paso-3-decide-que-ocurre-con-un-nombre-desconocido">🛡️ Paso 3: Decide qué ocurre con un nombre desconocido<a class="headerlink" href="#paso-3-decide-que-ocurre-con-un-nombre-desconocido" title="Permanent link">¶</a></h2>
+<p>Hasta ahora has declarado dos nombres válidos. Ahora comprobarás qué hace Nginx cuando recibe una petición cuyo <code>Host</code> no coincide con ninguno de ellos.</p>
+<h3 id="31-observa-el-comportamiento-actual">3.1. Observa el comportamiento actual<a class="headerlink" href="#31-observa-el-comportamiento-actual" title="Permanent link">¶</a></h3>
+<p>Ejecuta:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1">1</a></span>
+<span class="normal"><a href="#__codelineno-37-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a>curl<span class="w"> </span>-i<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="w">  </span>http://cualquier-cosa.127.0.0.1.nip.io:8088/
+</code></pre></div></td></tr></table></div>
+<p>Anota qué sitio responde.</p>
+<p>No cambies todavía la configuración.</p>
+<div class="admonition question">
+<p class="admonition-title">Predice</p>
+<p>¿Crees que es conveniente que un nombre que no has configurado termine mostrando accidentalmente uno de tus sitios?</p>
+</div>
+<h3 id="32-declara-un-servidor-por-defecto">3.2. Declara un servidor por defecto<a class="headerlink" href="#32-declara-un-servidor-por-defecto" title="Permanent link">¶</a></h3>
+<p>Añade <strong>al principio</strong> de <code>sitios.conf</code>:</p>
+<div class="language-nginx highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Nginx Configuration File</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1">1</a></span>
+<span class="normal"><a href="#__codelineno-38-2">2</a></span>
+<span class="normal"><a href="#__codelineno-38-3">3</a></span>
+<span class="normal"><a href="#__codelineno-38-4">4</a></span>
+<span class="normal"><a href="#__codelineno-38-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="k">server</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="w">    </span><span class="kn">listen</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="s">default_server</span><span class="p">;</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="w">    </span><span class="kn">server_name</span><span class="w"> </span><span class="s">_</span><span class="p">;</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4"></a><span class="w">    </span><span class="kn">return</span><span class="w"> </span><span class="mi">404</span><span class="p">;</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Como solo has modificado la configuración de Nginx, ahora no necesitas recrear el contenedor.</p>
+<p>Valida y recarga:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span>
+<span class="normal"><a href="#__codelineno-39-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>nginx<span class="w"> </span>-t
+<a id="__codelineno-39-2" name="__codelineno-39-2"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>nginx<span class="w"> </span>-s<span class="w"> </span>reload
+</code></pre></div></td></tr></table></div>
+<p>Repite:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1">1</a></span>
+<span class="normal"><a href="#__codelineno-40-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1"></a>curl<span class="w"> </span>-i<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2"></a><span class="w">  </span>http://cualquier-cosa.127.0.0.1.nip.io:8088/
+</code></pre></div></td></tr></table></div>
+<p>Comprueba también que los dos sitios válidos continúan funcionando.</p>
+<p>En <code>actividad-3.1.md</code> explica brevemente:</p>
+<ol>
+<li>qué ocurría antes de declarar <code>default_server</code>;</li>
+<li>qué ocurre después;</li>
+<li>por qué es preferible definir explícitamente este comportamiento.</li>
+</ol>
+<h2 id="paso-4-aplica-politicas-al-contenido-estatico">📦 Paso 4: Aplica políticas al contenido estático<a class="headerlink" href="#paso-4-aplica-politicas-al-contenido-estatico" title="Permanent link">¶</a></h2>
+<p>Nginx está sirviendo HTML, CSS, JavaScript e imágenes directamente. Ahora aplicarás dos políticas propias de esta capa: <strong>compresión</strong> y <strong>caché</strong>.</p>
+<p>No necesitas inventar la sintaxis. Debes aplicarla, medir su efecto e interpretar el resultado.</p>
+<h3 id="41-configura-gzip-y-cache">4.1. Configura gzip y caché<a class="headerlink" href="#41-configura-gzip-y-cache" title="Permanent link">¶</a></h3>
+<p>Dentro del bloque del catálogo añade:</p>
+<div class="language-nginx highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Nginx Configuration File</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1">1</a></span>
+<span class="normal"><a href="#__codelineno-41-2">2</a></span>
+<span class="normal"><a href="#__codelineno-41-3">3</a></span>
+<span class="normal"><a href="#__codelineno-41-4">4</a></span>
+<span class="normal"><a href="#__codelineno-41-5">5</a></span>
+<span class="normal"><a href="#__codelineno-41-6">6</a></span>
+<span class="normal"><a href="#__codelineno-41-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1"></a><span class="k">gzip</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2"></a><span class="k">gzip_vary</span><span class="w"> </span><span class="no">on</span><span class="p">;</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3"></a><span class="k">gzip_types</span><span class="w"> </span><span class="s">text/css</span><span class="w"> </span><span class="s">application/javascript</span><span class="w"> </span><span class="s">application/json</span><span class="p">;</span>
+<a id="__codelineno-41-4" name="__codelineno-41-4"></a>
+<a id="__codelineno-41-5" name="__codelineno-41-5"></a><span class="k">location</span><span class="w"> </span><span class="p">~</span><span class="sr">*</span><span class="w"> </span><span class="s">\.(css|js|png|jpg|jpeg|svg|webp)</span>$<span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6"></a><span class="w">    </span><span class="kn">expires</span><span class="w"> </span><span class="s">7d</span><span class="p">;</span>
+<a id="__codelineno-41-7" name="__codelineno-41-7"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>La configuración se aplica únicamente al sitio del catálogo.</p>
+<p>No copies esta política dentro de <code>/api/</code>.</p>
+<p>Valida y recarga:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1">1</a></span>
+<span class="normal"><a href="#__codelineno-42-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>nginx<span class="w"> </span>-t
+<a id="__codelineno-42-2" name="__codelineno-42-2"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>nginx<span class="w"> </span>-s<span class="w"> </span>reload
+</code></pre></div></td></tr></table></div>
+<h3 id="42-comprueba-las-cabeceras-del-css">4.2. Comprueba las cabeceras del CSS<a class="headerlink" href="#42-comprueba-las-cabeceras-del-css" title="Permanent link">¶</a></h3>
+<p>Ejecuta:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1">1</a></span>
+<span class="normal"><a href="#__codelineno-43-2">2</a></span>
+<span class="normal"><a href="#__codelineno-43-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1"></a>curl<span class="w"> </span>-I<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Accept-Encoding: gzip"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-43-3" name="__codelineno-43-3"></a><span class="w">  </span>http://escaparate.127.0.0.1.nip.io:8088/css/app.css
+</code></pre></div></td></tr></table></div>
+<p>Busca:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1">1</a></span>
+<span class="normal"><a href="#__codelineno-44-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1"></a>Content-Encoding: gzip
+<a id="__codelineno-44-2" name="__codelineno-44-2"></a>Cache-Control: ...
+</code></pre></div></td></tr></table></div>
+<h3 id="43-mide-el-efecto-de-la-compresion">4.3. Mide el efecto de la compresión<a class="headerlink" href="#43-mide-el-efecto-de-la-compresion" title="Permanent link">¶</a></h3>
+<p>Ejecuta:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-45-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-45-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-45-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-45-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-45-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-45-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-45-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-45-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-45-10">10</a></span>
+<span class="normal"><a href="#__codelineno-45-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1"></a>curl<span class="w"> </span>-s<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Accept-Encoding: identity"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3"></a><span class="w">  </span>-o<span class="w"> </span>/dev/null<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-45-4" name="__codelineno-45-4"></a><span class="w">  </span>-w<span class="w"> </span><span class="s2">"sin comprimir: %{size_download} bytes\n"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-45-5" name="__codelineno-45-5"></a><span class="w">  </span>http://escaparate.127.0.0.1.nip.io:8088/css/app.css
+<a id="__codelineno-45-6" name="__codelineno-45-6"></a>
+<a id="__codelineno-45-7" name="__codelineno-45-7"></a>curl<span class="w"> </span>-s<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-45-8" name="__codelineno-45-8"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Accept-Encoding: gzip"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-45-9" name="__codelineno-45-9"></a><span class="w">  </span>-o<span class="w"> </span>/dev/null<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-45-10" name="__codelineno-45-10"></a><span class="w">  </span>-w<span class="w"> </span><span class="s2">"comprimido:   %{size_download} bytes\n"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="w">  </span>http://escaparate.127.0.0.1.nip.io:8088/css/app.css
+</code></pre></div></td></tr></table></div>
+<p>Completa en <code>actividad-3.1.md</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Comprobación</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CSS sin comprimir</td>
+<td></td>
+</tr>
+<tr>
+<td>CSS con gzip</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Content-Encoding</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Cache-Control</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="44-contrasta-con-una-respuesta-dinamica">4.4. Contrasta con una respuesta dinámica<a class="headerlink" href="#44-contrasta-con-una-respuesta-dinamica" title="Permanent link">¶</a></h3>
+<p>Consulta:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1">1</a></span>
+<span class="normal"><a href="#__codelineno-46-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>-D<span class="w"> </span>-<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2"></a><span class="w">  </span>http://escaparate.127.0.0.1.nip.io:8088/api/salud/listo
+</code></pre></div></td></tr></table></div>
+<p>Compara sus cabeceras con las del CSS.</p>
+<p>Finalmente repite:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1">1</a></span>
+<span class="normal"><a href="#__codelineno-47-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1"></a>curl<span class="w"> </span>-i<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-47-2" name="__codelineno-47-2"></a><span class="w">  </span>http://cualquier-cosa.127.0.0.1.nip.io:8088/
+</code></pre></div></td></tr></table></div>
+<p><strong>Evidencia 3:</strong> una captura de terminal donde se vean el <code>404</code> del nombre desconocido y las mediciones del CSS con y sin gzip.</p>
+<div class="admonition question">
+<p class="admonition-title">Interpreta</p>
+<p>Responde brevemente:</p>
+<ol>
+<li>¿Por qué un CSS es buen candidato para compresión?</li>
+<li>¿Por qué puede tener sentido almacenarlo varios días en caché?</li>
+<li>¿Por qué no aplicarías automáticamente la misma política de caché a todas las respuestas de <code>/api/</code>?</li>
+<li>¿Por qué gzip suele aportar poco sobre formatos como JPEG o PNG?</li>
+</ol>
+</div>
+<h2 id="paso-5-documenta-e-integra">📝 Paso 5: Documenta e integra<a class="headerlink" href="#paso-5-documenta-e-integra" title="Permanent link">¶</a></h2>
+<p>La arquitectura técnica ya está construida. Antes de cerrar, comprueba que el repositorio permite entender qué ha cambiado respecto al Tema 2.</p>
+<h3 id="51-valida-el-estado-final">5.1. Valida el estado final<a class="headerlink" href="#51-valida-el-estado-final" title="Permanent link">¶</a></h3>
+<p>Ejecuta:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1">1</a></span>
+<span class="normal"><a href="#__codelineno-48-2">2</a></span>
+<span class="normal"><a href="#__codelineno-48-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>nginx<span class="w"> </span>-t
+<a id="__codelineno-48-2" name="__codelineno-48-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
+<a id="__codelineno-48-3" name="__codelineno-48-3"></a>git<span class="w"> </span>status
+</code></pre></div></td></tr></table></div>
+<p>Debe cumplirse:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-49-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-49-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-49-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-49-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-49-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-49-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-49-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-49-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-49-10">10</a></span>
+<span class="normal"><a href="#__codelineno-49-11">11</a></span>
+<span class="normal"><a href="#__codelineno-49-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1"></a>web
+<a id="__codelineno-49-2" name="__codelineno-49-2"></a>→ publica 8088 en el anfitrión
+<a id="__codelineno-49-3" name="__codelineno-49-3"></a>→ escucha en 80 dentro del contenedor
+<a id="__codelineno-49-4" name="__codelineno-49-4"></a>→ sirve catálogo
+<a id="__codelineno-49-5" name="__codelineno-49-5"></a>→ sirve documentación
+<a id="__codelineno-49-6" name="__codelineno-49-6"></a>→ reenvía /api/ hacia app
+<a id="__codelineno-49-7" name="__codelineno-49-7"></a>
+<a id="__codelineno-49-8" name="__codelineno-49-8"></a>app
+<a id="__codelineno-49-9" name="__codelineno-49-9"></a>→ sin puerto publicado
+<a id="__codelineno-49-10" name="__codelineno-49-10"></a>
+<a id="__codelineno-49-11" name="__codelineno-49-11"></a>bd
+<a id="__codelineno-49-12" name="__codelineno-49-12"></a>→ sin puerto publicado
+</code></pre></div></td></tr></table></div>
+<h3 id="52-actualiza-el-readme">5.2. Actualiza el README<a class="headerlink" href="#52-actualiza-el-readme" title="Permanent link">¶</a></h3>
+<p>No repitas toda la puesta en marcha de Compose.</p>
+<p>Añade únicamente:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-50-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-50-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-50-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-50-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-50-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-50-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-50-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-50-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-50-10">10</a></span>
+<span class="normal"><a href="#__codelineno-50-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1"></a>Catálogo:
+<a id="__codelineno-50-2" name="__codelineno-50-2"></a>http://escaparate.127.0.0.1.nip.io:8088/
+<a id="__codelineno-50-3" name="__codelineno-50-3"></a>
+<a id="__codelineno-50-4" name="__codelineno-50-4"></a>Documentación:
+<a id="__codelineno-50-5" name="__codelineno-50-5"></a>http://docs.127.0.0.1.nip.io:8088/
+<a id="__codelineno-50-6" name="__codelineno-50-6"></a>
+<a id="__codelineno-50-7" name="__codelineno-50-7"></a>Informes:
+<a id="__codelineno-50-8" name="__codelineno-50-8"></a>http://docs.127.0.0.1.nip.io:8088/informes/
+<a id="__codelineno-50-9" name="__codelineno-50-9"></a>
+<a id="__codelineno-50-10" name="__codelineno-50-10"></a>Readiness:
+<a id="__codelineno-50-11" name="__codelineno-50-11"></a>http://escaparate.127.0.0.1.nip.io:8088/api/salud/listo
+</code></pre></div></td></tr></table></div>
+<p>Añade también los comandos para:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1">1</a></span>
+<span class="normal"><a href="#__codelineno-51-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1"></a>validar Nginx
+<a id="__codelineno-51-2" name="__codelineno-51-2"></a>recargar Nginx
+</code></pre></div></td></tr></table></div>
+<h3 id="53-revisa-la-entrega">5.3. Revisa la entrega<a class="headerlink" href="#53-revisa-la-entrega" title="Permanent link">¶</a></h3>
+<p><code>actividad-3.1.md</code> debe contener:</p>
+<ul>
+<li>reflexión sobre la nueva puerta de entrada y los puertos;</li>
+<li>tipo de registro, dirección y TTL observados con <code>dig</code>;</li>
+<li>reflexión sobre la cabecera <code>Host</code>;</li>
+<li>comportamiento antes y después de <code>default_server</code>;</li>
+<li>tabla de gzip y caché;</li>
+<li>respuestas de interpretación del paso 4;</li>
+<li>las tres evidencias;</li>
+<li>cualquier incidencia relevante y cómo la resolviste.</li>
+</ul>
+<p>No copies configuraciones completas que ya están versionadas.</p>
+<h3 id="54-integra-la-rama">5.4. Integra la rama<a class="headerlink" href="#54-integra-la-rama" title="Permanent link">¶</a></h3>
+<p>Revisa primero:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1"></a>git<span class="w"> </span>status
+</code></pre></div></td></tr></table></div>
+<p>Después registra los cambios:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
+<span class="normal"><a href="#__codelineno-53-2">2</a></span>
+<span class="normal"><a href="#__codelineno-53-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1"></a>git<span class="w"> </span>add<span class="w"> </span>.
+<a id="__codelineno-53-2" name="__codelineno-53-2"></a>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Añade Nginx con dos sitios, gzip y caché"</span>
+<a id="__codelineno-53-3" name="__codelineno-53-3"></a>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>sesion-06
+</code></pre></div></td></tr></table></div>
+<p>Abre:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a>sesion-06 → main
+</code></pre></div></td></tr></table></div>
+<p>Fusiona mediante <strong>Create a merge commit</strong> cuando las comprobaciones sean correctas.</p>
+<p>Finalmente:</p>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1">1</a></span>
+<span class="normal"><a href="#__codelineno-55-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1"></a>git<span class="w"> </span>switch<span class="w"> </span>main
+<a id="__codelineno-55-2" name="__codelineno-55-2"></a>git<span class="w"> </span>pull<span class="w"> </span>--ff-only
+</code></pre></div></td></tr></table></div>
+<h2 id="si-algo-falla">🔧 Si algo falla<a class="headerlink" href="#si-algo-falla" title="Permanent link">¶</a></h2>
+<p>Utiliza los síntomas para localizar el problema antes de cambiar varias cosas a la vez.</p>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa probable</th>
+<th>Qué comprobar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>docker compose up</code> indica que <code>0.0.0.0:80</code> está ocupado</td>
+<td>Se ha utilizado <code>80:80</code> en el aula</td>
+<td>Usa <code>8088:80</code>; no detengas Apache</td>
+</tr>
+<tr>
+<td>El catálogo carga pero no aparecen productos</td>
+<td><code>/api/</code> no llega a <code>app</code></td>
+<td><code>docker compose ps</code>, <code>docker compose logs app</code> y bloque <code>/api/</code></td>
+</tr>
+<tr>
+<td><code>/api/salud/listo</code> devuelve <code>404</code></td>
+<td>Se ha modificado <code>proxy_pass</code></td>
+<td>Debe ser exactamente <code>proxy_pass http://app:8080;</code></td>
+</tr>
+<tr>
+<td><code>/</code> devuelve <code>403 Forbidden</code></td>
+<td>Nginx no encuentra <code>index.html</code> en su <code>root</code></td>
+<td>Revisa el montaje de <code>sitio-escaparate/escaparate/</code></td>
+</tr>
+<tr>
+<td>La documentación devuelve <code>404</code></td>
+<td>El nuevo montaje no está en el contenedor</td>
+<td>Ejecuta <code>docker compose up -d web</code></td>
+</tr>
+<tr>
+<td><code>/informes/</code> devuelve <code>403</code></td>
+<td>Falta <code>autoindex on</code> o está en otra ruta</td>
+<td>Revisa <code>location /informes/</code></td>
+</tr>
+<tr>
+<td>Aparece un listado en otras carpetas</td>
+<td><code>autoindex on</code> se ha declarado demasiado arriba</td>
+<td>Déjalo únicamente en <code>/informes/</code></td>
+</tr>
+<tr>
+<td>Un nombre desconocido muestra catálogo o documentación</td>
+<td>Falta el <code>default_server</code> o no se ha recargado</td>
+<td><code>nginx -t</code> y <code>nginx -s reload</code></td>
+</tr>
+<tr>
+<td><code>nginx -t</code> falla</td>
+<td>Error de sintaxis</td>
+<td>Lee la línea exacta indicada antes de modificar otra cosa</td>
+</tr>
+<tr>
+<td>El navegador no resuelve <code>*.nip.io</code></td>
+<td>La red del centro bloquea la resolución</td>
+<td>Utiliza temporalmente <code>/etc/hosts</code></td>
+</tr>
+<tr>
+<td>No aparece <code>Content-Encoding: gzip</code></td>
+<td>El cliente no solicita gzip o la configuración no está activa</td>
+<td>Revisa <code>Accept-Encoding</code>, <code>gzip on</code> y recarga</td>
+</tr>
+<tr>
+<td>Has cambiado un montaje pero Nginx no ve el fichero</td>
+<td>Solo has hecho <code>reload</code></td>
+<td>Un montaje exige <code>docker compose up -d web</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Regla de trabajo</p>
+<ul>
+<li>Si cambia <code>sitios.conf</code>: <code>nginx -t</code> → <code>nginx -s reload</code>.</li>
+<li>Si cambia <code>compose.yaml</code>: <code>docker compose config --quiet</code> → <code>docker compose up -d</code>.</li>
+<li>No cambies varias cosas a la vez cuando estés diagnosticando.</li>
+</ul>
+</div>
+<h2 id="que-se-entrega">✅ Qué se entrega<a class="headerlink" href="#que-se-entrega" title="Permanent link">¶</a></h2>
+<p>Antes de terminar, comprueba:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>practicas/compose/compose.yaml</code> con <code>web</code>, <code>app</code> y <code>bd</code>;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>web</code> publicado como <code>8088:80</code> en los equipos del aula;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>app</code> y <code>bd</code> sin puertos publicados;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>practicas/nginx/conf.d/sitios.conf</code>;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> frontend estático versionado;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> documentación versionada;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> dos hosts virtuales funcionando;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>default_server</code> para nombres desconocidos;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> gzip y caché comprobados sobre <code>/css/app.css</code>;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> README con las nuevas URL y los comandos de Nginx;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> <code>actividad-3.1.md</code> con reflexiones, mediciones y tres evidencias;</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled><span class="task-list-indicator"></span></label> Pull Request <code>sesion-06 → main</code> fusionada.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Dónde queda la entrega</p>
+<p>La configuración técnica y las evidencias quedan versionadas en el repositorio.</p>
+<p><code>.env</code> y <code>secrets/bd_clave.txt</code> continúan siendo archivos locales y no deben añadirse a Git.</p>
+</div>
+<h2 id="cierre">🧠 Cierre<a class="headerlink" href="#cierre" title="Permanent link">¶</a></h2>
+<p>Nginx se ha convertido en la <strong>única puerta de entrada del despliegue</strong>.</p>
+<p>Has comprobado que una misma instancia puede recibir peticiones para nombres diferentes y seleccionar el sitio correcto a partir de la petición HTTP:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-56-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-56-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-56-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-56-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-56-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-56-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-56-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-56-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-56-10">10</a></span>
+<span class="normal"><a href="#__codelineno-56-11">11</a></span>
+<span class="normal"><a href="#__codelineno-56-12">12</a></span>
+<span class="normal"><a href="#__codelineno-56-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1"></a>nombre
+<a id="__codelineno-56-2" name="__codelineno-56-2"></a>  ↓
+<a id="__codelineno-56-3" name="__codelineno-56-3"></a>DNS
+<a id="__codelineno-56-4" name="__codelineno-56-4"></a>  ↓
+<a id="__codelineno-56-5" name="__codelineno-56-5"></a>dirección IP
+<a id="__codelineno-56-6" name="__codelineno-56-6"></a>  ↓
+<a id="__codelineno-56-7" name="__codelineno-56-7"></a>Nginx
+<a id="__codelineno-56-8" name="__codelineno-56-8"></a>  ↓
+<a id="__codelineno-56-9" name="__codelineno-56-9"></a>cabecera Host
+<a id="__codelineno-56-10" name="__codelineno-56-10"></a>  ↓
+<a id="__codelineno-56-11" name="__codelineno-56-11"></a>server_name
+<a id="__codelineno-56-12" name="__codelineno-56-12"></a>  ↓
+<a id="__codelineno-56-13" name="__codelineno-56-13"></a>sitio correcto
+</code></pre></div></td></tr></table></div>
+<p>También has aplicado decisiones propias de un servidor web sobre el contenido estático: compresión, caché y comportamiento ante nombres desconocidos.</p>
+<p>Spring Boot no ha desaparecido. Su Tomcat embebido continúa ejecutando la lógica dinámica detrás de Nginx.</p>
+<p>En la siguiente actividad abrirás la caja negra de <code>/api/</code>: sustituirás una única aplicación por varias réplicas y estudiarás cómo Nginx reparte el tráfico entre ellas.</p></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../servidores-web-dns/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Servidores web y DNS">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Servidores web y DNS
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../proxy-inverso-balanceo/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Proxy inverso y balanceo">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                Proxy inverso y balanceo
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+<p style="margin: 0 auto; text-align: center; font-size: 0.7rem;">
+  © 2026 Alejandro Roig y Ángel Vidal
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">
+    Licencia CC BY-NC-SA 4.0
+  </a>
+</p>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.top", "navigation.tracking", "navigation.footer", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+    
+  </body>
+</html>
